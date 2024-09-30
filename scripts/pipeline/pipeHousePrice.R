@@ -1,4 +1,4 @@
-#' @title: Análise prévia dos dados coletados via Scraping 
+#' @title: Pipeline de Execução do Projeto 
 #' @author: Luiz Paulo Tavares 
 
 # Definindo ambiente de trabalhp ===============================================
@@ -6,7 +6,7 @@
 base::rm(list = ls()) 
 grDevices::graphics.off()
 
-setwd("~/Github/Projetos/IEEE/Projects/PropertyPrices/DBs")
+setwd("~/Github/Projetos/IEEE/Projects/HousePriceProject/DBs")
 
 # Dependências \* 
 
@@ -14,6 +14,9 @@ library(pacman)
 pacman::p_load(tidyverse, stats, DataExplorer, GGally)
 
 # FUNCTIONS ====================================================================
+
+"~/Github/Projetos/IEEE/Projects/HousePriceProject/scripts/functions"
+
 
 get_remove_outliers <- function(data) {
   
@@ -37,9 +40,20 @@ get_remove_outliers <- function(data) {
 }
 
 
+get_censorship <- function(data){
+  
+  n <- nrow(data_raw) * 0.05
+  
+  ordenado <- data_raw %>% 
+    dplyr::arrange(price) %>% 
+    dplyr::slice(1601:(n() - 1600))
+  
+  
+}
+
 # import dataset & cleaning 
 
-data_raw = readxl::read_excel("imoveis_df.xlsx") %>%
+data_raw = readxl::read_excel("Scrap_DFimoveis.xlsx") %>%
            janitor::clean_names() %>% 
            stats::na.omit() %>% 
            dplyr::mutate(bedrooms = as.integer(str_sub(bedrooms, 
@@ -49,18 +63,6 @@ data_raw = readxl::read_excel("imoveis_df.xlsx") %>%
                          size_m2 = as.numeric(base::gsub("m²", "", size_m2))) 
 
 
-
-censorship_filter <- function(){
-  
-  n <- nrow(data_raw) * 0.05
-  
-  ordenado <- data_raw %>% 
-              dplyr::arrange(price) %>% 
-               dplyr::slice(1601:(n() - 1600))
-    
-  
-}
-data_raw = ordenado
 # Chamando Funcões \* 
 
 data_cleaned = get_remove_outliers(data = data_raw)
