@@ -3,17 +3,13 @@
 #' @author Luiz Paulo Tavares 
 
 
-get_censorship <- function(){
+get_censorship <- function(data, pct, var) {
   
-  # ideia geral: partindo da métrica de média aparada 
-  # censurar % do início da distribuição e do final da distribuição 
-  # ou seja, censurar as caldas da distribuição 
+  censorship <- base::floor(nrow(data) * pct)
   
-  n <- nrow(data_raw) * 0.05
-  
-  ordenado <- data_raw %>% 
-              dplyr::arrange(price) %>% 
-              dplyr::slice(1601:(n() - 1600))
-  
-  
+  censored_data = data %>%
+                  dplyr::arrange(get(var)) %>%
+                  dplyr::slice((censorship + 1):(n() - censorship))
+
+  return(censored_data)
 }
