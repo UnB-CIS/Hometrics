@@ -5,32 +5,36 @@ server <- function(input, output, session) {
   
   # Exibindo o histograma
   
-  output$histogramPlot <- renderPlot({
+  output$histogramPlot <- renderPlotly({
     
-    ggplot2::ggplot(data_cleaned) +
-              aes(x = price_m2, fill = property_type) +
-              geom_histogram(bins = 30L) +
-              scale_fill_brewer(palette = "Blues", direction = 1) +
-              labs(y = "Contagem", 
-                   x = "Preço nominal do m²", 
-                   fill = "") +
-              theme_minimal() +
-              theme(legend.position = "bottom", 
-                    axis.title.x = element_text(face = "bold"),  
-                    axis.title.y = element_text(face = "bold"), 
-                    axis.text.x = element_text(face = "bold"),    
-                    axis.text.y = element_text(face = "bold"))
+    plot_property_type <- ggplot2::ggplot(data_cleaned) +
+                          aes(x = price_m2, fill = property_type) +
+                          geom_histogram(bins = 30L) +
+                          scale_fill_brewer(palette = "Blues", direction = 1) +
+                          labs(y = "Contagem", 
+                               x = "Preço nominal do m²", 
+                               fill = "") + get_thema_plots()
+    
+    # Adicionando interatividade
+    
+    plotly::ggplotly(plot_property_type)
     
   })
   
   # Gráfico por regiões baseado na seleção
   
-  output$regionPlot <- renderPlot({
+  output$regionPlot <- renderPlotly({
     
     req(input$property_type)  # Certifica que um tipo de imóvel foi selecionado
-    get_plot_region(data = data_cleaned, 
-                    type = input$property_type, 
-                    title_plot = paste("Preço do m² de", input$property_type, "no DF"))
+    
+    plot_region <- get_plot_region(data = data_cleaned, 
+                                   type = input$property_type, 
+                                   title_plot = paste(input$property_type: "Preço de Venda do m² no DF"))
+    
+    # Adicionando interatividade
+    
+    plotly::ggplotly(plot_region)
+    
   })
 }
 
