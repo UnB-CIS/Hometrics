@@ -22,9 +22,7 @@ get_plot_region <- function(data, type, title_plot){
                      x = "", 
                      fill = "")+
                 ylim(0, max(sumarizando$value)+1000)+
-                coord_flip() +
-                theme_minimal() +
-                theme(legend.position = "bottom")
+                coord_flip() + get_thema_plots()
   
                 
     return(plot_region)
