@@ -29,7 +29,7 @@ server <- function(input, output, session) {
     
     plot_region <- get_plot_region(data = data_cleaned, 
                                    type = input$property_type, 
-                                   title_plot = paste(input$property_type: "Preço de Venda do m² no DF"))
+                                   title_plot = paste(input$property_type, "-", "Preço de Venda do m² no DF"))
     
     # Adicionando interatividade
     
