@@ -56,13 +56,13 @@ ui <- bslib::page_sidebar(
     tabsetPanel(
       tabPanel("Preço Geral",
                box(title = "Preço de Venda", status = "info", solidHeader = TRUE, width = 12,
-                   plotlyOutput("histogramPlot"))
+                   plotlyOutput("histogramPlot", height = "480px"))
       ),
       tabPanel("Regiões do DF",
                box(status = "info", solidHeader = TRUE, width = 12,
                    selectInput("property_type", "Selecione o Tipo de Imóvel:", 
                                choices = c("Apartamento", "Casa", "Casa Condominio")),
-                   plotlyOutput("regionPlot")
+                   plotlyOutput("regionPlot", height = "480px")
                )
       )
     )
