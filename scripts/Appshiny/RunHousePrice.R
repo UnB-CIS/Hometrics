@@ -97,20 +97,3 @@ data_cleaned = get_censorship(data = data_cleaned, var = "size", pct = 0.05)
 
 data_cleaned = get_remove_outliers(data = data_cleaned)
 
-# Visualizando tipos de imóveis \* 
-
-get_plot_type(data = data_cleaned)
-
-# Visualizando por regiões \* 
-
-get_plot_region(data = data_cleaned, type = "Apartamento", 
-                title_plot = "Preço do m² do Apartamento no DF")
-
-get_plot_region(data = data_cleaned, type = "Casa", 
-                title_plot = "Preço do m² da Casa no DF")
-
-get_plot_region(data = data_cleaned, type = "Casa Condominio", 
-                title_plot = "Preço do m² da Casa Condominio no DF")
-
-
-
