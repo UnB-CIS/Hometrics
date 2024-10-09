@@ -9,117 +9,140 @@ import re
 
 from bs4 import BeautifulSoup
 
-# Constants \* 
+# Constants
 
 HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36'
 }
 
-BASE_URL = "https://www.dfimoveis.com.br/venda/df/todos/imoveis?pagina="
-NUM_PAGES = 1413 # A dinâmica de raspagem entre as pages está estática, precisa ser passado o número de paǵinas disponíveis
-# \* possível automação: deixar automático o NUM_PAGES \* 
-REQUEST_DELAY = 2  
+class PropertyScraper:
+    def __init__(self, base_url, headers = HEADERS):
+        self.base_url = base_url
+        self.headers = headers
 
-# Function for extracting data from a single property
+    def extract_property_data(self, property_soup):
 
-def extract_property_data(property_soup):
-    def get_text_or_none(element, selector):
-        selected_element = element.select_one(selector)
-        return selected_element.get_text(strip = True) if selected_element else None
+        """Extracts relevant data from a property listing HTML element."""
 
-    # Descrição do imóvel \* 
+        def get_text_or_none(element, selector):
+            selected_element = element.select_one(selector)
+            return selected_element.get_text(strip=True) if selected_element else None
 
-    description = get_text_or_none(property_soup, 'h2.new-title.phrase')
+        # Descrição \* 
 
-    # Tipo do imóvel \* 
-
-    type_property = get_text_or_none(property_soup, 'h3.new-desc.phrase')
-
-    # Preço total do imóvel \* 
-
-    price = get_text_or_none(property_soup, 'div.new-price span')
-
-    # Preço por m² \* 
-
-    price_per_m2 = get_text_or_none(property_soup, 'h4:contains("Valor m² R$") span')
-
-    # Tamanho em m² \* 
-
-    size_m2_element = property_soup.find('span', string = lambda x: x and "m²" in x)
-    size_m2 = size_m2_element.get_text(strip = True) if size_m2_element else None
-
-    # Nº de quartos \* 
-
-    bedroom_element = property_soup.find('span', string = lambda x: x and re.search(r'\b(quartos?|Quartos?)\b', x))
-    bedroom = bedroom_element.get_text(strip = True) if bedroom_element else None
-
-    # Número de Vagas para carros \* 
-
-    car_spaces_element = property_soup.find('span', string = lambda x: x and re.search(r'\b(Vaga?|Vagas?)\b', x))
-    car_spaces = car_spaces_element.get_text(strip = True) if car_spaces_element else None
-
-
-    return {
+        description = get_text_or_none(property_soup, 'h2.new-title.phrase')
         
-        'description': description,
-        'type': type_property,
-        'price': price,
-        'price_per_m2': price_per_m2,
-        'size': size_m2,
-        'bedrooms': bedroom, 
-        'car_spaces': car_spaces
-    }
+        # Tipo de imóvel \* 
+        
+        type_property = get_text_or_none(property_soup, 'h3.new-desc.phrase')
+        
+        # Preço do imóvel \* 
+        
+        price = get_text_or_none(property_soup, 'div.new-price span')
+        
+        # Tamanho do imóvel em m² \* 
 
-# Function for scraping a single page \* 
+        size_m2_element = property_soup.find('span', string = lambda x: x and "m²" in x)
+        size_m2 = size_m2_element.get_text(strip = True) if size_m2_element else None
+        
+        # Nº de quartos \* 
 
-def scrape_page(page_number):
-    url = f"{BASE_URL}{page_number}"
-    response = requests.get(url, headers = HEADERS)
-    
-    if response.status_code != 200:
-        print(f"Erro ao acessar a página {page_number}. Status code: {response.status_code}")
-        return []
+        bedroom_element = property_soup.find('span', string = lambda x: x and re.search(r'\b(quartos?|Quartos?)\b', x))
+        bedroom = bedroom_element.get_text(strip = True) if bedroom_element else None
+        
+        # Nº de vagas de carragem \* 
 
-    site = BeautifulSoup(response.text, "html.parser")
-    current_page = site.find('span', class_='active')
-    
-    if current_page:
-        print(f"Raspando dados da página {current_page.get_text(strip=True)}...")
+        car_spaces_element = property_soup.find('span', string = lambda x: x and re.search(r'\b(Vaga?|Vagas?)\b', x))
+        car_spaces = car_spaces_element.get_text(strip = True) if car_spaces_element else None
 
-    properties = site.find_all('div', class_='new-info')
-    return [extract_property_data(property_soup) for property_soup in properties]
+        return {
+            'description': description,
+            'type': type_property,
+            'price': price,
+            'size': size_m2,
+            'bedrooms': bedroom,
+            'car_spaces': car_spaces
+        }
 
-# Function to scrape multiple pages \* 
+    def scrape_page(self, page_number):
 
-def scrape_multiple_pages(num_pages):
-    all_properties = []
+        """Scrapes a single page for property listings."""
 
-    for page in range(1, num_pages + 1):
-        print(f"Raspando a página {page}...")
-        properties = scrape_page(page)
-        all_properties.extend(properties)
+        url = f"{self.base_url}{page_number}"
+        response = requests.get(url, headers=self.headers)
+        
+        if response.status_code != 200:
+            print(f"Erro ao acessar a página {page_number}. Status code: {response.status_code}")
+            return [], response.status_code
 
-        time.sleep(REQUEST_DELAY)
+        site = BeautifulSoup(response.text, "html.parser")
+        properties = site.find_all('div', class_='new-info')
+        
+        return [self.extract_property_data(property_soup) for property_soup in properties], response.status_code
 
-    return all_properties
+    def scrape_all_pages(self):
+        
+        """Scrapes all pages until no more data is available or an error occurs."""
 
-# Function to save data to a DataFrame
+        all_properties = []
+        page = 1
 
-def create_dataframe(properties_data):
-    return pd.DataFrame(properties_data)
+        while True:
+            print(f"Raspando a página {page}...")
+            properties, status_code = self.scrape_page(page)
+            
+            if status_code != 200 or not properties:
+                print(f"Parando a raspagem. Status code: {status_code}")
+                break
+            
+            all_properties.extend(properties)
+            page += 1
+            time.sleep(2)
 
-# Save xlsx \* 
+        return all_properties
 
-def save_to_excel(df, filename):
-    df.to_excel(filename, index=False) 
+class DataHandler:
+    def __init__(self, data):
+        self.data = data
 
-# Main script \* 
+    def create_dataframe(self, modo):
+
+        """Creates a Pandas DataFrame from the property data and adds a 'modo' column."""
+
+        df = pd.DataFrame(self.data)
+        df['modo'] = modo  
+        return df
+
+    def save_to_excel(self, df, filename):
+
+        """Saves the DataFrame to an Excel file."""
+
+        df.to_excel(filename, index = False)
 
 if __name__ == "__main__":
-    properties_data = scrape_multiple_pages(NUM_PAGES)
-    df = create_dataframe(properties_data)
+
+    # Inicializa o scraper com a URL base para aluguel ou vendas
+
+    BASE_URL_ALUGUEL = "https://www.dfimoveis.com.br/aluguel/df/todos/imoveis?pagina="
+    BASE_URL_VENDA = "https://www.dfimoveis.com.br/venda/df/todos/imoveis?pagina="
+
+    # Selecione o tipo de raspagem ('aluguel' ou 'venda')
+
+    tipo_modo = 'venda'  # Ou altere para 'venda' conforme necessário
+    base_url = BASE_URL_ALUGUEL if tipo_modo == 'aluguel' else BASE_URL_VENDA
+
+    scraper = PropertyScraper(base_url=base_url)
+
+    # Scrape all properties
+
+    properties_data = scraper.scrape_all_pages()
+    data_handler = DataHandler(properties_data)
+    df = data_handler.create_dataframe(tipo_modo)  
+
     print(df)
     print(os.getcwd())
     
-    # Save DataFrame to an Excel file
-    save_to_excel(df, 'imoveis_df.xlsx')
+    # Save the DataFrame to an Excel file
+
+    filename = f'imoveis_df_{tipo_modo}.xlsx'  
+    data_handler.save_to_excel(df, filename)
