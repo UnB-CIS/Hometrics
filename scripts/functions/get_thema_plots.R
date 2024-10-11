@@ -10,8 +10,8 @@ get_thema_plots <- function(){
                           legend.justification = "bottom", 
                           axis.title.x = element_text(face = "bold"),  
                           axis.title.y = element_text(face = "bold"), 
-                          axis.text.x = element_text(face = "bold", size = 12),    
-                          axis.text.y = element_text(face = "bold", size = 12), 
+                          axis.text.x = element_text(face = "bold", size = 10),    
+                          axis.text.y = element_text(face = "bold", size = 10), 
                           legend.title = element_text(face = "bold", size = 14))
     
     return(tema)
