@@ -55,16 +55,34 @@ ui <- bslib::page_sidebar(
     
     tabsetPanel(
       tabPanel("Preço Geral",
-               box(title = "Preço de Venda", status = "info", solidHeader = TRUE, width = 12,
-                   plotlyOutput("histogramPlot", height = "480px"))
+               
+               # Distribuição do Preço de venda por m² 
+               
+               box(title = "Venda", status = "info", solidHeader = TRUE, width = 12,
+                   plotlyOutput("histogramVenda")), 
+               
+               # Distribuição do Preço de aluguel por m²
+               
+               box(title = "Aluguel", status = "info", solidHeader = TRUE, width = 12,
+                   plotlyOutput("histogramAluguel")),
+               
       ),
       tabPanel("Regiões do DF",
                box(status = "info", solidHeader = TRUE, width = 12,
-                   selectInput("property_type", "Selecione o Tipo de Imóvel:", 
-                               choices = c("Apartamento", "Casa", "Casa Condominio")),
+                   fluidRow(
+                     column(width = 5, offset = 1, 
+                            selectInput("property_type", "Selecione o Tipo de Imóvel:", 
+                                        choices = c("Apartamento", "Casa", "Casa Condominio"))
+                     ),
+                     column(width = 5,
+                            selectInput("modo", "Selecione o Modo:", 
+                                        choices = c("venda", "aluguel"))
+                     )
+                   ),
                    plotlyOutput("regionPlot", height = "480px")
                )
       )
+      
     )
   )
 )
