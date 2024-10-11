@@ -35,7 +35,7 @@ base::lapply(list.files(PATH, pattern = "\\.R$", full.names = TRUE), source)
 venda <- get_import_db(is_type = "venda")  
 aluguel <- get_import_db(is_type = "aluguel") 
 
-# Limpeza & Organização \* 
+# Limpeza & Organização 
 
 data_cleaned_venda = get_data_cleaned(db = venda)
 data_cleaned_aluguel = get_data_cleaned(db = aluguel)
@@ -55,5 +55,4 @@ data_cleaned_venda = get_remove_outliers(data = data_cleaned_venda)
 # Venda e Aluguel organizadas e agrupadas \* 
 
 db = bind_rows(list(data_cleaned_venda, data_cleaned_aluguel))
-
 
