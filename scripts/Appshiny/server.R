@@ -3,21 +3,27 @@
 
 server <- function(input, output, session) {
   
-  # Exibindo o histograma
+  # Exibindo o histograma de Venda \* 
   
-  output$histogramPlot <- renderPlotly({
+  output$histogramVenda <- renderPlotly({
     
-    plot_property_type <- ggplot2::ggplot(data_cleaned) +
-                          aes(x = price_m2, fill = property_type) +
-                          geom_histogram(bins = 30L) +
-                          scale_fill_brewer(palette = "Blues", direction = 1) +
-                          labs(y = "Contagem", 
-                               x = "Preço nominal do m²", 
-                               fill = "") + get_thema_plots()
+    plot_histogram <- get_plot_histogram(data_cleaned_venda)
     
     # Adicionando interatividade
     
-    plotly::ggplotly(plot_property_type)
+    plotly::ggplotly(plot_histogram)
+    
+  })
+  
+  # Exibindo o histograma de Aluguel\* 
+  
+  output$histogramAluguel <- renderPlotly({
+    
+    plot_histogram <- get_plot_histogram(data_cleaned_aluguel)
+    
+    # Adicionando interatividade
+    
+    plotly::ggplotly(plot_histogram)
     
   })
   
@@ -25,17 +31,23 @@ server <- function(input, output, session) {
   
   output$regionPlot <- renderPlotly({
     
-    req(input$property_type)  # Certifica que um tipo de imóvel foi selecionado
+    req(input$property_type, input$modo)  # Certifica que ambos inputs estão disponíveis
     
-    plot_region <- get_plot_region(data = data_cleaned, 
-                                   type = input$property_type, 
-                                   title_plot = paste(input$property_type: "Preço de Venda do m² no DF"))
+    plot_region <- get_plot_region(data = db, 
+                                   is_type = input$property_type,  
+                                   is_modo = input$modo,           
+                                   title_plot = paste(input$property_type, "-", 
+                                                      ifelse(input$modo == "venda", "Preço de Venda", "Preço de Aluguel"), 
+                                                      "do m² no DF"))
     
-    # Adicionando interatividade
+    # Adicionando interatividade ao gráfico gerado
     
-    plotly::ggplotly(plot_region)
+    ggplotly(plot_region)
     
   })
+  
+  
+  
 }
 
 shinyApp(ui, server)
