@@ -2,14 +2,15 @@
 #' @author Luiz Paulo Tavares Gonçalves 
 
 
-get_plot_region <- function(data, type, title_plot){
+get_plot_region <- function(data, is_type, is_modo, title_plot){
   
   sumarizando = data  %>% 
-                dplyr::group_by(property_type, location) %>% 
+                dplyr::group_by(property_type, location, modo) %>% 
                        summarise(mean = mean(price_m2), 
                                  median = median(price_m2)) %>% ungroup() %>% 
                 tidyr::pivot_longer(cols = mean:median) %>% 
-                dplyr::filter(property_type == type)
+                dplyr::filter(property_type == is_type) %>% 
+                dplyr::filter(modo == is_modo)
   
   # Visualizando \* 
   
@@ -21,7 +22,7 @@ get_plot_region <- function(data, type, title_plot){
                      y = "", 
                      x = "", 
                      fill = "")+
-                ylim(0, max(sumarizando$value)+1000)+
+                ylim(0, max(sumarizando$value))+
                 coord_flip() + get_thema_plots()
   
                 
