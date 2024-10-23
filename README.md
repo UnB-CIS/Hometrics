@@ -7,7 +7,6 @@ A ideia central é utilizar técnicas de machine learning em dados de imóveis p
 ## Estrutura do projeto
 
 ```
-.
 ├── db
 │   └── mongodb.py                 # Scripts de configuração e conexão ao banco de dados MongoDB
 ├── docs
@@ -23,12 +22,6 @@ A ideia central é utilizar técnicas de machine learning em dados de imóveis p
 │   ├── net-imoveis                # Scripts de scraping para o site 'net-imoveis'
 │   ├── w-imoveis                  # Scripts de scraping para o site 'w-imoveis'
 │   └── zap-imoveis                # Scripts de scraping para o site 'zap-imoveis'
-├── .env.example                   # Exemplo de arquivo de variáveis de ambiente para configuração do projeto
-├── .gitignore                     # Arquivo para especificar quais arquivos e diretórios devem ser ignorados pelo Git
-├── docker-compose.yaml            # Arquivo de configuração do Docker Compose para orquestrar os serviços do projeto
-├── README.md                      # Documentação principal do projeto
-├── requirements.txt               # Lista de dependências Python necessárias para o projeto
-├── db
 ```
 
 ## Instalação e Configuração
@@ -44,7 +37,6 @@ cd <nome-do-repositório>
 
 ```
 docker-compose up -d
-
 ```
 
 ### Instalação das Dependências
