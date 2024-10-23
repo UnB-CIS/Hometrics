@@ -1,1 +1,7 @@
-apache-airflow
+apache-airflow]
+pymongo
+pytest
+pandas
+numpy
+scikit-learn
+matplotlib
