@@ -2,14 +2,12 @@ from pymongo import MongoClient
 from datetime import datetime
 import os
 
+DB_USER = os.environ['MONGO_DB_USER']
+DB_PASSWORD = os.environ['MONGO_DB_PASS']
+DB_CLUSTER = 'cluster0.mhq2j'
+DB_URI = f"mongodb+srv://{DB_USER}:{DB_PASSWORD}@{DB_CLUSTER}.mongodb.net/"
 
-print(os.environ['MONGO_DB_USER'])
-
-db_user = os.environ['MONGO_DB_USER']
-db_password = os.environ['MONGO_DB_PASS']
-db_uri = f"mongodb+srv://{db_user}:{db_password}@cluster0.mhq2j.mongodb.net/"
-
-def connect_to_mongo(uri=db_uri):
+def connect_to_mongo(uri=DB_URI):
     client = MongoClient(uri)
     return client
 
@@ -63,5 +61,4 @@ test_data = [
 ]
 
 inserted_ids = insert_multiple_properties(client, test_data)
-
 print(f"Property inserted with ID: {inserted_ids}")
