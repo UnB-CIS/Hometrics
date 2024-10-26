@@ -1,7 +1,15 @@
 from pymongo import MongoClient
 from datetime import datetime
+import os
 
-def connect_to_mongo(uri="mongodb://localhost:27017/"):
+
+print(os.environ['MONGO_DB_USER'])
+
+db_user = os.environ['MONGO_DB_USER']
+db_password = os.environ['MONGO_DB_PASS']
+db_uri = f"mongodb+srv://{db_user}:{db_password}@cluster0.mhq2j.mongodb.net/"
+
+def connect_to_mongo(uri=db_uri):
     client = MongoClient(uri)
     return client
 
