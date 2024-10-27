@@ -1,7 +1,9 @@
 #' @title Função para calcular e gerar tabelas com estatísticas descritivas 
 #' @author Luiz Paulo Tavares 
 
-get_table_stats <- function(db, modo_type){
+# Sun Oct 27 14:12:29 2024 ------------------------------
+
+get_table_stats <- function(db){
   
    summarizando_price = db %>% 
                         dplyr::group_by(property_type, modo) %>% 
@@ -12,7 +14,8 @@ get_table_stats <- function(db, modo_type){
                                          "Máximo" = round(max(price_m2), 2)) %>% 
                         dplyr::ungroup() %>% 
                         dplyr::rename("Tipo" = "property_type", "Modo" = "modo") %>% 
-                        dplyr::filter(Modo == modo_type)
+                        dplyr::arrange(desc(Modo))
+
   
   return(summarizando_price)
   
