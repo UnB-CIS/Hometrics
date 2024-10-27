@@ -7,7 +7,7 @@
 base::rm(list = ls()) 
 grDevices::graphics.off()
 
-setwd("~/Github/Projetos/IEEE/Projects/HousePriceProject/DBs")
+setwd("~/Github/Projetos/IEEE/Projects/HousePriceProject/scripts/df-imoveis/DBs")
 
 # Dependências \* 
 
@@ -21,34 +21,35 @@ pacman::p_load(tidyverse,
                shiny, 
                bslib, 
                shinydashboard, 
-               shiny)
+               shiny, 
+               leaflet)
 
 # Globais & Constantes 
 
-PATH = "~/Github/Projetos/IEEE/Projects/HousePriceProject/scripts/functions"
+PATH = "~/Github/Projetos/IEEE/Projects/HousePriceProject/scripts/df-imoveis/functions"
 
-COORDINATES = base::data.frame(
-                              location = c("Brasilia", "Gama", "Taguatinga", "Brazlandia", "Sobradinho", 
-                                           "Planaltina", "Paranoa", "Nucleo Bandeirante", "Ceilandia", 
-                                           "Guara", "Cruzeiro", "Samambaia", "Santa Maria", 
-                                           "Sao Sebastiao", "Recanto das Emas", "Lago Sul", 
-                                           "Riacho Fundo", "Lago Norte", "Candangolandia", 
-                                           "Aguas Claras", "Riacho Fundo II", "Sudoeste Octogonal", 
-                                           "Varjão", "Park Way", "SCIA", "Sobradinho II", "Jardim Botanico",
-                                           "Itapoã", "SIA", "Vicente Pires", "Fercal", "Sol Nascente", 
-                                           "Arniqueira", "Arapoanga", "Água Quente"),
-                              latitude = c(-15.7801, -16.0328, -15.8350, -15.6644, -15.6521, 
-                                           -15.6047, -15.7734, -15.8701, -15.8266, -15.8505, -15.7784,
-                                           -15.8771, -16.0164, -15.8854, -15.9164, -15.8421, -15.9329, 
-                                           -15.7202, -15.8618, -15.8346, -15.8872, -15.7989, -15.6841, 
-                                           -15.8718, -15.7864, -15.6324, -15.9057, -15.7255, -15.7745, 
-                                           -15.8153, -15.5522, -15.8109, -15.8644, -15.5704, -15.8928),
-                              longitude = c(-47.9292, -48.0651, -48.0500, -48.2731, -47.8359,
-                                            -47.6510, -47.8620, -47.9204, -48.1103, -47.9431, -47.9318,
-                                            -48.1122, -48.0559, -47.5795, -48.0396, -47.8787, -47.9310,
-                                            -47.8614, -47.9566, -48.0261, -47.9418, -47.9383, -47.9075, 
-                                            -47.9238, -47.9638, -47.8417, -47.7973, -47.7962, -47.8934, 
-                                            -47.9952, -48.2703, -47.9924, -48.0151, -47.7625, -48.1512))
+COORDINATES <- base::data.frame(
+                          location = c("Brasilia", "Gama", "Taguatinga", "Brazlandia", "Sobradinho", 
+                                       "Planaltina", "Paranoa", "Nucleo Bandeirante", "Ceilandia", 
+                                       "Guara", "Cruzeiro", "Samambaia", "Santa Maria", 
+                                       "Sao Sebastiao", "Recanto das Emas", "Lago Sul", 
+                                       "Riacho Fundo", "Lago Norte", "Candangolandia", 
+                                       "Aguas Claras", "Riacho Fundo II", "Sudoeste Octogonal", 
+                                       "Varjão", "Park Way", "SCIA", "Sobradinho II", "Jardim Botanico",
+                                       "Itapoã", "SIA", "Vicente Pires", "Fercal", "Sol Nascente", 
+                                       "Arniqueira", "Arapoanga", "Água Quente"),
+                          latitude = c(-15.7942, -16.0250, -15.8333, -15.6644, -15.6511, 
+                                       -15.6111, -15.7708, -15.8750, -15.8200, -15.8367, -15.7833,
+                                       -15.8842, -16.0203, -15.8992, -15.9175, -15.8564, -15.9144, 
+                                       -15.7053, -15.8569, -15.8364, -15.8953, -15.7972, -15.6844, 
+                                       -15.8684, -15.8014, -15.6324, -15.8977, -15.7367, -15.7825, 
+                                       -15.8092, -15.5606, -15.8125, -15.8564, -15.5725, -15.8847),
+                          longitude = c(-47.8822, -48.0636, -48.0536, -48.2639, -47.7900,
+                                        -47.6583, -47.8556, -47.9189, -48.1083, -47.9242, -47.9208,
+                                        -48.1128, -48.0625, -47.5858, -48.0486, -47.8828, -47.9325,
+                                        -47.8858, -47.9581, -48.0319, -47.9397, -47.9275, -47.8842, 
+                                        -47.9394, -47.9642, -47.8536, -47.7961, -47.8008, -47.8964, 
+                                        -47.9992, -48.2764, -47.9908, -48.0214, -47.7631, -48.1433))
 
 # Import Functions =============================================================
 
@@ -63,6 +64,8 @@ aluguel <- get_import_db(is_type = "aluguel")
 
 data_cleaned_venda = get_data_cleaned(db = venda)
 data_cleaned_aluguel = get_data_cleaned(db = aluguel)
+
+rm(venda, aluguel) # \* Limpando a memória \* Variáveis não utilizadas
 
 # get_censorship: filtragem de anomalia - censura de dados \*
 
@@ -80,51 +83,3 @@ data_cleaned_venda = get_remove_outliers(data = data_cleaned_venda)
 
 db = bind_rows(list(data_cleaned_venda, data_cleaned_aluguel))
 
-# Estatísticas Descritivas \* 
-
-table_stats = get_table_stats(db = db) 
-
-
-
-db <- db %>% 
-      base::merge(COORDINATES, by = "location")
-      
-
-test <- db %>% 
-        filter(property_type == "Apartamento") %>% 
-        group_by(location, latitude, longitude) %>% 
-  summarise(mean = mean(price_m2)) %>% ungroup()
-
-
-
-# test2 <- db %>% 
-#   filter(property_type == "Casa") %>% 
-#   group_by(location) %>% 
-#   summarise(mean = mean(price_m2)) %>% ungroup()
-
-
-
-# Definindo uma paleta de cores de azul a vermelho
-pal <- colorNumeric(palette = "RdYlBu", domain = test$mean, reverse = TRUE)
-
-# Criando o mapa interativo com o data frame `test`
-map <- leaflet(data = test) %>%
-  addTiles() %>%
-  addCircleMarkers(
-    lng = ~longitude, 
-    lat = ~latitude,
-    radius = ~mean / max(mean) * 10,  # Escala o tamanho do marcador pela média
-    color = ~pal(mean),               # Aplica a cor com base no valor médio
-    fillColor = ~pal(mean),
-    fillOpacity = 0.6,
-    popup = ~paste("<b>Região:</b>", location,
-                   "<br><b>Média:</b>", mean)
-  ) %>%
-  addLegend("bottomright",             # Adiciona legenda
-            pal = pal, 
-            values = ~mean,
-            title = "Valor Médio",
-            opacity = 1)
-
-# Exibindo o mapa
-map
