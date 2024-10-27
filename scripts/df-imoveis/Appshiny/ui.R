@@ -81,19 +81,25 @@ ui <- bslib::page_sidebar(
                
       )
     ),
-      tabPanel("Regiões do DF",
+    
+    # SEGUNDA SECÇÃO \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    
+      tabPanel("Geolocalização",
                box(status = "info", solidHeader = TRUE, width = 12,
                    fluidRow(
-                     column(width = 5, offset = 1, 
+                     
+                     tags$p(""),
+                     
+                     column(width = 3, offset = 1, 
                             selectInput("property_type", "Selecione o Tipo de Imóvel:", 
-                                        choices = c("Apartamento", "Casa", "Casa Condominio"))
+                                        choices = c("Apartamento", "Casa"))
                      ),
-                     column(width = 5,
+                     column(width = 3,
                             selectInput("modo", "Selecione o Modo:", 
                                         choices = c("venda", "aluguel"))
                      )
                    ),
-                   plotlyOutput("regionPlot", height = "480px")
+                   leafletOutput("maps_price", height = "400px")
                )
       )
       
