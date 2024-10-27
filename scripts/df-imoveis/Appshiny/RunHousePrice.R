@@ -59,7 +59,7 @@ base::lapply(list.files(PATH, pattern = "\\.R$", full.names = TRUE), source)
 venda <- get_import_db(is_type = "venda")  
 aluguel <- get_import_db(is_type = "aluguel") 
 
-# Limpeza & Organização \* 
+# Limpeza & Organização 
 
 data_cleaned_venda = get_data_cleaned(db = venda)
 data_cleaned_aluguel = get_data_cleaned(db = aluguel)
@@ -128,4 +128,3 @@ map <- leaflet(data = test) %>%
 
 # Exibindo o mapa
 map
-

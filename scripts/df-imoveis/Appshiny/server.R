@@ -53,6 +53,7 @@ server <- function(input, output, session) {
                                    title_plot = paste(input$property_type, "-", 
                                                       ifelse(input$modo == "venda", "Preço de Venda", "Preço de Aluguel"), 
                                                       "do m² no DF"))
+
     
     # Adicionando interatividade ao gráfico gerado
     
