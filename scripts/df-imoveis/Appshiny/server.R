@@ -3,12 +3,26 @@
 
 server <- function(input, output, session) {
   
+  # Tabela com estatísticas descritivas \* 
+  
+  output$table_description <- DT::renderDataTable({
+    
+    DT::datatable(as.data.frame(table_stats),
+                  options = list(pageLength = 2, 
+                                 autoWidth = TRUE,
+                                 columnDefs = list(list(className = 'dt-center', targets = "_all"))),
+                  caption = "Em R$. Considerando Brasília e todas as regiões administrativas do DF.",
+                  style = "bootstrap4")
+    
+  })
+  
+  
   # Exibindo o histograma de Venda \* 
   
   output$histogramVenda <- renderPlotly({
     
-    plot_histogram <- get_plot_histogram(data_cleaned_venda)
-    
+    plot_histogram <- get_plot_histogram(data_cleaned_venda) + ggtitle("Preço de Venda")
+   
     # Adicionando interatividade
     
     plotly::ggplotly(plot_histogram)
@@ -19,7 +33,7 @@ server <- function(input, output, session) {
   
   output$histogramAluguel <- renderPlotly({
     
-    plot_histogram <- get_plot_histogram(data_cleaned_aluguel)
+    plot_histogram <- get_plot_histogram(data_cleaned_aluguel) + ggtitle("Preço do Aluguel")
     
     # Adicionando interatividade
     
