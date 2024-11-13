@@ -7,8 +7,11 @@ A ideia central é utilizar técnicas de machine learning em dados de imóveis p
 ## Estrutura do projeto
 
 ```
-├── db
-│   └── mongodb.py                 # Scripts de configuração e conexão ao banco de dados MongoDB
+├── database
+│   ├── config.py                  # Configurações de conexão com o MongoDB
+│   ├── connection.py              # Classe para gerenciar a conexão com o MongoDB
+│   ├── main.py                    # Arquivo principal que gerencia a interação com o banco de dados
+│   ├── repository.py              # Funções para manipulação de dados de imóveis (CRUD)
 ├── docs
 │   ├── Project_documentation.docx # Documentação do projeto em formato Word
 │   └── Project_documentation.pdf  # Documentação do projeto em formato PDF
