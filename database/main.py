@@ -1,20 +1,8 @@
 from connection import MongoDBConnection
 from repository import Property
-from config import DB_USER, DB_PASSWORD, DB_CLUSTER , DB_URI
+from config import DB_URI
 
-# Environment variables 
-# DB_USER = os.environ['MONGO_DB_USER']
-# DB_PASSWORD = os.environ['MONGO_DB_PASS']
-# DB_CLUSTER = 'cluster0.mhq2j'
-# DB_URI = f"mongodb+srv://{DB_USER}:{DB_PASSWORD}@{DB_CLUSTER}.mongodb.net/"
-
-
-if __name__ == "__main__":
-    connection = MongoDBConnection(DB_URI)
-    client = connection.connect()
-    property_manager = Property(client)
-
-    test_data = [
+test_data = [
         {
             "state": "DF",
             "city": "Brasília",
@@ -46,6 +34,12 @@ if __name__ == "__main__":
             "cars_spaces": 1,
         }
     ]
+
+
+if __name__ == "__main__":
+    connection = MongoDBConnection(DB_URI)
+    client = connection.connect()
+    property_manager = Property(client)
 
     inserted_ids = property_manager.insert_multiple_properties(test_data)
     print(f"Properties inserted with IDs: {inserted_ids}")
