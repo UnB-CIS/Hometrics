@@ -23,8 +23,14 @@ A ideia central é utilizar técnicas de machine learning em dados de imóveis p
 ├── scripts
 │   ├── df-imoveis                 # Scripts de scraping para o site 'df-imoveis'
 │   ├── net-imoveis                # Scripts de scraping para o site 'net-imoveis'
+│   ├── quinta-andar                # Scripts de scraping para o site 'quinta-andar'
+│   ├── viva-real                # Scripts de scraping para o site 'viva-real'
 │   ├── w-imoveis                  # Scripts de scraping para o site 'w-imoveis'
-│   └── zap-imoveis                # Scripts de scraping para o site 'zap-imoveis'
+│   ├── zap-imoveis                # Scripts de scraping para o site 'zap-imoveis'
+│   ├── data-cleaning.py           # Script responsável por realizar o tratamento dos dados coletados
+│   ├── data-scrapping.py          # Arquivo principal que orquestra a execução dos scrapers.
+│   └── data-transform.py          # Script responsável pela transformação e normalização dos dados
+
 ```
 
 ## Instalação e Configuração
