@@ -11,7 +11,6 @@ COPY ./pipeline /pipeline
 COPY ./tests /tests
 COPY .env /
 
-# Set PYTHONPATH to the root directory to allow imports across folders
 ENV PYTHONPATH="/:${PYTHONPATH}"
 
 
