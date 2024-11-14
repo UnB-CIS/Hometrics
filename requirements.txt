@@ -1,8 +1,8 @@
-apache-airflow
+# apache-airflow
 pymongo
 pytest
-pandas
-numpy
-scikit-learn
-matplotlib
-bs4
+#pandas
+#numpy
+#scikit-learn
+#matplotlib
+#bs4

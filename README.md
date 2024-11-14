@@ -10,7 +10,7 @@ A ideia central é utilizar técnicas de machine learning em dados de imóveis p
 ├── database
 │   ├── config.py                  # Configurações de conexão com o MongoDB
 │   ├── connection.py              # Classe para gerenciar a conexão com o MongoDB
-│   ├── main.py                    # Arquivo principal que gerencia a interação com o banco de dados
+│   ├── main.py                    # Gerencia a interação com o banco de dados
 │   ├── repository.py              # Funções para manipulação de dados de imóveis (CRUD)
 ├── docs
 │   ├── Project_documentation.docx # Documentação do projeto em formato Word
@@ -27,9 +27,9 @@ A ideia central é utilizar técnicas de machine learning em dados de imóveis p
 │   ├── viva-real                # Scripts de scraping para o site 'viva-real'
 │   ├── w-imoveis                  # Scripts de scraping para o site 'w-imoveis'
 │   ├── zap-imoveis                # Scripts de scraping para o site 'zap-imoveis'
-│   ├── data-cleaning.py           # Script responsável por realizar o tratamento dos dados coletados
-│   ├── data-scrapping.py          # Arquivo principal que orquestra a execução dos scrapers.
-│   └── data-transform.py          # Script responsável pela transformação e normalização dos dados
+│   ├── data-cleaning.py           # Responsável por realizar o tratamento dos dados coletados
+│   ├── data-scrapping.py          # Orquestra a execução dos scrapers.
+    └── data-transform.py          # Responsável pela transformação e normalização dos dados
 
 ```
 

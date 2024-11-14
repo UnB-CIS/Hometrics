@@ -1,6 +1,6 @@
-from connection import MongoDBConnection
-from repository import Property
-from config import DB_URI
+from database.connection import MongoDBConnection
+from database.repository import Property
+from database.config import DB_URI
 
 test_data = [
         {
