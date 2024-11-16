@@ -79,6 +79,10 @@ A classe `DataTransformer` inclui métodos para transformar e normalizar os dado
 - **`transform_bedrooms(self)`**: Converte o número de quartos para o tipo inteiro.
 - **`transform_car_spaces(self)`**: Converte o número de vagas de carro para o tipo inteiro.
 - **`transform_data(self)`**: Executa todos os métodos de transformação e retorna os dados transformados.
+- **`normalize_state(self)`**: Normaliza as abreviações dos estados para seus nomes completos.
+- **`normalize_city(self)`**: Garante que os nomes das cidades estejam consistentemente capitalizados.
+- **`normalize_description(self)`**: Padroniza o formato das descrições.
+- **`transform_data(self)`**: Executa todos os métodos de transformação e normalização e retorna os dados transformados.
 
 # Exemplo de uso
 
