@@ -11,7 +11,7 @@ test_data = [
             "price": 10.285,
             "size": 86,
             "bedrooms": None,
-            "cars_spaces": None,
+            "car_spaces": None,
         },
         {
             "state": "SP",
@@ -21,7 +21,7 @@ test_data = [
             "price": 1.250,
             "size": 120,
             "bedrooms": 3,
-            "cars_spaces": 2,
+            "car_spaces": 2,
         },
         {
             "state": "RJ",
@@ -31,13 +31,13 @@ test_data = [
             "price": 900,
             "size": 80,
             "bedrooms": 2,
-            "cars_spaces": 1,
+            "car_spaces": 1,
         }
     ]
 
 
-if __name__ == "__main__":
-    connection = MongoDBConnection(DB_URI)
+def insert_data(uri=DB_URI):
+    connection = MongoDBConnection(uri)
     client = connection.connect()
     property_manager = Property(client)
 
@@ -45,3 +45,8 @@ if __name__ == "__main__":
     print(f"Properties inserted with IDs: {inserted_ids}")
 
     connection.close()
+
+    return inserted_ids
+
+
+
