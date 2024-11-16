@@ -14,7 +14,7 @@ ui <- bslib::page_sidebar(
   sidebar = HTML(paste0(
     "<div class='background' style='position: relative;'>
   <br>
-  <img width='64' height='64' src='https://img.icons8.com/external-icongeek26-glyph-icongeek26/64/000000/external-swan-origami-icongeek26-glyph-icongeek26.png' alt='external-swan-origami-icongeek26-glyph-icongeek26' style='display: block; margin-left: auto; margin-right: auto;'/>
+  <img width='64' height='64' src='https://img.icons8.com/?size=100&id=110355&format=png&color=000000' alt='external-swan-origami-icongeek26-glyph-icongeek26' style='display: block; margin-left: auto; margin-right: auto;'/>
     <p style='color: black; text-align: center;'></p>
       <p style='color: black; text-align: center;'>Plataforma dedicada ao monitoramento e análise do mercado imobiliário na região do Distrito Federal </p>
         <br>
@@ -54,32 +54,52 @@ ui <- bslib::page_sidebar(
     # Tabset para as seções
     
     tabsetPanel(
-      tabPanel("Preço Geral",
+      tabPanel("Geral",
+               
+               fluidRow(
                
                # Distribuição do Preço de venda por m² 
                
-               box(title = "Venda", status = "info", solidHeader = TRUE, width = 12,
+               box(status = "info", solidHeader = TRUE, width = 6,
                    plotlyOutput("histogramVenda")), 
                
                # Distribuição do Preço de aluguel por m²
                
-               box(title = "Aluguel", status = "info", solidHeader = TRUE, width = 12,
+               box(status = "info", solidHeader = TRUE, width = 6,
                    plotlyOutput("histogramAluguel")),
                
-      ),
-      tabPanel("Regiões do DF",
+               # Tabela com estatísticas descritivas 
+               
+               tags$p(""),
+               
+               box(title = "Estatísticas Descritivas do m²: Preço de Venda e Aluguel",
+                   
+                   tags$p(""),
+                   
+                   status = "info", solidHeader = TRUE, width = 12,
+                   DT::dataTableOutput("table_description")),
+               
+      )
+    ),
+    
+    # SEGUNDA SECÇÃO \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    
+      tabPanel("Geolocalização",
                box(status = "info", solidHeader = TRUE, width = 12,
                    fluidRow(
-                     column(width = 5, offset = 1, 
+                     
+                     tags$p(""),
+                     
+                     column(width = 3, offset = 1, 
                             selectInput("property_type", "Selecione o Tipo de Imóvel:", 
-                                        choices = c("Apartamento", "Casa", "Casa Condominio"))
+                                        choices = c("Apartamento", "Casa"))
                      ),
-                     column(width = 5,
+                     column(width = 3,
                             selectInput("modo", "Selecione o Modo:", 
                                         choices = c("venda", "aluguel"))
                      )
                    ),
-                   plotlyOutput("regionPlot", height = "480px")
+                   leafletOutput("maps_price", height = "400px")
                )
       )
       
