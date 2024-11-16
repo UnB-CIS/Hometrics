@@ -23,8 +23,8 @@ A ideia central é utilizar técnicas de machine learning em dados de imóveis p
 ├── scripts
 │   ├── df-imoveis                 # Scripts de scraping para o site 'df-imoveis'
 │   ├── net-imoveis                # Scripts de scraping para o site 'net-imoveis'
-│   ├── quinta-andar                # Scripts de scraping para o site 'quinta-andar'
-│   ├── viva-real                # Scripts de scraping para o site 'viva-real'
+│   ├── quinta-andar               # Scripts de scraping para o site 'quinta-andar'
+│   ├── viva-real                  # Scripts de scraping para o site 'viva-real'
 │   ├── w-imoveis                  # Scripts de scraping para o site 'w-imoveis'
 │   ├── zap-imoveis                # Scripts de scraping para o site 'zap-imoveis'
 │   ├── data-cleaning.py           # Responsável por realizar o tratamento dos dados coletados
@@ -42,11 +42,15 @@ git clone <URL-do-repositório>
 cd <nome-do-repositório>
 ```
 
-### Configuração do ambiente Docker
+### Utiliazando o Docker
+
+#### Configuração do ambiente Docker
 
 ```
 docker-compose up -d
 ```
+
+## Utilizando o ambiente virtual
 
 ### Instalação das Dependências
 
@@ -59,3 +63,5 @@ Execute o comando abaixo para instalar as dependências:
 ```
 pip install -r requirements.txt
 ```
+
+Verifique o pyhton PATH local e execute o arquivo desejado.
