@@ -10,6 +10,41 @@ A pasta `database` contém os componentes principais responsáveis pela definiç
 - `repository.py`: Contém as funções para manipulação dos dados (operações CRUD).
 - `__init__.py`: Arquivo responsável por tornar a pasta `database` um pacote Python, permitindo a importação dos módulos.
 
+## Configuração do Banco de Dados
+
+Para configurar e conectar ao MongoDB Atlas, siga os passos abaixo:
+
+1. **Criar uma Conta no MongoDB Atlas**:
+   - Acesse [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) e crie uma conta.
+
+2. **Criar um Cluster**:
+   - Após criar a conta, crie um novo cluster no MongoDB Atlas. Siga as instruções fornecidas pela plataforma para configurar o cluster.
+
+3. **Obter as Credenciais de Conexão**:
+   - No MongoDB Atlas, vá para a seção de segurança e configure um novo usuário de banco de dados. Anote o nome de usuário e a senha.
+   - Obtenha a URI de conexão do cluster. A URI geralmente tem o formato:
+     ```
+     mongodb+srv://<username>:<password>@cluster0.mongodb.net/<dbname>?retryWrites=true&w=majority
+     ```
+
+4. **Configurar Variáveis de Ambiente**:
+   - Crie um arquivo `.env` na raiz do seu projeto e adicione as seguintes variáveis de ambiente:
+     ```env
+     MONGO_DB_USER=<seu_nome_de_usuario>
+     MONGO_DB_PASS=<sua_senha>
+     MONGO_DB_CLUSTER=cluster0.mongodb.net
+     ```
+
+5. **Configurar o Arquivo `config.py`**:
+   - O arquivo `config.py` usa as variáveis de ambiente para construir a URI de conexão:
+     ```python
+     import os
+
+     DB_USER = os.environ["MONGO_DB_USER"]
+     DB_PASSWORD = os.environ["MONGO_DB_PASS"]
+     DB_CLUSTER = os.environ["MONGO_DB_CLUSTER", "cluster0.mongodb.net"]
+     DB_URI = f"mongodb+srv://{DB_USER}:{DB_PASSWORD}@{DB_CLUSTER}/?retryWrites=true&w=majority"
+     ```
 
 ### `config.py`
 
@@ -18,7 +53,7 @@ Este arquivo contém as configurações necessárias para a conexão com o banco
 #### Variáveis e Funções:
 - **`DB_USER`**: Obtém o nome de usuário do MongoDB a partir da variável de ambiente `MONGO_DB_USER`.
 - **`DB_PASSWORD`**: Obtém a senha do MongoDB a partir da variável de ambiente `MONGO_DB_PASS`.
-- **`DB_CLUSTER`**: Define o nome do cluster do MongoDB, no caso, `cluster0.mhq2j`.
+- **`DB_CLUSTER`**: Define o nome do cluster do MongoDB, no caso, `cluster0.mongodb.net`.
 - **`DB_URI`**: Concatena o nome de usuário, senha e o cluster para formar a URI de conexão com o MongoDB. Esta URI é usada para estabelecer a conexão com o banco de dados.
 
 ### `connection.py`
@@ -29,9 +64,8 @@ Este arquivo define a classe `MongoDBConnection`, que gerencia a conexão com o 
 - **`MongoDBConnection`**: Classe principal que lida com a conexão com o MongoDB.
 
 ##### Métodos:
-- **`__init__(self, uri)`**: Inicializa a classe com a URI de conexão fornecida.
-  - **Parâmetros**: 
-    - `uri`: A URI de conexão com o MongoDB, geralmente definida em `config.py`.
+- **Parâmetros**: 
+  - `uri`: A URI de conexão com o MongoDB, geralmente definida em `config.py`.
 - **`connect(self)`**: Estabelece a conexão com o banco de dados MongoDB usando a URI fornecida.
   - **Retorno**: Retorna o cliente MongoDB (`MongoClient`), que é usado para interagir com o banco de dados.
 - **`close(self)`**: Fecha a conexão com o MongoDB, se a conexão estiver ativa.
