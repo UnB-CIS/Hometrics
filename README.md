@@ -10,16 +10,12 @@ A ideia central é utilizar técnicas de machine learning em dados de imóveis p
 ├── database
 │   ├── config.py                  # Configurações de conexão com o MongoDB
 │   ├── connection.py              # Classe para gerenciar a conexão com o MongoDB
-│   ├── main.py                    # Gerencia a interação com o banco de dados
 │   ├── repository.py              # Funções para manipulação de dados de imóveis (CRUD)
 ├── docs
 │   ├── Project_documentation.docx # Documentação do projeto em formato Word
 │   └── Project_documentation.pdf  # Documentação do projeto em formato PDF
 ├── pipeline
-│   ├── config                     # Arquivos de configuração relacionados ao pipeline
-│   ├── dags                       # Diretório onde ficam os DAGs do Apache Airflow
-│   ├── logs                       # Logs gerados pelo Airflow durante a execução dos DAGs
-│   └── plugins                    # Plugins customizados para o Airflow, se necessário
+│   └── main.py                    # Gerencia a interação com o banco de dados
 ├── scripts
 │   ├── df-imoveis                 # Scripts de scraping para o site 'df-imoveis'
 │   ├── net-imoveis                # Scripts de scraping para o site 'net-imoveis'
