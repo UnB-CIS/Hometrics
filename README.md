@@ -42,7 +42,17 @@ git clone <URL-do-repositório>
 cd <nome-do-repositório>
 ```
 
-### Utiliazando o Docker
+### Configurando as variáveis de ambiente
+
+Crie um arquivo `.env` a partir do `.env.example`.
+
+```bash
+cp .env.example .env
+```
+
+Então, preencha o arquivo `.env` com as devidas variáveis de ambiente do projeto
+
+### Utilizando o Docker
 
 #### Configuração do ambiente Docker
 
@@ -70,7 +80,7 @@ Verifique o pyhton PATH local e execute o arquivo desejado.
 
 ### Dev
 
-Branch de ambiente de desenvolvimento da equipe. 
+Branch de ambiente de desenvolvimento da equipe.
 
 Toda nova funcionalidade ou correção deve primeiro ser implementada na branch `dev`.
 
