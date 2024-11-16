@@ -3,12 +3,28 @@
 
 server <- function(input, output, session) {
   
+  # Tabela com estatísticas descritivas \* 
+  
+  output$table_description <- DT::renderDataTable({
+    
+    table_stats = get_table_stats(db = db) 
+    
+    DT::datatable(as.data.frame(table_stats),
+                  options = list(pageLength = 2, 
+                                 autoWidth = TRUE,
+                                 columnDefs = list(list(className = 'dt-center', targets = "_all"))),
+                  caption = "Em R$. Considerando Brasília e todas as regiões administrativas do DF.",
+                  style = "bootstrap4")
+    
+  })
+  
+  
   # Exibindo o histograma de Venda \* 
   
   output$histogramVenda <- renderPlotly({
     
-    plot_histogram <- get_plot_histogram(data_cleaned_venda)
-    
+    plot_histogram <- get_plot_histogram(data_cleaned_venda) + ggtitle("Preço de Venda")
+   
     # Adicionando interatividade
     
     plotly::ggplotly(plot_histogram)
@@ -19,7 +35,7 @@ server <- function(input, output, session) {
   
   output$histogramAluguel <- renderPlotly({
     
-    plot_histogram <- get_plot_histogram(data_cleaned_aluguel)
+    plot_histogram <- get_plot_histogram(data_cleaned_aluguel) + ggtitle("Preço do Aluguel")
     
     # Adicionando interatividade
     
@@ -27,26 +43,21 @@ server <- function(input, output, session) {
     
   })
   
-  # Gráfico por regiões baseado na seleção
+  # SEGUNDA SECÇÃO =============================================================
+  # SECÇÃO REGIÕES DO DF \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
-  output$regionPlot <- renderPlotly({
+  
+  output$maps_price <- renderLeaflet({
     
     req(input$property_type, input$modo)  # Certifica que ambos inputs estão disponíveis
     
-    plot_region <- get_plot_region(data = db, 
-                                   is_type = input$property_type,  
-                                   is_modo = input$modo,           
-                                   title_plot = paste(input$property_type, "-", 
-                                                      ifelse(input$modo == "venda", "Preço de Venda", "Preço de Aluguel"), 
-                                                      "do m² no DF"))
+    map_region <- get_plot_map(data = db, 
+                               type = input$property_type,  
+                               modo = input$modo)
 
-    
-    # Adicionando interatividade ao gráfico gerado
-    
-    ggplotly(plot_region)
+   map_region
     
   })
-  
   
   
 }
