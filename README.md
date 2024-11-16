@@ -78,21 +78,11 @@ Verifique o pyhton PATH local e execute o arquivo desejado.
 
 ## Branchs principais
 
-### Dev
-
-Branch de ambiente de desenvolvimento da equipe.
-
-Toda nova funcionalidade ou correção deve primeiro ser implementada na branch `dev`.
-
 ### Main
 
 Branch principal do repositório e representa o ambiente de produção do projeto.
 
 ## Boas Práticas de GitHub
-
-### Novas branchs
-
-Procure criar branchs a partir da versão dev, caso vá desenvolver alguma alteração visual ou funcional do software.
 
 ### Nomenclatura de novas branchs
 
