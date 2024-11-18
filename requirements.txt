@@ -1,7 +1,7 @@
-apache-airflow
 pymongo
 pytest
-pandas
-numpy
-scikit-learn
-matplotlib
+# pandas
+# numpy
+# scikit-learn
+# matplotlib
+# bs4
