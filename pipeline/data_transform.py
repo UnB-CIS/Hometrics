@@ -1,13 +1,15 @@
+from typing import List, Dict, Any
+
 class DataTransformer:
-    def __init__(self, data):
+    def __init__(self, data: List[Dict[str, Any]]):
         self.data = data
 
-    def transform_price(self):
+    def transform_price(self) -> None:
         for d in self.data:
             if 'price' in d and isinstance(d['price'], (int, str)):
                 d['price'] = float(d['price'])
 
-    def transform_size(self):
+    def transform_size(self) -> None:
         for d in self.data:
             if 'size' in d and isinstance(d['size'], str):
                 try:
@@ -15,7 +17,7 @@ class DataTransformer:
                 except ValueError:
                     d['size'] = None
 
-    def transform_bedrooms(self):
+    def transform_bedrooms(self) -> None:
         for d in self.data:
             if 'bedrooms' in d and isinstance(d['bedrooms'], str):
                 try:
@@ -23,7 +25,7 @@ class DataTransformer:
                 except ValueError:
                     d['bedrooms'] = None
 
-    def transform_car_spaces(self):
+    def transform_car_spaces(self) -> None:
         for d in self.data:
             if 'car_spaces' in d and isinstance(d['car_spaces'], str):
                 try:
@@ -31,7 +33,7 @@ class DataTransformer:
                 except ValueError:
                     d['car_spaces'] = None
 
-    def normalize_state(self):
+    def normalize_state(self) -> None:
         state_mapping = {
             "AC": "Acre",
             "AL": "Alagoas",
@@ -66,17 +68,17 @@ class DataTransformer:
             if 'state' in d and d['state'] in state_mapping:
                 d['state'] = state_mapping[d['state']]
 
-    def normalize_city(self):
+    def normalize_city(self) -> None:
         for d in self.data:
             if 'city' in d:
                 d['city'] = d['city'].title()
 
-    def normalize_description(self):
+    def normalize_description(self) -> None:
         for d in self.data:
             if 'description' in d:
                 d['description'] = d['description'].strip().capitalize()
 
-    def transform_data(self):
+    def transform_data(self) -> List[Dict[str, Any]]:
         self.transform_price()
         self.transform_size()
         self.transform_bedrooms()

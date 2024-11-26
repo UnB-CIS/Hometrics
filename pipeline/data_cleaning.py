@@ -1,8 +1,10 @@
+from typing import List, Dict, Any
+
 class DataCleaner:
-    def __init__(self, data):
+    def __init__(self, data: List[Dict[str, Any]]):
         self.data = data
 
-    def remove_duplicates(self):
+    def remove_duplicates(self) -> None:
         seen = set()
         new_data = []
         for d in self.data:
@@ -12,17 +14,17 @@ class DataCleaner:
                 new_data.append(d)
         self.data = new_data
 
-    def remove_empty_values(self):
+    def remove_empty_values(self) -> None:
         self.data = [d for d in self.data if all(d.values())]
 
-    def standardize_keys(self, standard_keys):
+    def standardize_keys(self, standard_keys: List[str]) -> None:
         new_data = []
         for d in self.data:
             new_dict = {key: d.get(key, None) for key in standard_keys}
             new_data.append(new_dict)
         self.data = new_data
 
-    def convert_data_types(self):
+    def convert_data_types(self) -> None:
         for d in self.data:
             for key, value in d.items():
                 if isinstance(value, str) and value.isdigit():
@@ -33,7 +35,7 @@ class DataCleaner:
                     except ValueError:
                         pass
 
-    def clean_data(self, standard_keys):
+    def clean_data(self, standard_keys: List[str]) -> List[Dict[str, Any]]:
         self.remove_duplicates()
         self.remove_empty_values()
         self.standardize_keys(standard_keys)

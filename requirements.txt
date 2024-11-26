@@ -1,7 +1,8 @@
 pymongo
 pytest
-# pandas
+pandas
 # numpy
 # scikit-learn
 # matplotlib
-# bs4
+bs4
+requests
