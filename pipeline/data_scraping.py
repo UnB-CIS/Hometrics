@@ -1,13 +1,14 @@
 import os
 import importlib.util
 from pathlib import Path
+from typing import List, Dict, Any
 
 class Scraper:
-    def __init__(self, scraper_path, data_variable):
+    def __init__(self, scraper_path: str, data_variable: str):
         self.scraper_path = scraper_path
         self.data_variable = data_variable
 
-    def import_scraper(self):
+    def import_scraper(self) -> Any:
         module_name = self.scraper_path.split('.')[-1]
         module_path = Path(self.scraper_path.replace('.', '/'))
         spec = importlib.util.spec_from_file_location(module_name, module_path.with_suffix('.py'))
@@ -15,7 +16,7 @@ class Scraper:
         spec.loader.exec_module(scraper_module)
         return scraper_module
 
-    def run(self):
+    def run(self) -> Any:
         scraper_module = self.import_scraper()
         scraper_function = getattr(scraper_module, self.scraper_path.split('.')[-1])  # Nome da função
         scraped_data = scraper_function()  # Executa a função de scraping
@@ -23,11 +24,11 @@ class Scraper:
 
 
 class ScraperOrchestrator:
-    def __init__(self, scraper_info):
+    def __init__(self, scraper_info: List[Dict[str, str]]):
         self.scraper_info = scraper_info
         self.all_properties = []
 
-    def run_all_scrapers(self):
+    def run_all_scrapers(self) -> List[Dict[str, Any]]:
         for scraper in self.scraper_info:
             print(f"Iniciando scraping em {scraper['path']}...")
             scraper_instance = Scraper(scraper['path'], scraper['data'])
@@ -48,7 +49,7 @@ scraper_info = [
 ]
 
 
-def all_scraped_data(scraper_info):
+def all_scraped_data(scraper_info: List[Dict[str, str]]) -> List[Dict[str, Any]]:
     orchestrator = ScraperOrchestrator(scraper_info)
     all_property_data = orchestrator.run_all_scrapers()
     return all_property_data

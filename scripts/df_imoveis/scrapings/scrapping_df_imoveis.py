@@ -12,7 +12,8 @@ from bs4 import BeautifulSoup
 # Constants
 
 HEADERS = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36'
+    # 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36'
+    'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:92.0) Gecko/20100101 Firefox/92.0'
 }
 
 class PropertyScraper:
@@ -87,7 +88,7 @@ class PropertyScraper:
         all_properties = []
         page = 1
 
-        while True:
+        for i in range(1):
             print(f"Raspando a página {page}...")
             properties, status_code = self.scrape_page(page)
             
@@ -119,30 +120,31 @@ class DataHandler:
 
         df.to_excel(filename, index = False)
 
-if __name__ == "__main__":
 
-    # Inicializa o scraper com a URL base para aluguel ou vendas
+# Inicializa o scraper com a URL base para aluguel ou vendas
 
-    BASE_URL_ALUGUEL = "https://www.dfimoveis.com.br/aluguel/df/todos/imoveis?pagina="
-    BASE_URL_VENDA = "https://www.dfimoveis.com.br/venda/df/todos/imoveis?pagina="
+BASE_URL_ALUGUEL = "https://www.dfimoveis.com.br/aluguel/df/todos/imoveis?pagina="
+BASE_URL_VENDA = "https://www.dfimoveis.com.br/venda/df/todos/imoveis?pagina="
 
-    # Selecione o tipo de raspagem ('aluguel' ou 'venda')
+# Selecione o tipo de raspagem ('aluguel' ou 'venda')
 
-    tipo_modo = 'venda'  # Ou altere para 'venda' conforme necessário
-    base_url = BASE_URL_ALUGUEL if tipo_modo == 'aluguel' else BASE_URL_VENDA
+tipo_modo = 'venda'  # Ou altere para 'venda' conforme necessário
+base_url = BASE_URL_ALUGUEL if tipo_modo == 'aluguel' else BASE_URL_VENDA
 
-    scraper = PropertyScraper(base_url=base_url)
+scraper = PropertyScraper(base_url=base_url)
 
-    # Scrape all properties
+# Scrape all properties
 
-    properties_data = scraper.scrape_all_pages()
-    data_handler = DataHandler(properties_data)
-    df = data_handler.create_dataframe(tipo_modo)  
+properties_data = scraper.scrape_all_pages()
+print(properties_data)
 
-    print(df)
-    print(os.getcwd())
-    
-    # Save the DataFrame to an Excel file
+# data_handler = DataHandler(properties_data)
+# df = data_handler.create_dataframe(tipo_modo)  
 
-    filename = f'imoveis_df_{tipo_modo}.xlsx'  
-    data_handler.save_to_excel(df, filename)
+# print(df)
+# print(os.getcwd())
+
+# Save the DataFrame to an Excel file
+
+# filename = f'imoveis_df_{tipo_modo}.xlsx'  
+# data_handler.save_to_excel(df, filename)

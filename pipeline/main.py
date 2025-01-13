@@ -1,6 +1,9 @@
 from database.connection import MongoDBConnection
 from database.repository import Property
 from database.config import DB_URI
+from pipeline import scrape_data
+from pipeline import DataCleaner
+from pipeline import DataTransformer
 
 test_data = [
         {
@@ -49,4 +52,27 @@ def insert_data(uri=DB_URI):
     return inserted_ids
 
 
+def main():
+    while True:
+        # Step 1: Scrape data
+        scraped_data = scrape_data()
+        
+        # Step 2: Clean data
+        cleaner = DataCleaner(scraped_data)
+        standard_keys = ["state", "city", "description", "type", "price", "size", "bedrooms", "car_spaces"]
+        cleaned_data = cleaner.clean_data(standard_keys)
+        
+        # Step 3: Transform data
+        transformer = DataTransformer(cleaned_data)
+        transformed_data = transformer.transform_data()
+        
+        # Step 4: Insert data into MongoDB
+        connection = MongoDBConnection(DB_URI)
+        client = connection.connect()
+        property_manager = Property(client)
+        property_manager.insert_multiple_properties(transformed_data)
+        connection.close()
 
+
+if __name__ == "__main__":
+    main()

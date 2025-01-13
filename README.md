@@ -6,7 +6,7 @@ A ideia central é utilizar técnicas de machine learning em dados de imóveis p
 
 ## Estrutura do projeto
 
-```
+```markdown
 ├── database
 │   ├── config.py                  # Configurações de conexão com o MongoDB
 │   ├── connection.py              # Classe para gerenciar a conexão com o MongoDB
@@ -33,7 +33,7 @@ A ideia central é utilizar técnicas de machine learning em dados de imóveis p
 
 ### Clonar repositório
 
-```
+```bash
 git clone <URL-do-repositório>
 cd <nome-do-repositório>
 ```
@@ -52,7 +52,7 @@ Então, preencha o arquivo `.env` com as devidas variáveis de ambiente do proje
 
 #### Configuração do ambiente Docker
 
-```
+```bash
 docker-compose up -d
 ```
 
@@ -66,7 +66,7 @@ Certifique-se de estar no diretório raiz do projeto.
 
 Execute o comando abaixo para instalar as dependências:
 
-```
+```bash
 pip install -r requirements.txt
 ```
 
