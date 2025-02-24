@@ -23,20 +23,23 @@ Para configurar e conectar ao MongoDB Atlas, siga os passos abaixo:
 3. **Obter as Credenciais de Conexão**:
    - No MongoDB Atlas, vá para a seção de segurança e configure um novo usuário de banco de dados. Anote o nome de usuário e a senha.
    - Obtenha a URI de conexão do cluster. A URI geralmente tem o formato:
-     ```
+
+     ``` env
      mongodb+srv://<username>:<password>@cluster0.mongodb.net/<dbname>?retryWrites=true&w=majority
      ```
 
 4. **Configurar Variáveis de Ambiente**:
-   - Crie um arquivo `.env` na raiz do seu projeto e adicione as seguintes variáveis de ambiente:
-     ```env
+   - Crie um arquivo `.env` na raiz do seu projeto e adicione as seguintes variáveis de ambiente
+
+     ``` env
      MONGO_DB_USER=<seu_nome_de_usuario>
      MONGO_DB_PASS=<sua_senha>
      MONGO_DB_CLUSTER=cluster0.mongodb.net
      ```
 
 5. **Configurar o Arquivo `config.py`**:
-   - O arquivo `config.py` usa as variáveis de ambiente para construir a URI de conexão:
+   - O arquivo `config.py` usa as variáveis de ambiente para construir a URI de conexão
+
      ```python
      import os
 
@@ -50,7 +53,8 @@ Para configurar e conectar ao MongoDB Atlas, siga os passos abaixo:
 
 Este arquivo contém as configurações necessárias para a conexão com o banco de dados MongoDB. As variáveis de ambiente são usadas para armazenar informações sensíveis, como o nome de usuário e a senha do banco de dados, garantindo segurança na manipulação dessas credenciais. O URI de conexão com o MongoDB é construído com as informações do usuário e senha fornecidas.
 
-#### Variáveis e Funções:
+#### Variáveis e Funções
+
 - **`DB_USER`**: Obtém o nome de usuário do MongoDB a partir da variável de ambiente `MONGO_DB_USER`.
 - **`DB_PASSWORD`**: Obtém a senha do MongoDB a partir da variável de ambiente `MONGO_DB_PASS`.
 - **`DB_CLUSTER`**: Define o nome do cluster do MongoDB, no caso, `cluster0.mongodb.net`.
@@ -60,10 +64,12 @@ Este arquivo contém as configurações necessárias para a conexão com o banco
 
 Este arquivo define a classe `MongoDBConnection`, que gerencia a conexão com o banco de dados MongoDB. A classe é responsável por estabelecer a conexão com o banco usando a URI fornecida e também por fechar a conexão quando não for mais necessária.
 
-#### Classe:
+#### Classe
+
 - **`MongoDBConnection`**: Classe principal que lida com a conexão com o MongoDB.
 
-##### Métodos:
+##### Métodos
+
 - **Parâmetros**: 
   - `uri`: A URI de conexão com o MongoDB, geralmente definida em `config.py`.
 - **`connect(self)`**: Estabelece a conexão com o banco de dados MongoDB usando a URI fornecida.
@@ -74,10 +80,12 @@ Este arquivo define a classe `MongoDBConnection`, que gerencia a conexão com o 
 
 Este arquivo define a classe `Property`, que é responsável pela manipulação dos dados de imóveis no banco de dados MongoDB. Ele fornece métodos para inserir um único imóvel ou múltiplos imóveis na coleção `property_listings`.
 
-#### Classe:
+#### Classe
+
 - **`Property`**: Classe responsável pela inserção de dados de imóveis no banco de dados.
 
-##### Métodos:
+##### Métodos
+
 - **`__init__(self, client)`**: Inicializa a classe com o cliente MongoDB fornecido.
   - **Parâmetros**: 
     - `client`: O cliente MongoDB que é usado para acessar o banco de dados.
@@ -96,7 +104,8 @@ Este arquivo define a classe `Property`, que é responsável pela manipulação 
 
 Este arquivo inicializa a conexão com o banco de dados MongoDB e gerencia a inserção de dados de imóveis usando a classe `Property` do arquivo `repository.py`. Ele também inclui um caso de teste para inserção de múltiplos imóveis na coleção `property_listings`.
 
-#### Funcionalidade:
+#### Funcionalidade
+
 - Estabelece a conexão com o banco de dados MongoDB usando a classe `MongoDBConnection` do arquivo `connection.py`.
 - Cria uma instância da classe `Property` para manipular dados de imóveis.
 - Insere múltiplos imóveis na coleção `property_listings`.
