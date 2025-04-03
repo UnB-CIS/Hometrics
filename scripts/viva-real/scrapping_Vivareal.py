@@ -7,8 +7,6 @@ from selenium.webdriver.support import expected_conditions as EC
 import pandas as pd
 import time
 
-
-
 # Função para extrair os dados dos imóveis na página atual
 def extrair_dados():
     anuncios = WebDriverWait(driver, 10).until(

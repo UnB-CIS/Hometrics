@@ -32,16 +32,6 @@ class ScraperOrchestrator:
     def run_scraper(self, scraper_config: Dict[str, Any]) -> pd.DataFrame:
         """
         Run a scraper based on its configuration.
-        
-        Args:
-            scraper_config: Dictionary containing scraper configuration:
-                - 'name': Name of the scraper
-                - 'module_path': Import path for the scraper module
-                - 'function_name': Name of the function to call in the module
-                - 'params': Dictionary of parameters to pass to the scraper function
-        
-        Returns:
-            pandas.DataFrame: The scraped data
         """
         name = scraper_config['name']
         module_path = scraper_config['module_path']
@@ -112,8 +102,10 @@ def main():
             'function_name': 'run_scraper',
             'params': {
                 'category': 'aluguel',  # Updated parameter name
-                'max_pages': 50,  # Reduced for testing
-                'workers': 5
+                'max_pages': None,  # No limit - will scrape all available pages
+                'workers': 5,
+                'batch_size': 50,    # Process in batches of 50 pages
+                'batch_delay': 20    # Wait 20 seconds between batches
             }
         },
         {
@@ -122,8 +114,10 @@ def main():
             'function_name': 'run_scraper',
             'params': {
                 'category': 'venda',  # Updated parameter name
-                'max_pages': 50,  # Reduced for testing
-                'workers': 5
+                'max_pages': None,  # No limit - will scrape all available pages
+                'workers': 5,
+                'batch_size': 50,    # Process in batches of 50 pages
+                'batch_delay': 20    # Wait 20 seconds between batches
             }
         },
         # Net Imoveis scrapers
@@ -133,8 +127,10 @@ def main():
             'function_name': 'run_scraper',
             'params': {
                 'category': 'aluguel',
-                'max_pages': 5,  # Limit pages for testing
-                'workers': 5
+                'max_pages': None,  # No limit - will scrape all available pages
+                'workers': 5,
+                'batch_size': 50,    # Process in batches of 50 pages
+                'batch_delay': 20    # Wait 20 seconds between batches
             }
         },
         {
@@ -143,8 +139,10 @@ def main():
             'function_name': 'run_scraper',
             'params': {
                 'category': 'venda',
-                'max_pages': 5,  # Limit pages for testing
-                'workers': 5
+                'max_pages': None,  # No limit - will scrape all available pages
+                'workers': 5,
+                'batch_size': 50,    # Process in batches of 50 pages
+                'batch_delay': 20    # Wait 20 seconds between batches
             }
         }
     ]

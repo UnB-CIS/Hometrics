@@ -31,7 +31,9 @@ def run_scrapers(output_dir="dataset/v01"):
             'params': {
                 'category': 'aluguel',
                 'max_pages': None,  # Run until completion
-                'workers': 5
+                'workers': 5,
+                'batch_size': 50,    # Process in batches of 50 pages
+                'batch_delay': 20    # Wait 20 seconds between batches
             }
         },
         {
@@ -41,7 +43,9 @@ def run_scrapers(output_dir="dataset/v01"):
             'params': {
                 'category': 'venda',
                 'max_pages': None,  # Run until completion
-                'workers': 5
+                'workers': 5,
+                'batch_size': 50,    # Process in batches of 50 pages
+                'batch_delay': 20    # Wait 20 seconds between batches
             }
         },
         {
@@ -51,7 +55,7 @@ def run_scrapers(output_dir="dataset/v01"):
             'params': {
                 'category': 'aluguel',
                 'max_pages': None,  # Run until completion
-                'workers': 5
+                'workers': 5,
             }
         },
         {
@@ -61,7 +65,7 @@ def run_scrapers(output_dir="dataset/v01"):
             'params': {
                 'category': 'venda',
                 'max_pages': None,  # Run until completion
-                'workers': 5
+                'workers': 5,
             }
         },
     ]

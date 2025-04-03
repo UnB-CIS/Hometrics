@@ -260,7 +260,7 @@ if __name__ == "__main__":
     # Executar scraper de venda
     df_venda = run_scraper(
         category='venda',
-        max_pages=10,  # Limite para teste, use None para todas as páginas
+        max_pages=None,  # Limite para teste, use None para todas as páginas
         workers=5,
         output_dir=output_dir,
         append=True
@@ -269,7 +269,7 @@ if __name__ == "__main__":
     # Executar scraper de aluguel
     df_aluguel = run_scraper(
         category='aluguel',
-        max_pages=10,  # Limite para teste, use None para todas as páginas
+        max_pages=None,  # Limite para teste, use None para todas as páginas
         workers=5,
         output_dir=output_dir,
         append=True
