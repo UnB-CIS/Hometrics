@@ -1,8 +1,10 @@
 pymongo
 pytest
 pandas
-# numpy
-# scikit-learn
+numpy
 # matplotlib
 bs4
 requests
+selenium
+webdriver-manager
+openpyxl
