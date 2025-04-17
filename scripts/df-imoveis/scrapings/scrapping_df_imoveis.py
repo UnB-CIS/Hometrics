@@ -17,13 +17,16 @@ HEADERS = {
 }
 
 class PropertyScraper:
-    def __init__(self, base_url, headers = HEADERS):
-        self.base_url = base_url
+    def __init__(self, base_url, property_type="imoveis", headers=HEADERS):
+        self.base_url = base_url.format(property_type=property_type)
         self.headers = headers
+        self.property_type = property_type
 
     def extract_property_data(self, property_soup):
 
         """Extracts relevant data from a property listing HTML element."""
+        # Import re at the function level so it's available for all nested functions
+        import re
 
         def get_text_or_none(element, selector):
             selected_element = element.select_one(selector)
@@ -35,31 +38,106 @@ class PropertyScraper:
         
         # Tipo de imóvel \* 
         
-        type_property = get_text_or_none(property_soup, 'h3.new-desc.phrase')
+        type_property_full = get_text_or_none(property_soup, 'h3.new-desc.phrase')
+        
+        # Extract clean property type from the full description
+        property_type = self.property_type  # Default to the property_type used in the URL
+        
+        # If we have type_property_full, try to extract cleaner value
+        if type_property_full and isinstance(type_property_full, str):
+            type_property_full = type_property_full.lower()
+            # Check each property type and see if it's in the description
+            for p_type in PROPERTY_TYPES:
+                if p_type.lower() in type_property_full:
+                    property_type = p_type
+                    break
         
         # Preço do imóvel \* 
         
-        price = get_text_or_none(property_soup, 'div.new-price span')
+        price_raw = get_text_or_none(property_soup, 'div.new-price span')
+        
+        # Clean price value (extract numeric part)
+        price = None
+        if price_raw:
+            if 'Sob Consulta' in price_raw:
+                price = ''  # Empty string for 'Sob Consulta'
+            else:
+                # Extract numeric part using regex, even if it has 'A partir de'
+                numeric_match = re.search(r'(\d+(?:[.,]\d+)?)', price_raw)
+                if numeric_match:
+                    price_value = numeric_match.group(1)
+                    # Remove dots from thousands separators and replace comma with dot for decimal
+                    price_value = price_value.replace('.', '').replace(',', '.')
+                    try:
+                        price = float(price_value)
+                    except:
+                        price = price_raw
+                else:
+                    price = ''
         
         # Tamanho do imóvel em m² \* 
 
         size_m2_element = property_soup.find('span', string = lambda x: x and "m²" in x)
-        size_m2 = size_m2_element.get_text(strip = True) if size_m2_element else None
+        size_m2_raw = size_m2_element.get_text(strip = True) if size_m2_element else None
+        
+        # Clean size value (remove 'm²' and convert to numeric)
+        size_m2 = None
+        if size_m2_raw:
+            # Handle ranges like "64 a 219 m²" - take the first number
+            if 'a' in size_m2_raw:
+                size_m2_raw = size_m2_raw.split('a')[0].strip()
+            
+            # Extract numeric part
+            numeric_match = re.search(r'(\d+(?:[.,]\d+)?)', size_m2_raw)
+            if numeric_match:
+                size_value = numeric_match.group(1)
+                # Replace comma with dot for decimal values
+                size_value = size_value.replace(',', '.')
+                try:
+                    size_m2 = float(size_value)
+                except:
+                    size_m2 = size_value
         
         # Nº de quartos \* 
 
         bedroom_element = property_soup.find('span', string = lambda x: x and re.search(r'\b(quartos?|Quartos?)\b', x))
-        bedroom = bedroom_element.get_text(strip = True) if bedroom_element else None
+        bedroom_raw = bedroom_element.get_text(strip = True) if bedroom_element else None
+        
+        # Clean bedroom value (extract numeric part)
+        bedroom = None
+        if bedroom_raw:
+            # Handle ranges like "2 a 3 quartos" - take the first number
+            if 'a' in bedroom_raw:
+                bedroom_raw = bedroom_raw.split('a')[0].strip()
+            
+            # Extract numeric part
+            numeric_match = re.search(r'(\d+)', bedroom_raw)
+            if numeric_match:
+                try:
+                    bedroom = int(numeric_match.group(1))
+                except:
+                    bedroom = bedroom_raw
         
         # Nº de vagas de carragem \* 
 
         car_spaces_element = property_soup.find('span', string = lambda x: x and re.search(r'\b(Vaga?|Vagas?)\b', x))
-        car_spaces = car_spaces_element.get_text(strip = True) if car_spaces_element else None
+        car_spaces_raw = car_spaces_element.get_text(strip = True) if car_spaces_element else None
+        
+        # Clean parking spaces value (extract numeric part)
+        car_spaces = None
+        if car_spaces_raw:
+            # Extract numeric part
+            numeric_match = re.search(r'(\d+)', car_spaces_raw)
+            if numeric_match:
+                try:
+                    car_spaces = int(numeric_match.group(1))
+                except:
+                    car_spaces = car_spaces_raw
 
         return {
             'description': description,
             'address': "",
-            'type': type_property,
+            'property_type': property_type,
             'price': price,
             'size': size_m2,
             'bedrooms': bedroom,
@@ -124,7 +202,7 @@ class PropertyScraper:
         print(f"Número máximo de tentativas atingido para a página {page_number}")
         return [], 503  # Service Unavailable after retries
 
-    def scrape_all_pages(self, max_pages=None, workers=1, batch_size=10, batch_delay=30):
+    def scrape_all_pages(self, max_pages=None, workers=1, batch_size=10, batch_delay=30, save_each_batch=True, category='venda', property_type='imoveis', output_dir=None, append=True):
         """Scrapes all pages until no more data is available or an error occurs.
         
         Args:
@@ -132,12 +210,17 @@ class PropertyScraper:
             workers: Number of concurrent workers
             batch_size: Number of pages to process before taking a longer pause
             batch_delay: Seconds to pause between batches
+            save_each_batch: Whether to save data after each batch
+            category: Contract type (venda/aluguel)
+            property_type: Type of property being scraped
+            output_dir: Directory to save batch data
+            append: Whether to append to existing files
         """
         all_properties = []
+        empty_page_count = 0
         page = 1
-        continue_scraping = True
-        consecutive_empty_pages = 0
-        max_empty_pages = 3  # Stop after this many consecutive empty pages
+        current_batch = 1
+        consecutive_empty_pages_threshold = 2  # Stop after this many consecutive empty pages
         
         # Calculate batches if max_pages is specified
         total_batches = None
@@ -145,8 +228,7 @@ class PropertyScraper:
             total_batches = (max_pages + batch_size - 1) // batch_size
             print(f"Scraping will be performed in {total_batches} batches of {batch_size} pages each.")
         
-        current_batch = 1
-        while continue_scraping:
+        while True:
             batch_properties = []
             batch_start_page = page
             print(f"\n--- Starting batch {current_batch} (pages {batch_start_page} to {batch_start_page + batch_size - 1}) ---")
@@ -174,19 +256,19 @@ class PropertyScraper:
                     # Handle different status codes
                     if status_code == 204:  # No content but success
                         empty_in_batch += 1
-                        consecutive_empty_pages += 1
-                        if consecutive_empty_pages >= max_empty_pages:
-                            print(f"Encontradas {max_empty_pages} páginas vazias consecutivas. Assumindo fim dos resultados.")
-                            continue_scraping = False
+                        empty_page_count += 1
+                        if empty_page_count >= consecutive_empty_pages_threshold:
+                            print(f"Encontradas {consecutive_empty_pages_threshold} páginas vazias consecutivas. Assumindo fim dos resultados.")
+                            return all_properties
                     elif status_code != 200:
                         print(f"Erro ao acessar página. Status code: {status_code}")
                         # Don't stop completely on errors, just skip this page
                     else:  # 200 with properties
-                        consecutive_empty_pages = 0  # Reset counter when we find properties
+                        empty_page_count = 0  # Reset counter when we find properties
                         batch_properties.extend(properties)
                 
                 # Submit remaining pages for this batch if needed
-                while batch_page_count < batch_size and continue_scraping:
+                while batch_page_count < batch_size:
                     if max_pages and page > max_pages:
                         break
                         
@@ -198,14 +280,14 @@ class PropertyScraper:
                     properties, status_code = future.result()
                     if status_code == 204:  # No content but success
                         empty_in_batch += 1
-                        consecutive_empty_pages += 1
-                        if consecutive_empty_pages >= max_empty_pages:
-                            print(f"Encontradas {max_empty_pages} páginas vazias consecutivas. Assumindo fim dos resultados.")
-                            continue_scraping = False
+                        empty_page_count += 1
+                        if empty_page_count >= consecutive_empty_pages_threshold:
+                            print(f"Encontradas {consecutive_empty_pages_threshold} páginas vazias consecutivas. Assumindo fim dos resultados.")
+                            return all_properties
                     elif status_code != 200:
                         print(f"Erro ao acessar página. Status code: {status_code}")
                     else:  # 200 with properties
-                        consecutive_empty_pages = 0  # Reset counter
+                        empty_page_count = 0  # Reset counter
                         batch_properties.extend(properties)
             
             # Add batch properties to the total
@@ -224,26 +306,55 @@ class PropertyScraper:
                 print(f"Atingido o número máximo de páginas: {max_pages}")
                 break
             
-            # If we're not continuing, break the loop
-            if not continue_scraping:
-                print("Parando a raspagem devido a páginas vazias consecutivas")
-                break
+            # Save data after each completed batch if requested
+            if save_each_batch and batch_properties and output_dir:
+                print(f"Saving data from batch {current_batch}...")
+                # Process batch data
+                batch_data_handler = DataHandler(batch_properties)
+                batch_df = batch_data_handler.create_dataframe(category)
+                
+                # Use simplified file naming - one file per contract type (venda/aluguel)
+                excel_filename = f'imoveis_df_{category}.xlsx'
+                csv_filename = f'imoveis_df_{category}.csv'
+                
+                # Save with append=True to keep adding to the same files
+                batch_data_handler.save_to_excel(batch_df, excel_filename, output_dir=output_dir, append=append)
+                batch_data_handler.save_to_csv(batch_df, csv_filename, output_dir=output_dir, append=append)
+                
+                print(f"Batch {current_batch} data for {property_type} saved to {output_dir}/{excel_filename}")
             
             # Take a longer pause between batches
-            if continue_scraping:
-                actual_delay = batch_delay + random.uniform(-5, 5)  # Add some randomness
-                print(f"Pausando por {actual_delay:.1f} segundos antes do próximo lote...")
-                time.sleep(actual_delay)
-                current_batch += 1
+            actual_delay = batch_delay + random.uniform(-5, 5)  # Add some randomness
+            print(f"Pausando por {actual_delay:.1f} segundos antes do próximo lote...")
+            time.sleep(actual_delay)
+            current_batch += 1
             
         print(f"\nRaspagem concluída. Total de propriedades coletadas: {len(all_properties)}")
         return all_properties
 
-# URL Base constants
-BASE_URL_ALUGUEL = "https://www.dfimoveis.com.br/aluguel/df/todos/imoveis?pagina="
-BASE_URL_VENDA = "https://www.dfimoveis.com.br/venda/df/todos/imoveis?pagina="
+# URL Base constants - will be formatted with property_type
+BASE_URL_ALUGUEL = "https://www.dfimoveis.com.br/aluguel/df/todos/{property_type}?pagina="
+BASE_URL_VENDA = "https://www.dfimoveis.com.br/venda/df/todos/{property_type}?pagina="
 
-def run_scraper(category='venda', max_pages=500, workers=5, output_dir=None, append=False, custom_output_files=None, batch_size=10, batch_delay=30):
+# Available property types from the DF Imoveis website
+PROPERTY_TYPES = [
+    "apartamento",
+    "casa",
+    "casa-condominio",
+    "galpao",
+    "garagem", 
+    "hotel-flat",
+    "kitnet",
+    "loja",
+    "lote",
+    "loteamento",
+    "ponto-comercial",
+    "predio",
+    "rural",
+    "sala"
+]
+
+def run_scraper(category='venda', property_type='imoveis', max_pages=30, workers=3, output_dir=None, append=True, custom_output_files=None, batch_size=30, batch_delay=30, save_each_batch=True):
     """Run the DF Imoveis scraper with the specified parameters.
     
     Args:
@@ -260,8 +371,18 @@ def run_scraper(category='venda', max_pages=500, workers=5, output_dir=None, app
     base_url = BASE_URL_ALUGUEL if category == 'aluguel' else BASE_URL_VENDA
     
     # Initialize scraper and perform scraping
-    scraper = PropertyScraper(base_url=base_url)
-    properties_data = scraper.scrape_all_pages(max_pages=max_pages, workers=workers, batch_size=batch_size, batch_delay=batch_delay)
+    scraper = PropertyScraper(base_url=base_url, property_type=property_type)
+    properties_data = scraper.scrape_all_pages(
+        max_pages=max_pages, 
+        workers=workers, 
+        batch_size=batch_size, 
+        batch_delay=batch_delay,
+        save_each_batch=save_each_batch,
+        category=category,
+        property_type=property_type,
+        output_dir=output_dir,
+        append=append
+    )
     
     # Process scraped data
     
@@ -283,7 +404,7 @@ def run_scraper(category='venda', max_pages=500, workers=5, output_dir=None, app
             print(f"Excel data saved to {excel_path}")
             print(f"CSV data saved to {csv_path}")
         else:
-            # Use the default file naming scheme
+            # Use simplified file naming - one file per contract type (venda/aluguel)
             excel_filename = f'imoveis_df_{category}.xlsx'
             csv_filename = f'imoveis_df_{category}.csv'
             
@@ -296,12 +417,61 @@ def run_scraper(category='venda', max_pages=500, workers=5, output_dir=None, app
     return df
 
 # This allows the script to be run directly for testing
+def run_all_scrapers(max_pages=30, workers=3, output_dir=None, append=True, batch_size=30, batch_delay=30, save_each_batch=True):
+    """Run all scrapers for all contract types and property types.
+    
+    Args:
+        max_pages (int): Maximum number of pages to scrape per combination
+        workers (int): Number of concurrent workers for threading
+        output_dir (str): Directory to save output files
+        append (bool): Whether to append to existing files
+        batch_size (int): Number of pages per batch
+        batch_delay (int): Seconds to wait between batches
+    """
+    contract_types = ['aluguel']
+    all_dataframes = []
+    
+    for contract_type in contract_types:
+        for property_type in PROPERTY_TYPES:
+            print(f"\n\nScraping {contract_type} - {property_type}...")
+            df = run_scraper(
+                category=contract_type,
+                property_type=property_type,
+                max_pages=max_pages,
+                workers=workers,
+                output_dir=output_dir,
+                append=append,
+                batch_size=batch_size,
+                batch_delay=batch_delay,
+                save_each_batch=save_each_batch
+            )
+            all_dataframes.append(df)
+            
+            # Give the server some rest between different property types
+            time.sleep(30)
+    
+    return all_dataframes
+
 if __name__ == "__main__":
     # Example usage when running the script directly
-    df = run_scraper(
-        category='venda',
-        max_pages=500,
-        workers=5,
-        output_dir="scripts/df-imoveis/data/scraped",
-        append=True
+    # df = run_scraper(
+    #     category='venda',
+    #     property_type='apartamento',
+    #     max_pages=30,
+    #     workers=3,
+    #     output_dir="scripts/df-imoveis/dataset",
+    #     append=True,
+    #     batch_size=30,
+    #     batch_delay=30,
+    #     save_each_batch=True
+    # )
+    
+    all_dfs = run_all_scrapers(
+        max_pages=None,
+        workers=3,
+        output_dir="scripts/df-imoveis/dataset",
+        append=True,
+        batch_size=40,
+        batch_delay=20,
+        save_each_batch=True
     )

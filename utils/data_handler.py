@@ -6,11 +6,13 @@ class DataHandler:
     def __init__(self, data):
         self.data = data
 
-    def create_dataframe(self, modo):
-        """Creates a Pandas DataFrame from the property data and adds a 'modo' column."""
+    def create_dataframe(self, contract_type):
+        """
+        Creates a Pandas DataFrame from the property data and adds a 'contract_type' column.
+        """
 
         df = pd.DataFrame(self.data)
-        df['modo'] = modo  
+        df['contract_type'] = contract_type  
         return df
 
     def save_to_excel(self, df, filename, output_dir=None, append=False):
@@ -42,7 +44,8 @@ class DataHandler:
         print(f"Excel data saved to {filepath}")
         
     def save_to_csv(self, df, filename, output_dir=None, append=False, separator=',', encoding='utf-8'):
-        """Saves the DataFrame to a CSV file.
+        """
+        Saves the DataFrame to a CSV file.
         """
         # Create full path
         filepath = os.path.join(output_dir, filename) if output_dir else filename

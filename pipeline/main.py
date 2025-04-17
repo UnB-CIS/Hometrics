@@ -16,7 +16,7 @@ def insert_data(uri=DB_URI):
 
     return inserted_ids
 
-def run_scrapers(output_dir="dataset/v01"):
+def run_scrapers(output_dir="dataset/v02"):
     """Run all scrapers and save data to the specified output directory."""
     # Create output directory if it doesn't exist
     if not os.path.exists(output_dir):
@@ -24,24 +24,84 @@ def run_scrapers(output_dir="dataset/v01"):
         
     # Define scraper configurations for full scraping (no page limits)
     scraper_configs = [
+        # DF Imoveis - Aluguel - Apartamentos
         {
-            'name': 'df_imoveis_aluguel',
+            'name': 'df_imoveis_aluguel_apartamento',
             'module_path': 'scripts.df-imoveis.scrapings.scrapping_df_imoveis',
             'function_name': 'run_scraper',
             'params': {
-                'category': 'aluguel',
+                'contract_type': 'aluguel',
+                'property_type': 'apartamento',
                 'max_pages': None,  # Run until completion
                 'workers': 5,
                 'batch_size': 50,    # Process in batches of 50 pages
                 'batch_delay': 20    # Wait 20 seconds between batches
             }
         },
+        # DF Imoveis - Aluguel - Casas
         {
-            'name': 'df_imoveis_venda',
+            'name': 'df_imoveis_aluguel_casa',
             'module_path': 'scripts.df-imoveis.scrapings.scrapping_df_imoveis',
             'function_name': 'run_scraper',
             'params': {
-                'category': 'venda',
+                'contract_type': 'aluguel',
+                'property_type': 'casa',
+                'max_pages': None,  # Run until completion
+                'workers': 5,
+                'batch_size': 50,    # Process in batches of 50 pages
+                'batch_delay': 20    # Wait 20 seconds between batches
+            }
+        },
+        # DF Imoveis - Aluguel - Kitnet
+        {
+            'name': 'df_imoveis_aluguel_kitnet',
+            'module_path': 'scripts.df-imoveis.scrapings.scrapping_df_imoveis',
+            'function_name': 'run_scraper',
+            'params': {
+                'contract_type': 'aluguel',
+                'property_type': 'kitnet',
+                'max_pages': None,  # Run until completion
+                'workers': 5,
+                'batch_size': 50,    # Process in batches of 50 pages
+                'batch_delay': 20    # Wait 20 seconds between batches
+            }
+        },
+        # DF Imoveis - Venda - Apartamentos
+        {
+            'name': 'df_imoveis_venda_apartamento',
+            'module_path': 'scripts.df-imoveis.scrapings.scrapping_df_imoveis',
+            'function_name': 'run_scraper',
+            'params': {
+                'contract_type': 'venda',
+                'property_type': 'apartamento',
+                'max_pages': None,  # Run until completion
+                'workers': 5,
+                'batch_size': 50,    # Process in batches of 50 pages
+                'batch_delay': 20    # Wait 20 seconds between batches
+            }
+        },
+        # DF Imoveis - Venda - Casas
+        {
+            'name': 'df_imoveis_venda_casa',
+            'module_path': 'scripts.df-imoveis.scrapings.scrapping_df_imoveis',
+            'function_name': 'run_scraper',
+            'params': {
+                'contract_type': 'venda',
+                'property_type': 'casa',
+                'max_pages': None,  # Run until completion
+                'workers': 5,
+                'batch_size': 50,    # Process in batches of 50 pages
+                'batch_delay': 20    # Wait 20 seconds between batches
+            }
+        },
+        # DF Imoveis - Venda - Kitnet
+        {
+            'name': 'df_imoveis_venda_kitnet',
+            'module_path': 'scripts.df-imoveis.scrapings.scrapping_df_imoveis',
+            'function_name': 'run_scraper',
+            'params': {
+                'contract_type': 'venda',
+                'property_type': 'kitnet',
                 'max_pages': None,  # Run until completion
                 'workers': 5,
                 'batch_size': 50,    # Process in batches of 50 pages
@@ -50,22 +110,26 @@ def run_scrapers(output_dir="dataset/v01"):
         },
         {
             'name': 'net_imoveis_aluguel',
-            'module_path': 'scripts.net-imoveis.scrapping_Netimoveis',
+            'module_path': 'scripts.net-imoveis.scrapping_net_imoveis',
             'function_name': 'run_scraper',
             'params': {
                 'category': 'aluguel',
                 'max_pages': None,  # Run until completion
                 'workers': 5,
+                'batch_size': 50,    # Process in batches of 50 pages
+                'batch_delay': 20    # Wait 20 seconds between batches
             }
         },
         {
             'name': 'net_imoveis_venda',
-            'module_path': 'scripts.net-imoveis.scrapping_Netimoveis',
+            'module_path': 'scripts.net-imoveis.scrapping_net_imoveis',
             'function_name': 'run_scraper',
             'params': {
                 'category': 'venda',
                 'max_pages': None,  # Run until completion
                 'workers': 5,
+                'batch_size': 50,    # Process in batches of 50 pages
+                'batch_delay': 20    # Wait 20 seconds between batches
             }
         },
     ]
