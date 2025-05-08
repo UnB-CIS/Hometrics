@@ -12,13 +12,13 @@ class DataTransformer:
     def transform_data(self) -> List[Dict[str, Any]]:
         return self.data
     
-    def get_coordinates(self, address: str, max_retries: int = 2) -> Optional[Tuple[float, float]]:
+    def get_coordinates(self, address: str, max_retries: int = 1) -> Optional[Tuple[float, float]]:
         """
         Convert an address to latitude and longitude using Nominatim from geopy.
         
         Args:
             address: The address to geocode
-            max_retries: Number of retries for technical errors (timeouts, service errors)
+            max_retries: Number of retries for technical errors only (timeouts, service errors)
         """
         geolocator = Nominatim(user_agent="house_price_project")
         
@@ -35,31 +35,31 @@ class DataTransformer:
         for format_idx, full_address in enumerate(address_formats):
             print(f"Geocoding (format {format_idx+1}/{len(address_formats)}): {full_address}")
             
-            for attempt in range(max_retries):
-                try:
-                    # Increasingly longer waits between retries
-                    if attempt > 0:
-                        wait_time = 1 + attempt  # Progressively longer waits
-                        print(f"Retrying after {wait_time} seconds (attempt {attempt+1}/{max_retries})...")
-                        time.sleep(wait_time)
-                    
-                    location = geolocator.geocode(full_address)
-                    
-                    if location:
-                        print(f"Found location: {location.address} at {location.latitude}, {location.longitude}")
-                        return (location.latitude, location.longitude)
-                    elif attempt < max_retries - 1:
-                        print(f"No location found for '{full_address}', retrying...")
-                    else:
-                        print(f"No location found for '{full_address}' after {max_retries} attempts")
+            try:
+                # Single attempt for each format with no retries for not found addresses
+                location = geolocator.geocode(full_address)
                 
-                except (GeocoderTimedOut, GeocoderServiceError) as e:
-                    if attempt == max_retries - 1:  # Last attempt for this format
-                        print(f"Error geocoding address '{full_address}': {e}")
-                    else:
-                        print(f"Geocoding error: {e}, retrying...")
+                if location:
+                    print(f"Found location: {location.address} at {location.latitude}, {location.longitude}")
+                    return (location.latitude, location.longitude)
+                else:
+                    print(f"No location found for '{full_address}', trying next format...")
+            
+            except (GeocoderTimedOut, GeocoderServiceError) as e:
+                # Only retry for technical errors, not for "not found"
+                if max_retries > 1:
+                    print(f"Geocoding error: {e}, retrying once...")
+                    time.sleep(2)  # Wait before retry
+                    try:
+                        location = geolocator.geocode(full_address)
+                        if location:
+                            print(f"Found location on retry: {location.address} at {location.latitude}, {location.longitude}")
+                            return (location.latitude, location.longitude)
+                    except Exception:
+                        pass
+                print(f"Error geocoding address '{full_address}': {e}")
         
-        # If we've tried all formats and attempts, try one more approach: split the address
+        # If we've tried all formats, try one more approach: split the address
         # This can help with addresses that have apartment numbers or other details
         if ', ' in address:
             try:
@@ -68,7 +68,6 @@ class DataTransformer:
                 if len(parts) > 1:
                     simplified_address = f"{parts[0]}, {parts[-1]}, Brasília, Brazil"
                     print(f"Trying simplified address: {simplified_address}")
-                    time.sleep(1)  # Give Nominatim a break before this last attempt
                     
                     location = geolocator.geocode(simplified_address)
                     if location:
@@ -77,7 +76,7 @@ class DataTransformer:
             except Exception as e:
                 print(f"Error with simplified address: {e}")
         
-        print(f"Failed to geocode address after all attempts: {address}")
+        print(f"Failed to geocode address: {address}")
         return None
     
     def add_coordinates_to_data(self, address_field: str, batch_size: int = 50, callback=None) -> List[Dict[str, Any]]:

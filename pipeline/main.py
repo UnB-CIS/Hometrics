@@ -243,9 +243,14 @@ def parse_arguments():
     parser.add_argument('--skip-geocoding', action='store_true', help="Skip the geocoding step (faster but no coordinates)")
     parser.add_argument('--verbose', '-v', action='store_true', help="Show more detailed output")
     parser.add_argument('--batch-size', type=int, default=50, help="Number of items to process before saving (default: 50)")
-    parser.add_argument('--resume', action='store_true', help="Resume from where processing left off previously")
-    parser.add_argument('--restart', action='store_true', help="Force restart processing from beginning (ignores --resume)")
-    return parser.parse_args()
+    parser.add_argument('--no-resume', action='store_true', help="Do not resume processing (start from beginning)")
+    parser.add_argument('--restart', action='store_true', help="Force restart processing from beginning (same as --no-resume)")
+    args = parser.parse_args()
+    
+    # Set resume to True by default (opposite of no-resume flag)
+    args.resume = not args.no_resume and not args.restart
+    
+    return args
 
 def main():
     # Parse command line arguments
@@ -255,8 +260,9 @@ def main():
     print(f"Skip Geocoding: {'YES' if args.skip_geocoding else 'NO'}")
     print(f"Verbose Mode: {'YES' if args.verbose else 'NO'}")
     print(f"Batch Size: {args.batch_size}")
-    print(f"Resume Processing: {'YES' if args.resume and not args.restart else 'NO'}")
+    print(f"Resume Processing: {'YES (default)' if args.resume else 'NO (forced restart)'}")
     print(f"Force Restart: {'YES' if args.restart else 'NO'}")
+    print(f"Auto-resume: Always enabled unless --restart or --no-resume is specified")
     
     # Define paths to CSV files
     dataset_dir = os.path.join(os.getcwd(), 'dataset', 'v02')
