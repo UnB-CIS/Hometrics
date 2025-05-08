@@ -23,16 +23,3 @@ class DataCleaner:
 
         return self.data
 
-
-# data = [
-#     {"name": "Alice", "age": "30", "height": "5.5"},
-#     {"name": "Bob", "age": "25", "height": "6.0"},
-#     {"name": "Alice", "age": "30", "height": "5.5"},
-#     {"name": "Charlie", "age": "", "height": "5.8"}
-# ]
-
-# cleaner = DataCleaner(data)
-# standard_keys = ["name", "age", "height"]
-# cleaned_data = cleaner.clean_data(standard_keys)
-
-# print(cleaned_data)

@@ -1,0 +1,472 @@
+description,address,property_type,price,size,bedrooms,bathrooms,parking_spaces,contract_type,latitude,longitude
+"SQSW 300 Bloco A, SUDOESTE, BRASILIA",,apartamento,32000.0,560.0,4.0,,4.0,aluguel,-15.7901346,-47.9161562
+"Avenida Parque Águas Claras, NORTE, AGUAS CLARAS",,apartamento,8389.0,164.0,4.0,,3.0,aluguel,-15.8311467,-48.0150679
+"SQSW 500, SUDOESTE, BRASILIA",,apartamento,26000.0,178.0,4.0,,3.0,aluguel,-15.8058336,-47.9317627
+"CCSW 1, SUDOESTE, BRASILIA",,kitnet,4900.0,26.0,1.0,,1.0,aluguel,-15.7968509,-47.9274085
+"Avenida Parque Águas Claras, NORTE, AGUAS CLARAS",,apartamento,10150.0,162.0,4.0,,3.0,aluguel,-15.8311467,-48.0150679
+"SQS 409 Bloco H, ASA SUL, BRASILIA",,apartamento,4200.0,86.0,3.0,,,aluguel,,
+"SGCV Lote 27, PARK SUL, BRASILIA",,apartamento,7000.0,70.0,2.0,,1.0,aluguel,-15.8247211,-47.9537743
+"SQNW 309, NOROESTE, BRASILIA",,apartamento,9800.0,201.0,3.0,,2.0,aluguel,-15.7472132,-47.9126899
+"SMAS Trecho 1 C, PARK SUL, BRASILIA",,apartamento,6200.0,77.0,2.0,,2.0,aluguel,-15.8368348,-47.945102
+"Rua 33, NORTE, AGUAS CLARAS",,apartamento,7000.0,164.0,3.0,,2.0,aluguel,-11.7168682,-49.0981606
+"CLNW 10/11 Lote C, NOROESTE, BRASILIA",,apartamento,2800.0,32.0,1.0,,1.0,aluguel,,
+"Avenida Parque Águas Claras, NORTE, AGUAS CLARAS",,apartamento,4000.0,104.0,3.0,,2.0,aluguel,-15.8311467,-48.0150679
+"CCSW 1, SUDOESTE, BRASILIA",,kitnet,5100.0,26.0,1.0,,1.0,aluguel,-15.7968509,-47.9274085
+"SMAS, PARK SUL, BRASILIA",,apartamento,6200.0,87.0,3.0,,2.0,aluguel,-15.8368348,-47.945102
+"Avenida Parque Águas Claras, NORTE, AGUAS CLARAS",,apartamento,3800.0,104.0,3.0,,2.0,aluguel,-15.8311467,-48.0150679
+"Rua 25, NORTE, AGUAS CLARAS",,apartamento,3000.0,64.0,2.0,,2.0,aluguel,-11.713059,-49.1051517
+"Rua 24, SUL, AGUAS CLARAS",,apartamento,2700.0,54.0,2.0,,1.0,aluguel,-30.1257021,-50.8300302
+"SQNW 307 Bloco I, NOROESTE, BRASILIA",,apartamento,5500.0,74.0,2.0,,2.0,aluguel,,
+"SGCV, PARK SUL, BRASILIA",,apartamento,17900.0,135.0,3.0,,2.0,aluguel,-15.8247211,-47.9537743
+"CLNW 10/11 Lote K, NOROESTE, BRASILIA",,apartamento,2200.0,20.0,1.0,,1.0,aluguel,,
+"SCEN Trecho 1, ASA NORTE, BRASILIA",,apartamento,13000.0,134.0,4.0,,2.0,aluguel,-15.7876153,-47.8435403
+"SQNW 303 Bloco F, NOROESTE, BRASILIA",,apartamento,15900.0,201.0,4.0,,4.0,aluguel,,
+"Condomínio Jardim Botânico I, JARDIM BOTANICO, BRASILIA",,apartamento,2300.0,25.0,1.0,,,aluguel,-15.8825425,-47.8128006
+"SQN 116 Bloco B, ASA NORTE, BRASILIA",,apartamento,22000.0,339.0,3.0,,3.0,aluguel,-15.7395054,-47.8943638
+"CCSW 1, SUDOESTE, BRASILIA",,kitnet,5000.0,26.0,1.0,,1.0,aluguel,-15.7968509,-47.9274085
+"SHTN Trecho 1, ASA NORTE, BRASILIA",,apartamento,4290.0,60.0,2.0,,2.0,aluguel,-15.7888828,-47.8318449
+"SCEN Trecho 1, ASA NORTE, BRASILIA",,apartamento,10500.0,98.0,3.0,,2.0,aluguel,-15.7876153,-47.8435403
+"SGCV, PARK SUL, BRASILIA",,apartamento,2700.0,44.0,1.0,,1.0,aluguel,-15.8247211,-47.9537743
+"Rua 33, SUL, AGUAS CLARAS",,apartamento,4200.0,103.0,3.0,,2.0,aluguel,-15.8372884,-48.0366851
+"Quadra 101, NORTE, AGUAS CLARAS",,apartamento,5500.0,162.0,3.0,,3.0,aluguel,-15.8321344,-48.0104648
+"Rua 37, SUL, AGUAS CLARAS",,apartamento,3600.0,70.0,1.0,,1.0,aluguel,-15.8345964,-48.038916
+"SQN 314, ASA NORTE, BRASILIA",,apartamento,5500.0,139.0,3.0,,1.0,aluguel,-15.7549304,-47.8913402
+"Alameda Gravatá Quadra 301, NORTE, AGUAS CLARAS",,apartamento,2230.0,60.0,2.0,,,aluguel,,
+"Avenida Parque Águas Claras, NORTE, AGUAS CLARAS",,apartamento,8800.0,165.0,4.0,,3.0,aluguel,-15.8311467,-48.0150679
+"SHTN Trecho 1, ASA NORTE, BRASILIA",,apartamento,9013.0,96.0,2.0,,,aluguel,-15.7888828,-47.8318449
+"Rua 12, JARDIM CEU AZUL, VALPARAISO DE GOIAS",,apartamento,800.0,45.0,2.0,,1.0,aluguel,-16.0557399,-47.9887844
+"QI 5 Bloco O, GUARA I, GUARA",,apartamento,2800.0,82.0,3.0,,1.0,aluguel,,
+"SQS 211 Bloco I, ASA SUL, BRASILIA",,apartamento,40000.0,470.0,4.0,,3.0,aluguel,,
+"Quadra 201, SUL, AGUAS CLARAS",,apartamento,6500.0,129.0,3.0,,2.0,aluguel,-29.9198671,-51.0635217
+"QRSW 8 Bloco A 1, SUDOESTE, BRASILIA",,apartamento,1800.0,41.0,1.0,,,aluguel,-15.7839476,-47.9284166
+"Rua 12 Chacará 321, VICENTE PIRES, VICENTE PIRES",,apartamento,1100.0,50.0,2.0,,,aluguel,-15.7929037,-48.0313329
+"SQS 106, ASA SUL, BRASILIA",,apartamento,6500.0,120.0,2.0,,,aluguel,-15.8130299,-47.8987639
+"QI 5 Bloco P, GUARA I, GUARA",,apartamento,2890.0,72.0,3.0,,2.0,aluguel,,
+"CCSW 4, SUDOESTE, BRASILIA",,kitnet,1250.0,33.0,1.0,,,aluguel,-15.7967824,-47.9295357
+"Rua DAS AROEIRAS, NORTE, AGUAS CLARAS",,kitnet,1400.0,35.0,1.0,,1.0,aluguel,-15.8317837,-48.034582
+"SHTN Trecho 2 Lote 3, ASA NORTE, BRASILIA",,apartamento,3000.0,32.0,1.0,,,aluguel,-15.7858712,-47.8521756
+"SQN 409 Bloco C, ASA NORTE, BRASILIA",,apartamento,5000.0,96.0,4.0,,,aluguel,-15.7567174,-47.8795692
+"Avenida das Araucárias, SUL, AGUAS CLARAS",,apartamento,2100.0,37.0,1.0,,1.0,aluguel,-15.8400497,-48.0206766
+"Rua 12 Chacará 145, VICENTE PIRES, VICENTE PIRES",,apartamento,1500.0,60.0,2.0,,1.0,aluguel,-15.7929037,-48.0313329
+"SQN 114 Bloco G, ASA NORTE, BRASILIA",,apartamento,4200.0,82.0,2.0,,,aluguel,-15.7457063,-47.8917485
+"CCSW 04 Lote 01, SUDOESTE, BRASILIA",,kitnet,2000.0,30.0,1.0,,1.0,aluguel,,
+"SQSW 104 Bloco E, SUDOESTE, BRASILIA",,apartamento,13000.0,169.0,4.0,,2.0,aluguel,-15.8049392,-47.9279162
+"QS 303 Conjunto 6, SAMAMBAIA SUL, SAMAMBAIA",,apartamento,1850.0,47.0,2.0,,1.0,aluguel,-15.882049,-48.0913379
+"Condomínio Jardim Botânico V, JARDIM BOTANICO, BRASILIA",,apartamento,2500.0,75.0,2.0,,,aluguel,-15.8729314,-47.8143748
+"Área Especial 4 Módulo L, GUARA II, GUARA",,apartamento,3000.0,74.0,2.0,,1.0,aluguel,,
+"Rua 28, NORTE, AGUAS CLARAS",,apartamento,5500.0,175.0,4.0,,3.0,aluguel,-15.8376579,-48.0312149
+"SQSW 302, SUDOESTE, BRASILIA",,apartamento,14500.0,208.0,4.0,,3.0,aluguel,-15.7978707,-47.9232794
+"QMSW 5, SUDOESTE, BRASILIA",,kitnet,1600.0,28.0,1.0,,1.0,aluguel,-15.7940053,-47.9197148
+"SHTN Trecho 1, ASA NORTE, BRASILIA",,apartamento,6080.0,57.0,1.0,,,aluguel,-15.7888828,-47.8318449
+"SQS 211, ASA SUL, BRASILIA",,apartamento,14800.0,149.0,3.0,,1.0,aluguel,-15.8257602,-47.9092333
+"SQNW 307 Bloco I, NOROESTE, BRASILIA",,apartamento,5500.0,74.0,2.0,,2.0,aluguel,,
+"CCSW 1, SUDOESTE, BRASILIA",,apartamento,5000.0,26.0,1.0,,1.0,aluguel,-15.7968509,-47.9274085
+"Quadra 210, SUL, AGUAS CLARAS",,apartamento,2700.0,50.0,1.0,,1.0,aluguel,-29.9198671,-51.0635217
+"SCES Trecho 4, ASA SUL, BRASILIA",,apartamento,4500.0,42.0,1.0,,1.0,aluguel,-15.8253954,-47.8868277
+"Rua 25, NORTE, AGUAS CLARAS",,apartamento,5600.0,140.0,3.0,,1.0,aluguel,-11.713512,-49.1046261
+"SQS 312 Bloco J, ASA SUL, BRASILIA",,apartamento,15500.0,320.0,4.0,,2.0,aluguel,,
+"Rua 7, NORTE, AGUAS CLARAS",,apartamento,1999.0,41.0,1.0,,257.0,aluguel,-15.8407306,-48.0260912
+"SCES Trecho 4, ASA SUL, BRASILIA",,apartamento,4700.0,52.0,1.0,,1.0,aluguel,-15.8253954,-47.8868277
+"Rua 28, NORTE, AGUAS CLARAS",,apartamento,3600.0,69.0,2.0,,1.0,aluguel,-15.8376579,-48.0312149
+"CCSW 1, SUDOESTE, BRASILIA",,apartamento,4900.0,26.0,1.0,,1.0,aluguel,-15.7968509,-47.9274085
+"Quadra 301 Conjunto 8, SAMAMBAIA SUL, SAMAMBAIA",,apartamento,2150.0,50.0,2.0,,1.0,aluguel,-15.8823692,-48.0878368
+"Rodovia DF 150, GRANDE COLORADO, SOBRADINHO",,apartamento,1400.0,50.0,2.0,,1.0,aluguel,-15.6775259,-47.8262262
+"CLNW 10/11 Lote F, NOROESTE, BRASILIA",,apartamento,3014.0,50.0,1.0,,1.0,aluguel,,
+"Rua 14, NORTE, AGUAS CLARAS",,apartamento,7000.0,178.0,4.0,,3.0,aluguel,-3.056255,-59.9805856
+"SQS 405 Bloco O, ASA SUL, BRASILIA",,apartamento,3700.0,80.0,3.0,,,aluguel,,
+"SCES Trecho 4, ASA SUL, BRASILIA",,apartamento,4000.0,48.0,1.0,,1.0,aluguel,-15.8253954,-47.8868277
+"Rua DAS CARNAUBAS, NORTE, AGUAS CLARAS",,apartamento,1500.0,28.0,1.0,,1.0,aluguel,-15.8297333,-48.0179572
+"SQNW 108 Bloco A, NOROESTE, BRASILIA",,apartamento,10900.0,163.0,4.0,,2.0,aluguel,-15.750479,-47.9097874
+"SCLRN 703 Bloco H, ASA NORTE, BRASILIA",,apartamento,4900.0,230.0,1.0,,1.0,aluguel,,
+"Trecho 1 Lote C , SETOR INDUSTRIAL, GUARA",,apartamento,6000.0,104.0,3.0,,2.0,aluguel,-15.8020618,-47.9917176
+"QSF 1, TAGUATINGA SUL, TAGUATINGA",,apartamento,2500.0,61.0,2.0,,1.0,aluguel,-15.8620695,-48.0357389
+"QN 5 Conjunto 4, RIACHO FUNDO, RIACHO FUNDO",,apartamento,1400.0,65.0,2.0,,,aluguel,-15.8807317,-48.0138024
+"Quadra 203, SUL, AGUAS CLARAS",,apartamento,2700.0,69.0,2.0,,1.0,aluguel,-29.9198671,-51.0635217
+"Alameda das Acácias Quadra 107, NORTE, AGUAS CLARAS",,apartamento,3800.0,107.0,3.0,,2.0,aluguel,,
+"Rua 37, SUL, AGUAS CLARAS",,apartamento,4000.0,55.0,1.0,,1.0,aluguel,-15.8348133,-48.0390942
+"QMSW 5 Lote 8, SUDOESTE, BRASILIA",,kitnet,2200.0,1.0,1.0,,1.0,aluguel,-15.7940053,-47.9197148
+"QRSW 3, SUDOESTE, BRASILIA",,apartamento,4200.0,60.0,2.0,,,aluguel,-15.7903291,-47.9317472
+"EQRSW 2/3, SUDOESTE, BRASILIA",,apartamento,2600.0,36.0,1.0,,1.0,aluguel,-15.7920392,-47.9310884
+"Rua 19, NORTE, AGUAS CLARAS",,apartamento,1600.0,38.0,1.0,,1.0,aluguel,-15.8418328,-48.0228719
+"SQNW 107 Bloco F, NOROESTE, BRASILIA",,apartamento,5900.0,77.0,2.0,,1.0,aluguel,,
+"SGCV Lote 27, PARK SUL, BRASILIA",,apartamento,6000.0,75.0,2.0,,2.0,aluguel,-15.8247211,-47.9537743
+"SQSW 102 Bloco I, SUDOESTE, BRASILIA",,apartamento,8800.0,182.0,4.0,,2.0,aluguel,-15.8049392,-47.9279162
+"Avenida Parque Águas Claras, NORTE, AGUAS CLARAS",,apartamento,8300.0,164.0,4.0,,3.0,aluguel,-15.8311467,-48.0150679
+"QN 1 Conjunto 30, RIACHO FUNDO, RIACHO FUNDO",,apartamento,600.0,30.0,1.0,,,aluguel,-15.8793614,-48.0063892
+"Quadra 107, NORTE, AGUAS CLARAS",,apartamento,6500.0,139.0,4.0,,2.0,aluguel,-15.8305187,-48.0308634
+"SQS 210, ASA SUL, BRASILIA",,apartamento,11500.0,222.0,4.0,,1.0,aluguel,-15.823728,-47.906512
+"SQS 103 Bloco A, ASA SUL, BRASILIA",,apartamento,5600.0,149.0,2.0,,1.0,aluguel,,
+"Rua 36, NORTE, AGUAS CLARAS",,apartamento,2100.0,60.0,1.0,,1.0,aluguel,-15.8356039,-48.0380838
+"SQS 212 Bloco K, ASA SUL, BRASILIA",,apartamento,14500.0,194.0,3.0,,2.0,aluguel,,
+"QC 10 Rua P, JARDINS MANGUEIRAL, BRASILIA",,apartamento,2000.0,48.0,2.0,,1.0,aluguel,-15.8974233,-47.7986385
+"STN Bloco K, ASA NORTE, BRASILIA",,kitnet,1250.0,27.0,1.0,,1.0,aluguel,,
+"SGAS 905, ASA SUL, BRASILIA",,kitnet,2100.0,27.0,1.0,,,aluguel,-15.8042433,-47.9016082
+"Alameda das Acácias Quadra 107, NORTE, AGUAS CLARAS",,apartamento,6500.0,144.0,3.0,,2.0,aluguel,,
+"Avenida Parque Águas Claras, NORTE, AGUAS CLARAS",,apartamento,3200.0,72.0,3.0,,1.0,aluguel,-15.8311467,-48.0150679
+"SGAS 905, ASA SUL, BRASILIA",,kitnet,2100.0,29.0,,,1.0,aluguel,-15.8042433,-47.9016082
+"SCES Trecho 4, ASA SUL, BRASILIA",,apartamento,3700.0,48.0,1.0,,,aluguel,-15.8253954,-47.8868277
+"SGCV Lote 19, PARK SUL, BRASILIA",,apartamento,10500.0,154.0,4.0,,3.0,aluguel,-15.8247211,-47.9537743
+"CLN 411 Bloco E, ASA NORTE, BRASILIA",,kitnet,3000.0,41.0,1.0,,,aluguel,,
+"Quadra 208, SUL, AGUAS CLARAS",,apartamento,5900.0,95.0,3.0,,2.0,aluguel,-29.9198671,-51.0635217
+"QMSW 5, SUDOESTE, BRASILIA",,kitnet,2200.0,27.0,1.0,,,aluguel,-15.7940053,-47.9197148
+"SQS 408 Bloco F, ASA SUL, BRASILIA",,apartamento,3100.0,43.0,1.0,,,aluguel,,
+"SGCV, PARK SUL, BRASILIA",,apartamento,3000.0,30.0,1.0,,1.0,aluguel,-15.8247211,-47.9537743
+"Quadra 301 Conjunto 1, SAMAMBAIA SUL, SAMAMBAIA",,apartamento,1500.0,62.0,2.0,,1.0,aluguel,-15.8823692,-48.0878368
+"SQSW 305, SUDOESTE, BRASILIA",,apartamento,20000.0,300.0,4.0,,4.0,aluguel,-15.8054368,-47.9335081
+"Rua 36, SUL, AGUAS CLARAS",,apartamento,2000.0,25.0,1.0,,,aluguel,-15.8356039,-48.0380838
+"SMAS Trecho 1 C, PARK SUL, BRASILIA",,apartamento,5200.0,73.0,2.0,,2.0,aluguel,-15.8368348,-47.945102
+"Rua COPAIBA, NORTE, AGUAS CLARAS",,apartamento,2800.0,34.0,1.0,,,aluguel,-15.8342015,-48.0399113
+"SCEN Trecho 1, ASA NORTE, BRASILIA",,apartamento,10500.0,71.0,2.0,,2.0,aluguel,-15.7876153,-47.8435403
+"SCES Trecho 4, ASA SUL, BRASILIA",,apartamento,7200.0,51.0,1.0,,1.0,aluguel,-15.8253954,-47.8868277
+"SCEN Trecho 1 Conjunto 36, ASA NORTE, BRASILIA",,apartamento,12000.0,134.0,4.0,,3.0,aluguel,,
+"QE 40, GUARA II, GUARA",,apartamento,1500.0,38.0,2.0,,,aluguel,-15.8419452,-47.9855289
+"Rua 14, SUL, AGUAS CLARAS",,apartamento,2500.0,61.0,2.0,,1.0,aluguel,-15.8384039,-48.0192201
+"CA 08, LAGO NORTE, BRASILIA",,apartamento,4000.0,74.0,2.0,,1.0,aluguel,-15.7136449,-47.8876116
+"SEPS 712/912, ASA SUL, BRASILIA",,kitnet,1900.0,25.0,1.0,,,aluguel,-15.8170813,-47.9172328
+"SES Quadra 1, SETOR ECONOMICO DE SOBRADINHO, SOBRADINHO",,apartamento,1100.0,80.0,2.0,,,aluguel,,
+"Quadra 106, NORTE, AGUAS CLARAS",,apartamento,3500.0,65.0,2.0,,1.0,aluguel,-15.8358021,-48.0312744
+"Quadra 201, SUL, AGUAS CLARAS",,apartamento,1950.0,45.0,1.0,,1.0,aluguel,-29.9198671,-51.0635217
+"Rua MANACA, SUL, AGUAS CLARAS",,apartamento,1900.0,32.0,1.0,,1.0,aluguel,-15.8343289,-48.0086332
+"Rua DAS CARNAUBAS, NORTE, AGUAS CLARAS",,apartamento,3400.0,63.0,2.0,,,aluguel,-15.8297333,-48.0179572
+"SQS 116 Bloco J, ASA SUL, BRASILIA",,apartamento,3900.0,66.0,2.0,,1.0,aluguel,-15.8329999,-47.9248604
+"CA 02, LAGO NORTE, BRASILIA",,apartamento,4000.0,57.0,2.0,,1.0,aluguel,-15.7180106,-47.8825455
+"Rua 21, NORTE, AGUAS CLARAS",,apartamento,4900.0,244.0,3.0,,3.0,aluguel,-11.7154093,-49.1038191
+"SCEN Trecho 1, ASA NORTE, BRASILIA",,apartamento,11400.0,100.0,3.0,,2.0,aluguel,-15.7876153,-47.8435403
+"QC 1, JARDINS MANGUEIRAL, BRASILIA",,apartamento,2300.0,48.0,2.0,,1.0,aluguel,-15.8869551,-47.8167176
+"QE 5, GUARA I, GUARA",,apartamento,2300.0,39.0,1.0,,1.0,aluguel,-15.8307171,-47.975955
+"SQN 108, ASA NORTE, BRASILIA",,apartamento,6000.0,126.0,3.0,,1.0,aluguel,-15.7635048,-47.8859617
+"QMSW 5 Lote 2 Bloco B, SUDOESTE, BRASILIA",,kitnet,3200.0,26.0,1.0,,1.0,aluguel,-15.7940053,-47.9197148
+"SQNW 307 Bloco I, NOROESTE, BRASILIA",,apartamento,5800.0,74.0,2.0,,2.0,aluguel,,
+"SQS 308 Bloco C, ASA SUL, BRASILIA",,apartamento,7250.0,154.0,3.0,,1.0,aluguel,,
+"QN 120 Conjunto 2, SAMAMBAIA SUL, SAMAMBAIA",,apartamento,2200.0,42.0,2.0,,1.0,aluguel,,
+"SQS 211 Bloco D, ASA SUL, BRASILIA",,apartamento,6000.0,169.0,4.0,,1.0,aluguel,,
+"SQSW 504 Bloco I, SUDOESTE, BRASILIA",,apartamento,4700.0,81.0,2.0,,1.0,aluguel,-15.8049392,-47.9279162
+"SGCV Lote 13, PARK SUL, BRASILIA",,apartamento,3100.0,35.0,1.0,,1.0,aluguel,-15.8247211,-47.9537743
+"SQS 108, ASA SUL, BRASILIA",,apartamento,5600.0,88.0,2.0,,,aluguel,-15.8166635,-47.9040639
+"QI 12, SETOR INDUSTRIAL, TAGUATINGA",,apartamento,3000.0,67.0,3.0,,2.0,aluguel,-15.8106303,-48.0776866
+"SHS Quadra 02 Bloco J, ASA SUL, BRASILIA",,apartamento,4300.0,49.0,1.0,,,aluguel,,
+"Rua 21, SUL, AGUAS CLARAS",,apartamento,4500.0,148.0,3.0,,1.0,aluguel,-15.8390863,-48.0259111
+"CSG 3, TAGUATINGA SUL, TAGUATINGA",,apartamento,2100.0,44.0,1.0,,1.0,aluguel,-15.8662108,-48.0340308
+"Quadra 107 Rua E, NORTE, AGUAS CLARAS",,apartamento,2500.0,60.0,2.0,,1.0,aluguel,-15.8580029,-48.0338158
+"QS 1 Rua 210, AREAL, AGUAS CLARAS",,apartamento,1000.0,33.0,1.0,,1.0,aluguel,,
+"SQS 314, ASA SUL, BRASILIA",,apartamento,9500.0,170.0,3.0,,1.0,aluguel,-15.8164055,-47.9080336
+"QMSW 6, SUDOESTE, BRASILIA",,kitnet,2500.0,30.0,1.0,,2.0,aluguel,-15.7946423,-47.921738
+"Quadra 207, SUL, AGUAS CLARAS",,apartamento,7000.0,150.0,3.0,,3.0,aluguel,-29.9198671,-51.0635217
+"Rua 37, NORTE, AGUAS CLARAS",,apartamento,2290.0,33.0,1.0,,,aluguel,-15.8348133,-48.0390942
+"SQN 111 Bloco A, ASA NORTE, BRASILIA",,apartamento,12000.0,168.0,3.0,,2.0,aluguel,-15.7544848,-47.8883595
+"CRS 513 Bloco C, ASA SUL, BRASILIA",,apartamento,1950.0,47.0,2.0,,,aluguel,,
+"Rua 27, NORTE, AGUAS CLARAS",,apartamento,6800.0,130.0,3.0,,2.0,aluguel,-11.7151819,-49.1051762
+"Quadra 56 Bloco A B Lote 06, SETOR CENTRAL, GAMA",,apartamento,1270.0,50.0,2.0,,,aluguel,,
+"QNH Área Especial 4, TAGUATINGA NORTE, TAGUATINGA",,apartamento,1600.0,30.0,2.0,,,aluguel,-15.8042901,-48.085626
+"QC 15, JARDINS MANGUEIRAL, BRASILIA",,apartamento,2000.0,48.0,2.0,,1.0,aluguel,-15.892737,-47.8043235
+"QS 5 Rua 400, AREAL, AGUAS CLARAS",,apartamento,3000.0,180.0,5.0,,2.0,aluguel,-15.8540219,-48.0388214
+"Rua ALECRIM, NORTE, AGUAS CLARAS",,apartamento,4000.0,96.0,3.0,,2.0,aluguel,-15.836772,-48.0177672
+"CA 05, LAGO NORTE, BRASILIA",,apartamento,4000.0,74.0,2.0,,1.0,aluguel,-15.7196252,-47.8793711
+"Rua ALECRIM, SUL, AGUAS CLARAS",,apartamento,3300.0,107.0,4.0,,1.0,aluguel,-15.836772,-48.0177672
+"CRNW 510 Bloco B Lote 1, NOROESTE, BRASILIA",,apartamento,5300.0,54.0,2.0,,1.0,aluguel,,
+"QN 5 Conjunto 4, RIACHO FUNDO, RIACHO FUNDO",,apartamento,1400.0,65.0,2.0,,,aluguel,-15.8807317,-48.0138024
+"Rua 21, NORTE, AGUAS CLARAS",,apartamento,3800.0,96.0,3.0,,1.0,aluguel,-11.7154549,-49.10386
+"SEPS 712/912, ASA SUL, BRASILIA",,kitnet,1700.0,25.0,1.0,,,aluguel,-15.8170813,-47.9172328
+"SQS 308 Bloco G, ASA SUL, BRASILIA",,apartamento,14500.0,157.0,3.0,,1.0,aluguel,,
+"Avenida São Sebastião, CENTRO, SAO SEBASTIAO",,apartamento,1600.0,58.0,2.0,,,aluguel,-15.9064879,-47.7714075
+"SQN 108, ASA NORTE, BRASILIA",,apartamento,5950.0,122.0,3.0,,1.0,aluguel,-15.7635048,-47.8859617
+"SQS 411 Bloco D, ASA SUL, BRASILIA",,apartamento,3300.0,55.0,2.0,,,aluguel,,
+"QE 40 Conjunto Q, GUARA II, GUARA",,apartamento,800.0,47.0,1.0,,,aluguel,-15.8469821,-47.9730733
+"SCRN 708/709 Bloco G, ASA NORTE, BRASILIA",,apartamento,2000.0,42.0,1.0,,,aluguel,-15.7635082,-47.892723
+"SGAN 914 Módulo H, ASA NORTE, BRASILIA",,apartamento,1400.0,29.0,1.0,,1.0,aluguel,,
+"SQN 314 Bloco H, ASA NORTE, BRASILIA",,apartamento,13500.0,376.0,4.0,,4.0,aluguel,-15.7452883,-47.8953796
+"Avenida das Castanheiras, NORTE, AGUAS CLARAS",,apartamento,2500.0,67.0,2.0,,1.0,aluguel,-15.8360494,-48.0195287
+"Rua 4, SUL, AGUAS CLARAS",,apartamento,3800.0,88.0,3.0,,1.0,aluguel,-15.8368046,-48.0110054
+"SQSW 305, SUDOESTE, BRASILIA",,apartamento,5000.0,82.0,2.0,,1.0,aluguel,-15.8054368,-47.9335081
+"Quadra 105, NORTE, AGUAS CLARAS",,apartamento,2300.0,45.0,2.0,,1.0,aluguel,-15.8330159,-48.0127396
+"CRNW 510 Bloco B Lote 5, NOROESTE, BRASILIA",,apartamento,5300.0,60.0,2.0,,1.0,aluguel,,
+"SQSW 300, SUDOESTE, BRASILIA",,apartamento,23000.0,288.0,3.0,,3.0,aluguel,-15.790541,-47.9171433
+"Rua COPAIBA, NORTE, AGUAS CLARAS",,apartamento,2300.0,44.0,1.0,,1.0,aluguel,-15.8342015,-48.0399113
+"Quadra 2 Conjunto A 6, SOBRADINHO, SOBRADINHO",,apartamento,1800.0,60.0,2.0,,1.0,aluguel,-15.6598788,-47.8048014
+"Rua 24, NORTE, AGUAS CLARAS",,apartamento,3600.0,87.0,3.0,,1.0,aluguel,-11.7131131,-49.1042791
+"SHDB QL 32 Conjunto 1, LAGO SUL, BRASILIA",,apartamento,4900.0,120.0,3.0,,2.0,aluguel,,
+"SQS 216, ASA SUL, BRASILIA",,apartamento,7300.0,168.0,3.0,,1.0,aluguel,-15.8164055,-47.9080336
+"CSG 3, TAGUATINGA SUL, TAGUATINGA",,apartamento,3500.0,45.0,2.0,,1.0,aluguel,-15.8662108,-48.0340308
+"Rua 20, SUL, AGUAS CLARAS",,apartamento,1600.0,24.0,1.0,,1.0,aluguel,-15.8418989,-48.0242537
+"CLNW 8/9 Lote A, NOROESTE, BRASILIA",,apartamento,2400.0,32.0,1.0,,,aluguel,,
+"Alameda dos Eucaliptos Quadra 107, NORTE, AGUAS CLARAS",,apartamento,1650.0,32.0,1.0,,1.0,aluguel,,
+"CLSW 301 Bloco A, SUDOESTE, BRASILIA",,apartamento,1750.0,40.0,1.0,,,aluguel,,
+"Rua 4 Chacará 6A, VICENTE PIRES, VICENTE PIRES",,apartamento,950.0,33.0,1.0,,,aluguel,-15.8158065,-48.020461
+"Quadra 210, SUL, AGUAS CLARAS",,apartamento,5990.0,160.0,3.0,,2.0,aluguel,-29.9198671,-51.0635217
+"Rua 8, SUL, AGUAS CLARAS",,apartamento,5500.0,129.0,3.0,,2.0,aluguel,-15.8407051,-48.0264621
+"SQNW 107 Bloco F, NOROESTE, BRASILIA",,apartamento,5900.0,77.0,2.0,,2.0,aluguel,,
+"SGCV, PARK SUL, BRASILIA",,apartamento,3200.0,32.0,1.0,,1.0,aluguel,-15.8247211,-47.9537743
+"Rua 8, NORTE, AGUAS CLARAS",,apartamento,2890.0,60.0,2.0,,1.0,aluguel,-11.7146885,-49.1039172
+"SGCV, PARK SUL, BRASILIA",,apartamento,3800.0,42.0,1.0,,,aluguel,-15.8247211,-47.9537743
+"Rua 31, SUL, AGUAS CLARAS",,apartamento,3900.0,59.0,2.0,,1.0,aluguel,-15.8398498,-48.0364797
+"SQS 204 Bloco K, ASA SUL, BRASILIA",,apartamento,6900.0,100.0,3.0,,1.0,aluguel,,
+"Avenida Pau Brasil, NORTE, AGUAS CLARAS",,apartamento,3200.0,102.0,3.0,,1.0,aluguel,-15.8381184,-48.0275694
+"Avenida Parque Águas Claras, NORTE, AGUAS CLARAS",,apartamento,9000.0,131.0,3.0,,2.0,aluguel,-15.8311467,-48.0150679
+"Rua 14, NORTE, AGUAS CLARAS",,apartamento,2600.0,68.0,2.0,,1.0,aluguel,-3.056255,-59.9805856
+"Avenida Parque Águas Claras, NORTE, AGUAS CLARAS",,apartamento,1600.0,42.0,1.0,,1.0,aluguel,-15.8311467,-48.0150679
+"SCES Trecho 4, ASA SUL, BRASILIA",,apartamento,7000.0,53.0,1.0,,1.0,aluguel,-15.8253954,-47.8868277
+"QMSW 4, SUDOESTE, BRASILIA",,kitnet,2700.0,30.0,1.0,,1.0,aluguel,-15.7919381,-47.9202154
+"Avenida Contorno Área Especial 13, NUCLEO BANDEIRANTE, NUCLEO BANDEIRANTE",,apartamento,1670.0,55.0,2.0,,,aluguel,,
+"Quadra 101, NORTE, AGUAS CLARAS",,apartamento,2600.0,64.0,2.0,,1.0,aluguel,-15.8321344,-48.0104648
+"AREA COMERCIAL IV, VALPARAISO II, VALPARAISO DE GOIAS",,apartamento,1500.0,63.0,3.0,,1.0,aluguel,,
+"QMSW 5, SUDOESTE, BRASILIA",,kitnet,2200.0,27.0,1.0,,,aluguel,-15.7940053,-47.9197148
+"SQNW 109 Bloco F, NOROESTE, BRASILIA",,apartamento,5000.0,78.0,2.0,,1.0,aluguel,,
+"CNB 11, TAGUATINGA NORTE, TAGUATINGA",,apartamento,1450.0,55.0,2.0,,1.0,aluguel,-15.822482,-48.0615459
+"qdra 6 Conjunto 6, VICENTE PIRES, VICENTE PIRES",,apartamento,1800.0,60.0,2.0,,,aluguel,,
+"SQNW 108 Bloco G, NOROESTE, BRASILIA",,apartamento,5380.0,73.0,2.0,,2.0,aluguel,-15.750479,-47.9097874
+"Quadra 101, NORTE, AGUAS CLARAS",,apartamento,2900.0,82.0,2.0,,1.0,aluguel,-15.8321344,-48.0104648
+"SQN 109, ASA NORTE, BRASILIA",,apartamento,9000.0,110.0,3.0,,2.0,aluguel,-15.7604133,-47.8868663
+"SCEN Trecho 1, ASA NORTE, BRASILIA",,apartamento,12000.0,110.0,3.0,,2.0,aluguel,-15.7876153,-47.8435403
+"SQN 109 Bloco K, ASA NORTE, BRASILIA",,apartamento,9500.0,168.0,3.0,,2.0,aluguel,-15.7596617,-47.8874357
+"SCEN Trecho 1, ASA NORTE, BRASILIA",,apartamento,13000.0,136.0,3.0,,3.0,aluguel,-15.7876153,-47.8435403
+"Quadra 204, SUL, AGUAS CLARAS",,apartamento,3890.0,104.0,3.0,,2.0,aluguel,-29.9198671,-51.0635217
+"SQNW 311 Bloco C, NOROESTE, BRASILIA",,apartamento,4000.0,38.0,1.0,,1.0,aluguel,-15.7408046,-47.9141201
+"Rua 19, SUL, AGUAS CLARAS",,apartamento,3500.0,75.0,2.0,,2.0,aluguel,-15.8418989,-48.0242537
+"SQNW 107, NOROESTE, BRASILIA",,apartamento,4900.0,68.0,2.0,,2.0,aluguel,-15.7523535,-47.9097125
+"SQNW 108, NOROESTE, BRASILIA",,apartamento,10900.0,154.0,2.0,,2.0,aluguel,-15.7503488,-47.910008
+"CA 10, LAGO NORTE, BRASILIA",,apartamento,3100.0,60.0,1.0,,1.0,aluguel,-15.7342351,-47.8641578
+"SCEN Trecho 1, ASA NORTE, BRASILIA",,apartamento,11500.0,100.0,3.0,,2.0,aluguel,-15.7876153,-47.8435403
+"Rua 36, NORTE, AGUAS CLARAS",,apartamento,2850.0,56.0,2.0,,1.0,aluguel,-15.8356039,-48.0380838
+"Quadra 210, SUL, AGUAS CLARAS",,apartamento,2800.0,80.0,3.0,,2.0,aluguel,-29.9198671,-51.0635217
+"QC 11 Rua D, JARDINS MANGUEIRAL, BRASILIA",,apartamento,2300.0,48.0,2.0,,1.0,aluguel,-15.8919988,-47.8011114
+"SHDB QL 32 , LAGO SUL, BRASILIA",,apartamento,5900.0,182.0,3.0,,,aluguel,-15.8089546,-47.801039
+"Quadra 204, SUL, AGUAS CLARAS",,apartamento,3800.0,104.0,3.0,,2.0,aluguel,-29.9198671,-51.0635217
+"Avenida Sucupira, RIACHO FUNDO, RIACHO FUNDO",,kitnet,900.0,35.0,1.0,,,aluguel,-15.890833,-48.0443889
+"SQS 103, ASA SUL, BRASILIA",,apartamento,5600.0,102.0,2.0,,1.0,aluguel,-15.8059174,-47.8916185
+"CSB 2, TAGUATINGA SUL, TAGUATINGA",,apartamento,1400.0,62.0,2.0,,1.0,aluguel,-15.8366479,-48.0563886
+"Rua 31, SUL, AGUAS CLARAS",,apartamento,2900.0,56.0,2.0,,,aluguel,-15.8388003,-48.0356277
+"Quadra 8 Comércio Local 29, SOBRADINHO, SOBRADINHO",,kitnet,900.0,30.0,1.0,,1.0,aluguel,,
+"SGCV Lote 13, PARK SUL, BRASILIA",,apartamento,3900.0,55.0,2.0,,1.0,aluguel,-15.8247211,-47.9537743
+"SCES Trecho 4, ASA SUL, BRASILIA",,apartamento,6500.0,100.0,1.0,,1.0,aluguel,-15.8253954,-47.8868277
+"SCES Trecho 4, ASA SUL, BRASILIA",,apartamento,4400.0,48.0,1.0,,1.0,aluguel,-15.8253954,-47.8868277
+"Avenida das Araucárias, SUL, AGUAS CLARAS",,apartamento,2400.0,34.0,1.0,,,aluguel,-15.8400497,-48.0206766
+"SQNW 304, NOROESTE, BRASILIA",,apartamento,13500.0,165.0,3.0,,3.0,aluguel,-15.7447012,-47.910477
+"Conjunto Residencial 1 Cond 2 Bloco E, PARQUE DAS CACHOEIRAS, VALPARAISO DE GOIAS",,apartamento,1200.0,48.0,2.0,,1.0,aluguel,,
+"Quadra 105, NORTE, AGUAS CLARAS",,apartamento,3700.0,112.0,3.0,,1.0,aluguel,-15.8330159,-48.0127396
+"SGAS 905, ASA SUL, BRASILIA",,kitnet,1800.0,28.0,1.0,,1.0,aluguel,-15.8042433,-47.9016082
+"Rua 37, SUL, AGUAS CLARAS",,apartamento,2800.0,45.0,1.0,,1.0,aluguel,-15.8348133,-48.0390942
+"Quadra 2 Conjunto C, SETOR DE INDUSTRIAS BERNARDO SAYAO, NUCLEO BANDEIRANTE",,apartamento,1000.0,34.0,1.0,,,aluguel,,
+"QMSW 6 Lote 8, SUDOESTE, BRASILIA",,kitnet,1300.0,30.0,1.0,,1.0,aluguel,-15.7939284,-47.921811
+"Rua MANACA, NORTE, AGUAS CLARAS",,apartamento,3500.0,59.0,2.0,,1.0,aluguel,-15.8274516,-48.0098276
+"Quadra 301 Conjunto 8, SAMAMBAIA SUL, SAMAMBAIA",,apartamento,2150.0,54.0,2.0,,,aluguel,-15.8836862,-48.088446
+"SMDB Conjunto 12, LAGO SUL, BRASILIA",,kitnet,1250.0,32.0,1.0,,,aluguel,-15.85529,-47.8368773
+"SEPS 712/912, ASA SUL, BRASILIA",,kitnet,1600.0,25.0,1.0,,,aluguel,-15.8170813,-47.9172328
+"SQSW 104 Bloco E, SUDOESTE, BRASILIA",,apartamento,7400.0,164.0,4.0,,2.0,aluguel,-15.8049392,-47.9279162
+"SEPS 713/913, ASA SUL, BRASILIA",,apartamento,2000.0,35.0,1.0,,1.0,aluguel,-15.8199601,-47.9212181
+"Rua 28, SUL, AGUAS CLARAS",,apartamento,5500.0,189.0,4.0,,3.0,aluguel,-15.8376579,-48.0312149
+"QSE Área Especial 16, TAGUATINGA SUL, TAGUATINGA",,kitnet,600.0,29.0,1.0,,,aluguel,,
+"CRS 509 Bloco A, ASA SUL, BRASILIA",,kitnet,1800.0,25.0,1.0,,,aluguel,,
+"SQNW 104, NOROESTE, BRASILIA",,apartamento,13000.0,160.0,4.0,,4.0,aluguel,-15.7447012,-47.910477
+"SQS 311, ASA SUL, BRASILIA",,apartamento,10000.0,148.0,3.0,,1.0,aluguel,-15.8202126,-47.9132289
+"CNA 1, TAGUATINGA NORTE, TAGUATINGA",,apartamento,2300.0,60.0,2.0,,1.0,aluguel,,
+"Avenida das Araucárias, SUL, AGUAS CLARAS",,kitnet,1200.0,30.0,1.0,,1.0,aluguel,-15.8400497,-48.0206766
+"SQS 413 Bloco C, ASA SUL, BRASILIA",,apartamento,5000.0,56.0,2.0,,,aluguel,,
+"CLNW 8/9 Lote A, NOROESTE, BRASILIA",,apartamento,3300.0,35.0,1.0,,1.0,aluguel,,
+"Rua 21, SUL, AGUAS CLARAS",,apartamento,3600.0,97.0,3.0,,1.0,aluguel,-15.8390863,-48.0259111
+"CLN 7 Bloco H, RIACHO FUNDO, RIACHO FUNDO",,kitnet,900.0,33.0,1.0,,,aluguel,,
+"SCRN 714/715, ASA NORTE, BRASILIA",,kitnet,1450.0,31.0,1.0,,,aluguel,-15.7517039,-47.8964484
+"SCEN Trecho 1 Conjunto 36, ASA NORTE, BRASILIA",,apartamento,9900.0,94.0,3.0,,2.0,aluguel,,
+"SQS 113 Bloco K, ASA SUL, BRASILIA",,apartamento,5500.0,100.0,3.0,,1.0,aluguel,,
+"Área Especial 02 Módulo B, GUARA II, GUARA",,apartamento,3000.0,62.0,2.0,,1.0,aluguel,,
+"QC 8, JARDINS MANGUEIRAL, BRASILIA",,apartamento,2300.0,48.0,2.0,,1.0,aluguel,-15.8873376,-47.8144932
+"Rua 31, SUL, AGUAS CLARAS",,apartamento,3200.0,53.0,2.0,,,aluguel,-15.8388003,-48.0356277
+"CA 09, LAGO NORTE, BRASILIA",,apartamento,3100.0,60.0,1.0,,1.0,aluguel,-15.7219698,-47.8870161
+"SCES Trecho 4, ASA SUL, BRASILIA",,apartamento,6800.0,52.0,1.0,,1.0,aluguel,-15.8253954,-47.8868277
+"Rua 19, NORTE, AGUAS CLARAS",,apartamento,2000.0,39.0,1.0,,1.0,aluguel,-15.8418328,-48.0228719
+"CCSW 4, SUDOESTE, BRASILIA",,kitnet,1850.0,30.0,1.0,,1.0,aluguel,-15.7967824,-47.9295357
+"SQSW 301, SUDOESTE, BRASILIA",,apartamento,17500.0,188.0,4.0,,3.0,aluguel,-15.796302,-47.9219547
+"QMSW 5 Lote 3 Bloco E, SUDOESTE, BRASILIA",,kitnet,1550.0,25.0,1.0,,1.0,aluguel,,
+"SQNW 311, NOROESTE, BRASILIA",,apartamento,4350.0,84.0,1.0,,2.0,aluguel,-15.741624,-47.9131405
+"Rua 4, SUL, AGUAS CLARAS",,apartamento,3850.0,101.0,3.0,,2.0,aluguel,-15.8368046,-48.0110054
+"SQSW 305, SUDOESTE, BRASILIA",,apartamento,9000.0,154.0,4.0,,2.0,aluguel,-15.8055654,-47.9343892
+"SQS 402 Bloco P, ASA SUL, BRASILIA",,apartamento,4500.0,53.0,1.0,,1.0,aluguel,,
+"QMS 44, SETOR DE MANSOES DE SOBRADINHO, SOBRADINHO",,apartamento,1800.0,80.0,3.0,,,aluguel,-15.6258969,-47.8321293
+"SQNW 110 Bloco G, NOROESTE, BRASILIA",,apartamento,10800.0,132.0,4.0,,2.0,aluguel,,
+"QE 40, GUARA II, GUARA",,apartamento,800.0,45.0,1.0,,,aluguel,-15.8436431,-47.9827332
+"SQNW 302 Bloco A, NOROESTE, BRASILIA",,apartamento,6150.0,70.0,2.0,,1.0,aluguel,,
+"SCES Trecho 4, ASA SUL, BRASILIA",,apartamento,4500.0,44.0,1.0,,1.0,aluguel,-15.8253954,-47.8868277
+"SQN 208 Bloco D, ASA NORTE, BRASILIA",,apartamento,4950.0,85.0,2.0,,1.0,aluguel,-15.7628252,-47.8812582
+"Quadra 101, NORTE, AGUAS CLARAS",,apartamento,4300.0,87.0,3.0,,1.0,aluguel,-15.8321344,-48.0104648
+"Quadra 5MR1, SETOR LESTE, PLANALTINA DE GOIAS",,apartamento,800.0,67.0,2.0,,1.0,aluguel,,
+"Quadra 301 Conjunto 7, SAMAMBAIA SUL, SAMAMBAIA",,apartamento,3000.0,74.0,3.0,,1.0,aluguel,-15.8836862,-48.088446
+"SQN 211, ASA NORTE, BRASILIA",,apartamento,9500.0,197.0,2.0,,2.0,aluguel,-15.7530314,-47.8848674
+"QRSW 6 Bloco A 8, SUDOESTE, BRASILIA",,apartamento,4200.0,62.0,2.0,,,aluguel,,
+"SQNW 310 Bloco E, NOROESTE, BRASILIA",,apartamento,5350.0,74.0,2.0,,1.0,aluguel,,
+"SQNW 108 Bloco B, NOROESTE, BRASILIA",,apartamento,9900.0,125.0,3.0,,2.0,aluguel,-15.750479,-47.9097874
+"CLN 313 Bloco E, ASA NORTE, BRASILIA",,kitnet,1200.0,32.0,1.0,,,aluguel,,
+"SQSW 300 Bloco L, SUDOESTE, BRASILIA",,apartamento,14600.0,180.0,4.0,,2.0,aluguel,-15.7912405,-47.9182899
+"SQNW 107 Bloco G, NOROESTE, BRASILIA",,apartamento,15000.0,213.0,3.0,,4.0,aluguel,,
+"Rua 8, SUL, AGUAS CLARAS",,apartamento,4400.0,72.0,2.0,,1.0,aluguel,-15.8407051,-48.0264621
+"SCES Trecho 4, ASA SUL, BRASILIA",,apartamento,4000.0,48.0,1.0,,1.0,aluguel,-15.8253954,-47.8868277
+"QSD 53, TAGUATINGA SUL, TAGUATINGA",,kitnet,900.0,40.0,1.0,,,aluguel,-15.8509467,-48.0432712
+"CA 05, LAGO NORTE, BRASILIA",,apartamento,2390.0,42.0,1.0,,1.0,aluguel,-15.7219698,-47.8870161
+"Quadra 206, SUL, AGUAS CLARAS",,apartamento,3400.0,90.0,2.0,,2.0,aluguel,-29.9198671,-51.0635217
+"SQSW 100 Bloco G, SUDOESTE, BRASILIA",,apartamento,11000.0,197.0,3.0,,2.0,aluguel,-15.8049392,-47.9279162
+"Trecho 1 Lote C , SETOR INDUSTRIAL, GUARA",,apartamento,5500.0,73.0,2.0,,2.0,aluguel,-15.8097339,-47.9927224
+"Avenida Flamboyant, NORTE, AGUAS CLARAS",,apartamento,1600.0,29.0,1.0,,1.0,aluguel,-15.8369691,-48.0311046
+"SHTN Trecho 2 Lote 3, ASA NORTE, BRASILIA",,apartamento,2500.0,32.0,1.0,,,aluguel,-15.7858712,-47.8521756
+"SQNW 107 Bloco G, NOROESTE, BRASILIA",,apartamento,14000.0,213.0,3.0,,3.0,aluguel,,
+"SQN 314 Bloco B, ASA NORTE, BRASILIA",,apartamento,3450.0,63.0,2.0,,,aluguel,-15.7448682,-47.8940056
+"Área Especial 4, GUARA II, GUARA",,apartamento,4200.0,91.0,3.0,,2.0,aluguel,-15.8405456,-47.9846739
+"QNC 3, TAGUATINGA NORTE, TAGUATINGA",,apartamento,1225.0,45.0,1.0,,,aluguel,-15.8302167,-48.0626412
+"SQNW 107, NOROESTE, BRASILIA",,apartamento,13000.0,200.0,2.0,,2.0,aluguel,-15.7523535,-47.9097125
+"QSC 10, TAGUATINGA SUL, TAGUATINGA",,kitnet,900.0,40.0,1.0,,,aluguel,-15.8399411,-48.0606662
+"SQSW 504 Bloco H, SUDOESTE, BRASILIA",,apartamento,4000.0,77.0,2.0,,1.0,aluguel,,
+"EPTG QE 2, QUADRAS ECONOMICAS LUCIO COSTA, GUARA",,apartamento,3450.0,82.0,1.0,,2.0,aluguel,-15.8091532,-47.9870883
+"Quadra 101, NORTE, AGUAS CLARAS",,apartamento,3000.0,80.0,2.0,,1.0,aluguel,-15.8325794,-48.010596
+"QI 31 Lote 07, GUARA II, GUARA",,apartamento,2200.0,58.0,2.0,,,aluguel,,
+"SQN 312 Bloco F, ASA NORTE, BRASILIA",,apartamento,5500.0,80.0,2.0,,,aluguel,,
+"SGAN 912 Módulo D, ASA NORTE, BRASILIA",,kitnet,2490.0,25.0,1.0,,1.0,aluguel,-15.7759483,-47.8995769
+"QS 502 Conjunto 7, SAMAMBAIA SUL, SAMAMBAIA",,apartamento,2890.0,60.0,2.0,,1.0,aluguel,,
+"QR 4 Conjunto A, CANDANGOLANDIA, CANDANGOLANDIA",,apartamento,1500.0,60.0,2.0,,,aluguel,-15.8503771,-47.9480483
+"EQNO 9/11 Bloco A, CEILANDIA NORTE, CEILANDIA",,apartamento,800.0,30.0,1.0,,,aluguel,,
+"Avenida das Araucárias, SUL, AGUAS CLARAS",,apartamento,6300.0,128.0,4.0,,2.0,aluguel,-15.8400497,-48.0206766
+"EQNO 9/11 Bloco A, CEILANDIA NORTE, CEILANDIA",,kitnet,800.0,30.0,1.0,,,aluguel,,
+"SHTN, ASA NORTE, BRASILIA",,apartamento,3700.0,30.0,1.0,,1.0,aluguel,-15.7888828,-47.8318449
+"SGCV Lote 24, PARK SUL, BRASILIA",,apartamento,15000.0,204.0,4.0,,4.0,aluguel,-15.8247211,-47.9537743
+"Quadra 101, NORTE, AGUAS CLARAS",,apartamento,1800.0,30.0,1.0,,,aluguel,-15.8325794,-48.010596
+"QRSW 7 Bloco A 11, SUDOESTE, BRASILIA",,apartamento,3450.0,70.0,2.0,,,aluguel,,
+"CCSW 2 Lote 3, SUDOESTE, BRASILIA",,apartamento,7500.0,50.0,2.0,,2.0,aluguel,-15.7978594,-47.9284452
+"CSB 3, TAGUATINGA SUL, TAGUATINGA",,apartamento,1600.0,77.0,3.0,,,aluguel,-15.8374746,-48.0557361
+"SGCV Lote 27, PARK SUL, BRASILIA",,apartamento,22990.0,315.0,4.0,,3.0,aluguel,-15.8247211,-47.9537743
+"CSG 3, TAGUATINGA SUL, TAGUATINGA",,apartamento,2430.0,47.0,1.0,,1.0,aluguel,-15.8662108,-48.0340308
+"SQN 202 Bloco A, ASA NORTE, BRASILIA",,apartamento,8900.0,160.0,3.0,,1.0,aluguel,-15.7827782,-47.8774184
+"Área Especial 02 Módulo F, GUARA II, GUARA",,apartamento,2350.0,38.0,1.0,,1.0,aluguel,,
+"Quadra 101, NORTE, AGUAS CLARAS",,apartamento,3100.0,53.0,2.0,,1.0,aluguel,-15.8325794,-48.010596
+"QS 410 Conjunto G, SAMAMBAIA NORTE, SAMAMBAIA",,apartamento,1400.0,40.0,2.0,,,aluguel,-15.8818507,-48.0908091
+"SQS 216 Bloco J, ASA SUL, BRASILIA",,apartamento,7400.0,163.0,3.0,,1.0,aluguel,,
+"SETOR DE MANSOES SUDESTE, SAMAMBAIA SUL, SAMAMBAIA",,apartamento,3700.0,120.0,3.0,,,aluguel,-15.8688914,-48.0728585
+"Área Especial 02 Módulo A, GUARA II, GUARA",,apartamento,3400.0,56.0,2.0,,1.0,aluguel,,
+"SQS 104, ASA SUL, BRASILIA",,apartamento,10000.0,153.0,4.0,,2.0,aluguel,-15.8085911,-47.8942577
+"Avenida Jacarandá, SUL, AGUAS CLARAS",,apartamento,1600.0,30.0,1.0,,1.0,aluguel,-15.8411919,-48.0307388
+"SGCV Lote 13, PARK SUL, BRASILIA",,apartamento,3100.0,28.0,1.0,,1.0,aluguel,-15.8247211,-47.9537743
+"QMSW 5 Lote 2 Bloco A, SUDOESTE, BRASILIA",,kitnet,1650.0,30.0,1.0,,1.0,aluguel,-15.7940053,-47.9197148
+"QS 111, SAMAMBAIA SUL, SAMAMBAIA",,apartamento,450.0,40.0,1.0,,,aluguel,-15.8732132,-48.0590056
+"SQNW 110 Bloco G, NOROESTE, BRASILIA",,apartamento,10500.0,155.0,4.0,,2.0,aluguel,,
+"Avenida Flamboyant, NORTE, AGUAS CLARAS",,apartamento,2000.0,40.0,1.0,,1.0,aluguel,-15.8369691,-48.0311046
+"QI 33, GUARA II, GUARA",,apartamento,3600.0,90.0,3.0,,1.0,aluguel,-15.8402392,-47.9684168
+"SQNW 108 Bloco J, NOROESTE, BRASILIA",,apartamento,9500.0,153.0,3.0,,2.0,aluguel,-15.750479,-47.9097874
+"Rua 13, NORTE, AGUAS CLARAS",,apartamento,2300.0,33.0,1.0,,1.0,aluguel,-3.0556248,-59.9801944
+"QI 31 Lote 08, GUARA II, GUARA",,apartamento,2650.0,43.0,1.0,,1.0,aluguel,,
+"QN 122 Conjunto 15, SAMAMBAIA SUL, SAMAMBAIA",,apartamento,950.0,33.0,1.0,,1.0,aluguel,-15.8679881,-48.0589046
+"SQN 403, ASA NORTE, BRASILIA",,apartamento,4100.0,80.0,2.0,,,aluguel,-15.7552101,-47.8811552
+"QN 312 Conjunto 7, SAMAMBAIA SUL, SAMAMBAIA",,kitnet,1200.0,28.0,1.0,,,aluguel,,
+"QS 111 Conjunto I, SAMAMBAIA SUL, SAMAMBAIA",,apartamento,450.0,30.0,1.0,,,aluguel,,
+"Rua 12, NORTE, AGUAS CLARAS",,apartamento,2300.0,70.0,3.0,,1.0,aluguel,-3.0617746,-59.9752761
+"Quadra 210, SUL, AGUAS CLARAS",,apartamento,5900.0,160.0,4.0,,2.0,aluguel,-29.9198671,-51.0635217
+"QNO 19, CEILANDIA NORTE, CEILANDIA",,apartamento,1800.0,60.0,3.0,,1.0,aluguel,-15.7964356,-48.1176621
+"SGAN 910, ASA NORTE, BRASILIA",,kitnet,1500.0,30.0,1.0,,2.0,aluguel,-15.7594861,-47.8959302
+"Quadra 103, NORTE, AGUAS CLARAS",,apartamento,2750.0,73.0,2.0,,2.0,aluguel,-15.8334832,-48.0170868
+"Rua 18, GUARA II, GUARA",,apartamento,1450.0,70.0,2.0,,,aluguel,-15.8495918,-47.9765008
+"QI 33, GUARA II, GUARA",,apartamento,9500.0,233.0,3.0,,3.0,aluguel,-15.8402392,-47.9684168
+"QN 112, SAMAMBAIA SUL, SAMAMBAIA",,apartamento,2000.0,53.0,2.0,,1.0,aluguel,-15.8680685,-48.0841972
+"SAGOCA, TAGUATINGA NORTE, TAGUATINGA",,apartamento,1550.0,50.0,2.0,,1.0,aluguel,-15.7965494,-48.0945498
+"Rua COPAIBA, SUL, AGUAS CLARAS",,apartamento,1980.0,45.0,2.0,,1.0,aluguel,-15.8342015,-48.0399113
+"SQS 409 Bloco S, ASA SUL, BRASILIA",,apartamento,3200.0,65.0,2.0,,,aluguel,,
+"SGCV Lote 27, PARK SUL, BRASILIA",,apartamento,20000.0,622.0,4.0,,5.0,aluguel,-15.8247211,-47.9537743
+"QMSW 6 Lote 4, SUDOESTE, BRASILIA",,kitnet,1800.0,23.0,1.0,,1.0,aluguel,-15.7946423,-47.921738
+"SQNW 109, NOROESTE, BRASILIA",,apartamento,6400.0,77.0,2.0,,2.0,aluguel,-15.7470195,-47.9102839
+"SQS 415 Bloco T, ASA SUL, BRASILIA",,apartamento,4500.0,52.0,2.0,,,aluguel,,
+"QS 402, SAMAMBAIA NORTE, SAMAMBAIA",,apartamento,1350.0,50.0,1.0,,,aluguel,-15.8691111,-48.0904886
+"QI 25 Bloco A AO O Lote 05/17, GUARA II, GUARA",,apartamento,2800.0,97.0,3.0,,1.0,aluguel,,
+"CNB 2, TAGUATINGA NORTE, TAGUATINGA",,apartamento,2000.0,60.0,2.0,,1.0,aluguel,-15.8196594,-48.0625276
+"Quadra 205, SUL, AGUAS CLARAS",,apartamento,7100.0,243.0,4.0,,3.0,aluguel,-29.9198671,-51.0635217
+"SQS 116, ASA SUL, BRASILIA",,apartamento,14000.0,275.0,4.0,,2.0,aluguel,-15.8164055,-47.9080336
+"SQNW 107 Bloco G, NOROESTE, BRASILIA",,apartamento,23000.0,217.0,3.0,,4.0,aluguel,,
+"Quadra 204, SUL, AGUAS CLARAS",,apartamento,2500.0,70.0,1.0,,1.0,aluguel,-29.9198671,-51.0635217
+"QN 407 Conjunto E, SAMAMBAIA NORTE, SAMAMBAIA",,apartamento,1000.0,30.0,1.0,,,aluguel,,
+"SQN 205 Bloco B, ASA NORTE, BRASILIA",,apartamento,7200.0,92.0,3.0,,1.0,aluguel,,
+"QMSW 5, SUDOESTE, BRASILIA",,kitnet,1500.0,27.0,1.0,,1.0,aluguel,-15.7940053,-47.9197148
+"SQS 212 Bloco D, ASA SUL, BRASILIA",,apartamento,1900.0,35.0,1.0,,1.0,aluguel,,
+"SQN 211 Bloco E, ASA NORTE, BRASILIA",,apartamento,5400.0,74.0,2.0,,2.0,aluguel,-15.7535322,-47.8851746
+"Rua 35, SUL, AGUAS CLARAS",,apartamento,2900.0,57.0,2.0,,1.0,aluguel,-15.8379105,-48.0389736
+"QNM 18 Conjunto A, CEILANDIA NORTE, CEILANDIA",,apartamento,1200.0,60.0,2.0,,,aluguel,-15.8145908,-48.1025213
+"QR 120, SAMAMBAIA SUL, SAMAMBAIA",,apartamento,1500.0,55.0,2.0,,1.0,aluguel,-15.8697766,-48.0832788
+"Quadra 202, SUL, AGUAS CLARAS",,apartamento,2200.0,70.0,2.0,,1.0,aluguel,-29.9198671,-51.0635217
+"SEPS 713/913, ASA SUL, BRASILIA",,kitnet,3000.0,25.0,1.0,,2.0,aluguel,-15.8199601,-47.9212181
+"Quadra 203, SUL, AGUAS CLARAS",,apartamento,3000.0,124.0,3.0,,1.0,aluguel,-29.9198671,-51.0635217
+"EQNO 9/11 Bloco A, CEILANDIA NORTE, CEILANDIA",,apartamento,800.0,30.0,1.0,,,aluguel,,
+"CSG 11, TAGUATINGA SUL, TAGUATINGA",,apartamento,1400.0,44.0,2.0,,1.0,aluguel,-15.8710464,-48.0323452
+"SHCES Quadra 913 Bloco E, NOVO, CRUZEIRO",,apartamento,3000.0,66.0,3.0,,,aluguel,,
+"Rua 37, SUL, AGUAS CLARAS",,apartamento,2400.0,42.0,1.0,,1.0,aluguel,-15.8348133,-48.0390942
+"Avenida Dom Bosco Bloco 790, NUCLEO BANDEIRANTE, NUCLEO BANDEIRANTE",,apartamento,1900.0,67.0,2.0,,,aluguel,-15.8695795,-47.9679168
+"SQS 204 Bloco C, ASA SUL, BRASILIA",,apartamento,5900.0,91.0,3.0,,1.0,aluguel,,
+"CRS 510 Bloco B, ASA SUL, BRASILIA",,apartamento,1600.0,58.0,2.0,,,aluguel,,
+"SQS 116, ASA SUL, BRASILIA",,apartamento,14000.0,275.0,4.0,,2.0,aluguel,-15.8164055,-47.9080336
+"SQS 302, ASA SUL, BRASILIA",,apartamento,6800.0,140.0,3.0,,1.0,aluguel,-15.8164055,-47.9080336
+"QE 20 Conjunto N, GUARA I, GUARA",,kitnet,950.0,30.0,1.0,,,aluguel,-15.8418418,-47.974984
+"Rua 37, SUL, AGUAS CLARAS",,apartamento,2800.0,56.0,2.0,,1.0,aluguel,-15.8348133,-48.0390942
+"SGCV, PARK SUL, BRASILIA",,apartamento,4500.0,78.0,3.0,,2.0,aluguel,-15.8247211,-47.9537743
+"Alameda das Acácias Quadra 107, NORTE, AGUAS CLARAS",,apartamento,3500.0,90.0,3.0,,2.0,aluguel,,
+"Avenida Parque Águas Claras, NORTE, AGUAS CLARAS",,apartamento,2800.0,40.0,2.0,,1.0,aluguel,-15.8311467,-48.0150679
+"EQNO 9/11 Bloco A, CEILANDIA NORTE, CEILANDIA",,apartamento,800.0,30.0,1.0,,,aluguel,,
+"QNB 11, TAGUATINGA NORTE, TAGUATINGA",,apartamento,1900.0,100.0,3.0,,,aluguel,-15.8238235,-48.0628459
+"SQN 214 Bloco K, ASA NORTE, BRASILIA",,apartamento,4900.0,79.0,2.0,,1.0,aluguel,,
+"Rua 18, SUL, AGUAS CLARAS",,apartamento,4500.0,62.0,2.0,,1.0,aluguel,-15.8383235,-48.0231139
+"SQNW 307 Bloco C, NOROESTE, BRASILIA",,kitnet,3200.0,32.0,1.0,,1.0,aluguel,,
+"SQN 214 Bloco K, ASA NORTE, BRASILIA",,apartamento,5200.0,79.0,2.0,,1.0,aluguel,,
+"SQS 407, ASA SUL, BRASILIA",,apartamento,5500.0,78.0,3.0,,,aluguel,-15.8204784,-47.8969378
+"QN 106, SAMAMBAIA SUL, SAMAMBAIA",,apartamento,1000.0,43.0,2.0,,,aluguel,-15.8680685,-48.0841972
+"QC 4, JARDINS MANGUEIRAL, BRASILIA",,apartamento,2100.0,49.0,2.0,,1.0,aluguel,-15.8917675,-47.8135852
+"CCSW 2 Lote 3, SUDOESTE, BRASILIA",,apartamento,7500.0,115.0,2.0,,1.0,aluguel,-15.7978594,-47.9284452
+"Quadra 203, SUL, AGUAS CLARAS",,apartamento,3100.0,130.0,3.0,,1.0,aluguel,-29.9198671,-51.0635217
+"SQNW 306 Bloco J, NOROESTE, BRASILIA",,apartamento,14800.0,213.0,3.0,,4.0,aluguel,,
+"CCSW 4, SUDOESTE, BRASILIA",,kitnet,1900.0,30.0,1.0,,1.0,aluguel,-15.7967824,-47.9295357
+"Área Especial 4 Módulo K, GUARA II, GUARA",,apartamento,3300.0,68.0,2.0,,1.0,aluguel,,
+"Rua MANACA, SUL, AGUAS CLARAS",,apartamento,2200.0,58.0,2.0,,1.0,aluguel,-15.8343289,-48.0086332
+"QI 4 AREA CENTRAL, GUARA I, GUARA",,apartamento,1950.0,55.0,2.0,,,aluguel,,
+"Rua DAS PITANGUEIRAS, NORTE, AGUAS CLARAS",,apartamento,2200.0,60.0,2.0,,1.0,aluguel,-15.8339602,-48.0176747
+"SQS 403 Bloco B, ASA SUL, BRASILIA",,apartamento,3700.0,80.0,3.0,,,aluguel,,
+"Quadra 4 Conjunto 7, VICENTE PIRES, VICENTE PIRES",,apartamento,2175.0,60.0,2.0,,,aluguel,,
+"Avenida das Castanheiras, NORTE, AGUAS CLARAS",,apartamento,1100.0,33.0,1.0,,1.0,aluguel,-15.8354239,-48.0078434
+"QR 122 Conjunto F, SANTA MARIA, SANTA MARIA",,kitnet,700.0,40.0,1.0,,,aluguel,-15.9982419,-47.9908025
+"QN 406 Conjunto F, SAMAMBAIA NORTE, SAMAMBAIA",,apartamento,700.0,48.0,1.0,,,aluguel,-15.861996,-48.0819656
+"AOS 04/5, OCTOGONAL, BRASILIA",,apartamento,1500.0,37.0,1.0,,,aluguel,,
+"ADE Conjunto 18, SAMAMBAIA SUL, SAMAMBAIA",,apartamento,700.0,130.0,1.0,,,aluguel,,
+"QMSW 5 Lote 8, SUDOESTE, BRASILIA",,kitnet,1600.0,29.0,1.0,,1.0,aluguel,-15.7940053,-47.9197148
+"AVENIDA ARAUCARIAS, SUL, AGUAS CLARAS",,apartamento,3500.0,62.0,2.0,,1.0,aluguel,-15.8400497,-48.0206766
+"SGCV Lote 19, PARK SUL, BRASILIA",,apartamento,14900.0,157.0,3.0,,3.0,aluguel,-15.8247211,-47.9537743
+"SQNW 106, NOROESTE, BRASILIA",,apartamento,5599.0,76.0,2.0,,,aluguel,-15.7447012,-47.910477
+"SQSW 305 Bloco F, SUDOESTE, BRASILIA",,apartamento,8000.0,94.0,3.0,,1.0,aluguel,,
+"QS 410 Conjunto G, SAMAMBAIA NORTE, SAMAMBAIA",,apartamento,1300.0,40.0,2.0,,,aluguel,-15.8818507,-48.0908091
+"AOS 02 Bloco F, OCTOGONAL, BRASILIA",,apartamento,6500.0,162.0,4.0,,1.0,aluguel,,
+"SHTN, ASA NORTE, BRASILIA",,apartamento,3800.0,37.0,1.0,,1.0,aluguel,-15.7888828,-47.8318449
+"EQNO 9/11 Bloco A, CEILANDIA NORTE, CEILANDIA",,apartamento,800.0,30.0,1.0,,,aluguel,,
+"SQNW 310 Bloco C, NOROESTE, BRASILIA",,apartamento,2600.0,33.0,1.0,,1.0,aluguel,,
+"Rua 18, NORTE, AGUAS CLARAS",,apartamento,1900.0,58.0,1.0,,1.0,aluguel,-15.8383235,-48.0231139
+"Rua 21, SUL, AGUAS CLARAS",,apartamento,2700.0,77.0,3.0,,1.0,aluguel,-15.8390863,-48.0259111
+"SQS 210 Bloco E, ASA SUL, BRASILIA",,apartamento,7000.0,130.0,4.0,,,aluguel,,
+"Avenida das Araucárias, SUL, AGUAS CLARAS",,apartamento,6300.0,128.0,4.0,,2.0,aluguel,-15.8400497,-48.0206766
+"SQSW 304 Bloco J, SUDOESTE, BRASILIA",,apartamento,5500.0,82.0,3.0,,,aluguel,,
+"QS 303 Conjunto 7, SAMAMBAIA SUL, SAMAMBAIA",,apartamento,1100.0,55.0,2.0,,2.0,aluguel,-15.882049,-48.0913379
+"Quadra 502 Conjunto 1, ITAPOA PARQUE, PARANOA",,apartamento,1000.0,46.0,2.0,,,aluguel,,
+"SQS 304 Bloco G, ASA SUL, BRASILIA",,apartamento,3800.0,130.0,3.0,,,aluguel,,
+"SGCV, PARK SUL, BRASILIA",,apartamento,25000.0,347.0,4.0,,4.0,aluguel,-15.8247211,-47.9537743
+"Alameda Gravatá Quadra 301 Conjunto 16, NORTE, AGUAS CLARAS",,apartamento,3500.0,150.0,4.0,,1.0,aluguel,,
+"AOS 04/5, OCTOGONAL, BRASILIA",,apartamento,1600.0,42.0,1.0,,,aluguel,,
+"QNM 18 Conjunto A, CEILANDIA NORTE, CEILANDIA",,apartamento,1200.0,55.0,2.0,,,aluguel,-15.8145908,-48.1025213
+"SHTN Trecho 1, ASA NORTE, BRASILIA",,apartamento,6941.0,53.0,1.0,,1.0,aluguel,-15.7888828,-47.8318449
+"Rua 37, NORTE, AGUAS CLARAS",,apartamento,2350.0,29.0,1.0,,,aluguel,-15.8348133,-48.0390942
+"STN, ASA NORTE, BRASILIA",,kitnet,1300.0,28.0,1.0,,,aluguel,-15.7387705,-47.9138166
+"CCSW 1, SUDOESTE, BRASILIA",,apartamento,5100.0,26.0,1.0,,1.0,aluguel,-15.7968509,-47.9274085
+"QN 32 Conjunto 10, RIACHO FUNDO II, RIACHO FUNDO",,apartamento,1350.0,60.0,2.0,,1.0,aluguel,-15.9011191,-48.0365859
+"Quadra 501 Conjunto 1, ITAPOA PARQUE, PARANOA",,apartamento,1250.0,60.0,2.0,,1.0,aluguel,,
+"QS 408, SAMAMBAIA NORTE, SAMAMBAIA",,apartamento,1750.0,55.0,2.0,,1.0,aluguel,-15.8626197,-48.0889907
+"Rua 11, GUARA II, GUARA",,apartamento,1350.0,40.0,1.0,,1.0,aluguel,-15.8472948,-47.9781178
+"SOF SUL Quadra 15 Conjunto A, SOF SUL, SETOR INDUSTRIAL",,apartamento,4000.0,64.0,2.0,,1.0,aluguel,,
+"QR 418 Conjunto O, SANTA MARIA, SANTA MARIA",,apartamento,900.0,50.0,2.0,,,aluguel,,
+"QS 122 Conjunto 4, SAMAMBAIA SUL, SAMAMBAIA",,apartamento,1200.0,50.0,2.0,,,aluguel,,
+"QMSW 4, SUDOESTE, BRASILIA",,kitnet,2600.0,30.0,1.0,,1.0,aluguel,-15.7919381,-47.9202154
+"EPTG QE 4 Bloco B 13, QUADRAS ECONOMICAS LUCIO COSTA, GUARA",,apartamento,1850.0,57.0,2.0,,1.0,aluguel,,
+"CLNW 10/11 Lote F, NOROESTE, BRASILIA",,apartamento,2306.0,35.0,1.0,,1.0,aluguel,,
+"Condomínio Solar de Brasília, JARDIM BOTANICO, BRASILIA",,apartamento,2690.0,75.0,2.0,,,aluguel,-15.8441389,-47.8086549
+"Quadra 301 Rua D Conjunto 3, NORTE, AGUAS CLARAS",,apartamento,2200.0,53.0,2.0,,1.0,aluguel,-15.8307859,-48.0171136
+"SEPS 713/913, ASA SUL, BRASILIA",,apartamento,3700.0,35.0,1.0,,1.0,aluguel,-15.8199601,-47.9212181
+"SETOR HOTELEIRO, TAGUATINGA CENTRO, TAGUATINGA",,apartamento,3100.0,33.0,1.0,,1.0,aluguel,-15.8342296,-48.0521467
+"QN 312 Conjunto 7, SAMAMBAIA SUL, SAMAMBAIA",,apartamento,1200.0,42.0,1.0,,,aluguel,,
+"SQNW 307 Bloco I, NOROESTE, BRASILIA",,apartamento,8500.0,149.0,2.0,,1.0,aluguel,,
+"QNM 29 Área Especial J, CEILANDIA SUL, CEILANDIA",,apartamento,1500.0,45.0,2.0,,1.0,aluguel,-15.8249724,-48.0927068
+"SGCV Lote 10, PARK SUL, BRASILIA",,kitnet,2800.0,30.0,1.0,,1.0,aluguel,-15.8247211,-47.9537743
+"SGCV Lote 13, PARK SUL, BRASILIA",,apartamento,3200.0,28.0,1.0,,1.0,aluguel,-15.8247211,-47.9537743
+"Rua 19, SUL, AGUAS CLARAS",,apartamento,3500.0,75.0,2.0,,1.0,aluguel,-15.8418989,-48.0242537
+"Quadra 401, ITAPOA PARQUE, PARANOA",,apartamento,900.0,64.0,2.0,,1.0,aluguel,-15.7638617,-47.7905676
