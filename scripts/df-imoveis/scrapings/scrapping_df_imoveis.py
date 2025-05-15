@@ -468,7 +468,7 @@ if __name__ == "__main__":
     
     all_dfs = run_all_scrapers(
         max_pages=None,
-        workers=3,
+        workers=5,
         output_dir="scripts/df-imoveis/dataset",
         append=True,
         batch_size=40,

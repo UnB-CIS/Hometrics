@@ -1,20 +1,98 @@
 from typing import List, Dict, Any, Tuple, Optional
-from geopy.geocoders import Nominatim
+from geopy.geocoders import Nominatim, GoogleV3
 from geopy.exc import GeocoderTimedOut, GeocoderServiceError
 import time
+import os
 
 class DataTransformer:
-    def __init__(self, data: List[Dict[str, Any]]):
+    def __init__(self, data: List[Dict[str, Any]], geocoding_service="nominatim"):
         self.data = data
+        self.geocoding_service = geocoding_service.lower()
 
   
 
-    def transform_data(self) -> List[Dict[str, Any]]:
+    def transform_data(self, skip_geocoding=False) -> List[Dict[str, Any]]:
+        """Transform data and add coordinates if geocoding is enabled"""
+        if not skip_geocoding:
+            for item in self.data:
+                if 'full_address' in item and item['full_address']:
+                    coords = self.geocode_address(item['full_address'])
+                    if coords:
+                        item['latitude'] = coords[0]
+                        item['longitude'] = coords[1]
+                    else:
+                        print(f"Warning: Could not geocode address: {item['full_address']}")
+                        # Set to None to indicate we tried but failed
+                        item['latitude'] = None
+                        item['longitude'] = None
         return self.data
-    
-    def get_coordinates(self, address: str, max_retries: int = 1) -> Optional[Tuple[float, float]]:
+        
+    def geocode_address(self, address: str) -> Optional[Tuple[float, float]]:
+        """Choose geocoding service based on configuration"""
+        if self.geocoding_service == "google":
+            return self.get_coordinates_google(address)
+        else:  # Default to Nominatim
+            return self.get_coordinates(address)
+        
+    def get_coordinates_google(self, address: str, max_retries: int = 2) -> Optional[Tuple[float, float]]:
         """
-        Convert an address to latitude and longitude using Nominatim from geopy.
+        Convert an address to latitude and longitude using Google Maps API.
+        
+        Args:
+            address: The address to geocode
+            max_retries: Number of retries for technical errors
+        """
+        # Get API key from environment variables
+        api_key = os.environ.get('GOOGLE_MAPS_API_KEY')
+        if not api_key:
+            print("Error: GOOGLE_MAPS_API_KEY not found in environment variables")
+            return None
+            
+        geolocator = GoogleV3(api_key=api_key)
+        
+        # Try with different address formats
+        address_formats = [
+            # First try with the full context
+            f"{address}, Brasília, DF, Brazil",
+            # Then try with just the city and country
+            f"{address}, Brasília, Brazil",
+            # Finally try with just the address
+            address
+        ]
+        
+        for format_idx, full_address in enumerate(address_formats):
+            print(f"Google Geocoding (format {format_idx+1}/{len(address_formats)}): {full_address}")
+            
+            try:
+                # Attempt geocoding with a single API request
+                location = geolocator.geocode(full_address)
+                
+                if location:
+                    print(f"Found location: {location.address} at {location.latitude}, {location.longitude}")
+                    return (location.latitude, location.longitude)
+                else:
+                    print(f"No location found for '{full_address}', trying next format...")
+            
+            except Exception as e:
+                # Only retry for technical errors, not for "not found"
+                if max_retries > 1:
+                    print(f"Google geocoding error: {e}, retrying once...")
+                    time.sleep(2)  # Wait before retry
+                    try:
+                        location = geolocator.geocode(full_address)
+                        if location:
+                            print(f"Found location on retry: {location.address} at {location.latitude}, {location.longitude}")
+                            return (location.latitude, location.longitude)
+                    except Exception:
+                        pass
+                print(f"Error geocoding address '{full_address}': {e}")
+        
+        print(f"Failed to geocode address with Google API: {address}")
+        return None
+    
+    def get_coordinates(self, address: str, max_retries: int = 2) -> Optional[Tuple[float, float]]:
+        """
+        Convert an address to latitude and longitude using Nominatim from geopy (free service).
         
         Args:
             address: The address to geocode
@@ -49,7 +127,7 @@ class DataTransformer:
                 # Only retry for technical errors, not for "not found"
                 if max_retries > 1:
                     print(f"Geocoding error: {e}, retrying once...")
-                    time.sleep(2)  # Wait before retry
+                    time.sleep(2.2)  # Wait before retry
                     try:
                         location = geolocator.geocode(full_address)
                         if location:
@@ -83,12 +161,6 @@ class DataTransformer:
         """
         Add latitude and longitude to each item in the data based on a specified address field.
         Processes data in batches of batch_size items and calls the callback function after each batch.
-        
-        Args:
-            address_field: Field containing address to geocode
-            batch_size: Number of items to process in each batch before calling callback
-            callback: Optional function to call after each batch with the batch results
-                      Should accept (batch_data, is_final_batch) as parameters
         """
         transformed_data = []
         total_items = len(self.data)
@@ -101,7 +173,7 @@ class DataTransformer:
                 print(f"Processing item {i+1}/{total_items}...")
                 
                 if address_field in item and item[address_field]:
-                    coordinates = self.get_coordinates(item[address_field])
+                    coordinates = self.geocode_address(item[address_field])
                     
                     if coordinates:
                         item['latitude'] = coordinates[0]
@@ -132,7 +204,7 @@ class DataTransformer:
                     current_batch = []
                 
                 # Add a short delay to respect Nominatim's usage policy
-                time.sleep(1)  # 1 second between requests
+                time.sleep(2)  # 1 second between requests
                 
         except KeyboardInterrupt:
             print("\nGeocoding process was interrupted!")

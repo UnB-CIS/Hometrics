@@ -10,6 +10,10 @@ import os
 import sys
 import argparse
 import time
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 def save_batch_callback(batch_data, is_final_batch):
     """
@@ -73,7 +77,7 @@ def save_batch_callback(batch_data, is_final_batch):
         print(f"ERROR during batch saving: {str(e)}")
 
 
-def load_and_process_data(csv_paths, standard_keys=None, skip_geocoding=False, batch_size=50, resume=False, restart=False):
+def load_and_process_data(csv_paths, standard_keys=None, skip_geocoding=False, batch_size=50, resume=False, restart=False, geocoding_service="google"):
     """
     Load CSV files, clean and transform data
     Processes data in batches and saves incrementally
@@ -129,25 +133,122 @@ def load_and_process_data(csv_paths, standard_keys=None, skip_geocoding=False, b
     if resume and not restart:
         # Try to load existing processed data
         try:
+            restart_needed = False
             if os.path.exists(rental_file_path):
-                rental_df = pd.read_csv(rental_file_path)
-                print(f"Found existing rental data with {len(rental_df)} items")
-                # Create a dictionary of already processed items using the description as key
-                for _, row in rental_df.iterrows():
-                    already_processed_items[row['description']] = {
-                        'file': 'rental',
-                        'has_coords': pd.notnull(row.get('latitude')) and pd.notnull(row.get('longitude'))
-                    }
+                try:
+                    # First, try to read the file with most permissive options
+                    try:
+                        # Use pandas with more permissive options
+                        rental_df = pd.read_csv(rental_file_path, quoting=pd.io.common.csv.QUOTE_NONE, 
+                                            error_bad_lines=False, warn_bad_lines=True, 
+                                            escapechar='\\', encoding='utf-8', 
+                                            engine='python', delimiter=',', 
+                                            on_bad_lines='skip')
+                    except Exception as e1:
+                        try:
+                            # Try using Python's built-in CSV reader which is more forgiving
+                            import csv
+                            with open(rental_file_path, 'r', newline='', encoding='utf-8') as f:
+                                reader = csv.reader(f)
+                                rows = []
+                                for i, row in enumerate(reader):
+                                    if i == 0:  # header
+                                        headers = row
+                                        continue
+                                    # Only include rows with the correct number of fields
+                                    if len(row) == len(headers):
+                                        rows.append(row)
+                            # Convert back to pandas DataFrame
+                            rental_df = pd.DataFrame(rows, columns=headers)
+                        except Exception as e2:
+                            print(f"Error reading rental file with both methods: {str(e1)} and {str(e2)}")
+                            restart_needed = True
+                            raise
+                            
+                    if not restart_needed:
+                        print(f"Found existing rental data with {len(rental_df)} items")
+                        # Create a dictionary of already processed items using the description as key
+                        for _, row in rental_df.iterrows():
+                            if 'description' in row and not pd.isna(row['description']):
+                                desc = str(row['description']).strip()
+                                if desc:  # Only add non-empty descriptions
+                                    already_processed_items[desc] = {
+                                        'file': 'rental',
+                                        'has_coords': pd.notnull(row.get('latitude')) and pd.notnull(row.get('longitude'))
+                                    }
+                except Exception as e:
+                    print(f"Error loading existing data for resume: {str(e)}")
+                    restart_needed = True
             
-            if os.path.exists(sales_file_path):
-                sales_df = pd.read_csv(sales_file_path)
-                print(f"Found existing sales data with {len(sales_df)} items")
-                # Add sales items to the already processed dictionary
-                for _, row in sales_df.iterrows():
-                    already_processed_items[row['description']] = {
-                        'file': 'sales',
-                        'has_coords': pd.notnull(row.get('latitude')) and pd.notnull(row.get('longitude'))
-                    }
+            if os.path.exists(sales_file_path) and not restart_needed:
+                try:
+                    # First, try to read the file with most permissive options
+                    try:
+                        sales_df = pd.read_csv(sales_file_path, quoting=pd.io.common.csv.QUOTE_NONE, 
+                                         error_bad_lines=False, warn_bad_lines=True, 
+                                         escapechar='\\', encoding='utf-8', 
+                                         engine='python', delimiter=',',
+                                         on_bad_lines='skip')
+                    except Exception as e1:
+                        try:
+                            # Try using Python's built-in CSV reader which is more forgiving
+                            import csv
+                            with open(sales_file_path, 'r', newline='', encoding='utf-8') as f:
+                                reader = csv.reader(f)
+                                rows = []
+                                for i, row in enumerate(reader):
+                                    if i == 0:  # header
+                                        headers = row
+                                        continue
+                                    # Only include rows with the correct number of fields
+                                    if len(row) == len(headers):
+                                        rows.append(row)
+                            # Convert back to pandas DataFrame
+                            sales_df = pd.DataFrame(rows, columns=headers)
+                        except Exception as e2:
+                            print(f"Error reading sales file with both methods: {str(e1)} and {str(e2)}")
+                            restart_needed = True
+                            raise
+                            
+                    if not restart_needed:
+                        print(f"Found existing sales data with {len(sales_df)} items")
+                        # Add sales items to the already processed dictionary
+                        for _, row in sales_df.iterrows():
+                            if 'description' in row and not pd.isna(row['description']):
+                                desc = str(row['description']).strip()
+                                if desc:  # Only add non-empty descriptions
+                                    already_processed_items[desc] = {
+                                        'file': 'sales',
+                                        'has_coords': pd.notnull(row.get('latitude')) and pd.notnull(row.get('longitude'))
+                                    }
+                except Exception as e:
+                    print(f"Error loading existing data for resume: {str(e)}")
+                    restart_needed = True
+            
+            if restart_needed:
+                print("\nStarting fresh instead")
+                # Create empty files but first backup the existing ones
+                if os.path.exists(rental_file_path):
+                    import shutil
+                    backup_path = f"{rental_file_path}.backup_{int(time.time())}"
+                    shutil.copy2(rental_file_path, backup_path)
+                    print(f"Backed up corrupted rental file to {backup_path}")
+                    
+                if os.path.exists(sales_file_path):
+                    import shutil
+                    backup_path = f"{sales_file_path}.backup_{int(time.time())}"
+                    shutil.copy2(sales_file_path, backup_path)
+                    print(f"Backed up corrupted sales file to {backup_path}")
+                    
+                # Create empty files
+                data_handler = DataHandler([])
+                empty_df = pd.DataFrame(columns=standard_keys + ['latitude', 'longitude'])
+                data_handler.save_to_csv(empty_df, 'imoveis_aluguel_final.csv', output_dir=pipeline_dir, append=False)
+                data_handler.save_to_csv(empty_df, 'imoveis_venda_final.csv', output_dir=pipeline_dir, append=False)
+                print("CSV data saved to", rental_file_path)
+                print("CSV data saved to", sales_file_path)
+                print("Created empty output files for batch processing")
+                return []
             
             processed_count = len(already_processed_items)
             with_coords = sum(1 for info in already_processed_items.values() if info['has_coords'])
@@ -155,7 +256,6 @@ def load_and_process_data(csv_paths, standard_keys=None, skip_geocoding=False, b
             
             if processed_count > 0:
                 print("Will resume processing from where it left off")
-                # Keep existing files for appending
             else:
                 print("No previously processed items found, starting fresh")
                 # Create empty files
@@ -208,19 +308,20 @@ def load_and_process_data(csv_paths, standard_keys=None, skip_geocoding=False, b
                 skipped_count = 0
                 for item in cleaned_data:
                     desc = item.get('description')
-                    if desc in already_processed_items and already_processed_items[desc]['has_coords']:
-                        # Skip this item since it already has coordinates
+                    if desc in already_processed_items:
+                        # Skip this item since it was already processed
                         skipped_count += 1
                     else:
                         need_processing.append(item)
                 
-                print(f"Skipping {skipped_count} already processed items with coordinates")
+                print(f"Skipping {skipped_count} already processed items")
                 print(f"Processing {len(need_processing)} out of {len(cleaned_data)} total items")
                 processing_data = need_processing
             else:
                 processing_data = cleaned_data
             
-            transformer = DataTransformer(processing_data)
+            transformer = DataTransformer(processing_data, geocoding_service=geocoding_service)
+            print(f"Using geocoding service: {geocoding_service}")
             start_time = time.time()
             transformed_data = transformer.add_coordinates_to_data(
                 'description',  # Use description field instead of address
@@ -253,16 +354,22 @@ def parse_arguments():
     return args
 
 def main():
-    # Parse command line arguments
-    args = parse_arguments()
+    # Hardcoded settings for direct execution
+    skip_geocoding = False
+    verbose = True
+    batch_size = 50
+    resume = True  # Always resume from last processed line
+    restart = False
+    geocoding_service = "google"  # Use Google API by default
     
     print("\n======= PROPERTY DATA PROCESSING PIPELINE =======\n")
-    print(f"Skip Geocoding: {'YES' if args.skip_geocoding else 'NO'}")
-    print(f"Verbose Mode: {'YES' if args.verbose else 'NO'}")
-    print(f"Batch Size: {args.batch_size}")
-    print(f"Resume Processing: {'YES (default)' if args.resume else 'NO (forced restart)'}")
-    print(f"Force Restart: {'YES' if args.restart else 'NO'}")
-    print(f"Auto-resume: Always enabled unless --restart or --no-resume is specified")
+    print(f"Skip Geocoding: {'YES' if skip_geocoding else 'NO'}")
+    print(f"Verbose Mode: {'YES' if verbose else 'NO'}")
+    print(f"Batch Size: {batch_size}")
+    print(f"Resume Processing: {'YES (forced)'}") 
+    print(f"Force Restart: {'NO (forced)'}")
+    print(f"Auto-resume: ENABLED")
+    print(f"Geocoding Service: {geocoding_service.upper()}")
     
     # Define paths to CSV files
     dataset_dir = os.path.join(os.getcwd(), 'dataset', 'v02')
@@ -283,10 +390,11 @@ def main():
     try:
         processed_data = load_and_process_data(
             csv_files, 
-            skip_geocoding=args.skip_geocoding,
-            batch_size=args.batch_size,
-            resume=args.resume,
-            restart=args.restart
+            skip_geocoding=skip_geocoding,
+            batch_size=batch_size,
+            resume=resume,
+            restart=restart,
+            geocoding_service=geocoding_service
         )
     except Exception as e:
         print(f"Fatal error during data processing: {str(e)}")
@@ -295,7 +403,7 @@ def main():
     # Print sample of processed data
     if processed_data:
         print(f"\nProcessed {len(processed_data)} properties successfully")
-        if args.verbose:
+        if verbose:  # Using local variable instead of args
             print("\nSample property:")
             if processed_data:
                 sample = processed_data[0]
