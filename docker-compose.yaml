@@ -8,4 +8,4 @@ services:
       - .:/app
     working_dir: /app
     # command: "pytest -s -v --maxfail=1 --disable-warnings -q "
-    command: "python3 tests/test_pipeline.py"
+    # command: "python3 tests/test_pipeline.py"

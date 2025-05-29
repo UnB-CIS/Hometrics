@@ -31,6 +31,7 @@ scraper_info = [
     {"path": "scripts.site_c.scraper", "data": "site_c_data"}
 ]
 ```
+
 ### `data-cleaning.py`
 
 Este arquivo contém a classe `DataCleaner`, responsável por realizar o tratamento dos dados coletados, como a remoção de inconsistências e duplicações.
@@ -72,8 +73,6 @@ Este arquivo contém a classe `DataTransformer`, responsável pela transformaç�
 
 A classe `DataTransformer` inclui métodos para transformar e normalizar os dados, garantindo que os tipos de dados sejam consistentes e adequados para armazenamento.
 
-##### Métodos
-
 - **`transform_price(self)`**: Converte o preço para o tipo float.
 - **`transform_size(self)`**: Converte o tamanho para o tipo inteiro.
 - **`transform_bedrooms(self)`**: Converte o número de quartos para o tipo inteiro.
@@ -84,7 +83,7 @@ A classe `DataTransformer` inclui métodos para transformar e normalizar os dado
 - **`normalize_description(self)`**: Padroniza o formato das descrições.
 - **`transform_data(self)`**: Executa todos os métodos de transformação e normalização e retorna os dados transformados.
 
-# Exemplo de uso
+## Exemplo de uso
 
 ```python
 data = [
