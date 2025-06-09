@@ -60,7 +60,17 @@ def scrape_page(driver, url, tipo_transacao, page_number, property_type=None):
             try:
                 # Clean up description text - remove newlines and excess whitespace
                 descricao_raw = imovel.select_one("h2").text if imovel.select_one("h2") else ""
-                descricao = " ".join(descricao_raw.split())
+                # More thorough cleaning with regex
+                if descricao_raw:
+                    import re
+                    # Replace line breaks and tabs with spaces
+                    descricao = re.sub(r'[\n\t\r]+', ' ', descricao_raw)
+                    # Replace multiple spaces with a single space
+                    descricao = re.sub(r'\s+', ' ', descricao)
+                    # Final strip to remove any leading/trailing spaces
+                    descricao = descricao.strip()
+                else:
+                    descricao = ""
                 address = imovel.select_one("div.endereco").text.strip() if imovel.select_one("div.endereco") else ""
                 m2 = imovel.select_one("div.caracteristica.area").text.split()[0] if imovel.select_one("div.caracteristica.area") else ""
                 bedroom = imovel.select_one("div.caracteristica.quartos").text.split()[0] if imovel.select_one("div.caracteristica.quartos") else ""
@@ -143,16 +153,16 @@ def scrape_netimoveis(url, tipo_transacao, total_pages, workers=5, batch_size=No
         batch_df = data_handler.create_dataframe(tipo_transacao.lower())
         
         # Verificar se há arquivos personalizados definidos
-        if custom_output_files and 'excel_path' in custom_output_files and 'csv_path' in custom_output_files:
+        if custom_output_files and 'excel_path' in custom_output_files and 'tsv_path' in custom_output_files:
             # Usar caminhos personalizados (orquestrador)
             excel_path = custom_output_files['excel_path']
-            csv_path = custom_output_files['csv_path']
+            tsv_path = custom_output_files['tsv_path']
             
             # Salvar diretamente nos caminhos personalizados
             data_handler.save_to_excel(batch_df, excel_path, append=True)  # Sempre append=True para lotes
-            data_handler.save_to_csv(batch_df, csv_path, append=True)  # Sempre append=True para lotes
+            data_handler.save_to_tsv(batch_df, tsv_path, append=True)  # Sempre append=True para lotes
             
-            print(f"Batch data saved to {excel_path} and {csv_path}")
+            print(f"Batch data saved to {excel_path} and {tsv_path}")
         else:
             # Usar o transaction type e property_type para o prefixo de arquivo
             if property_type:
@@ -188,10 +198,10 @@ def scrape_netimoveis(url, tipo_transacao, total_pages, workers=5, batch_size=No
         empty_handler = DataHandler([])
         empty_df = empty_handler.create_dataframe(tipo_transacao.lower())
         
-        if custom_output_files and 'excel_path' in custom_output_files and 'csv_path' in custom_output_files:
+        if custom_output_files and 'excel_path' in custom_output_files and 'tsv_path' in custom_output_files:
             # Limpar arquivos personalizados
             empty_handler.save_to_excel(empty_df, custom_output_files['excel_path'], append=False)
-            empty_handler.save_to_csv(empty_df, custom_output_files['csv_path'], append=False)
+            empty_handler.save_to_tsv(empty_df, custom_output_files['tsv_path'], append=False)
         else:
             # Limpar arquivos padrão
             if property_type:

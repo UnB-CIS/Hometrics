@@ -32,12 +32,16 @@ class PropertyScraper:
             selected_element = element.select_one(selector)
             return selected_element.get_text(strip=True) if selected_element else None
 
-        # Descrição \* 
 
-        description = get_text_or_none(property_soup, 'h2.new-title.phrase')
+        full_description = get_text_or_none(property_soup, 'div.new-text.phrase')
+        if not full_description:
+            # Try alternative selector
+            full_description = get_text_or_none(property_soup, 'div.new-text.phrase')
         
-        # Tipo de imóvel \* 
+        # Endereço
+        address = get_text_or_none(property_soup, 'h2.new-title.phrase')
         
+        # Tipo de imóvel 
         type_property_full = get_text_or_none(property_soup, 'h3.new-desc.phrase')
         
         # Extract clean property type from the full description
@@ -52,8 +56,7 @@ class PropertyScraper:
                     property_type = p_type
                     break
         
-        # Preço do imóvel \* 
-        
+        # Preço do imóvel 
         price_raw = get_text_or_none(property_soup, 'div.new-price span')
         
         # Clean price value (extract numeric part)
@@ -76,7 +79,6 @@ class PropertyScraper:
                     price = ''
         
         # Tamanho do imóvel em m² \* 
-
         size_m2_element = property_soup.find('span', string = lambda x: x and "m²" in x)
         size_m2_raw = size_m2_element.get_text(strip = True) if size_m2_element else None
         
@@ -99,7 +101,6 @@ class PropertyScraper:
                     size_m2 = size_value
         
         # Nº de quartos \* 
-
         bedroom_element = property_soup.find('span', string = lambda x: x and re.search(r'\b(quartos?|Quartos?)\b', x))
         bedroom_raw = bedroom_element.get_text(strip = True) if bedroom_element else None
         
@@ -119,7 +120,6 @@ class PropertyScraper:
                     bedroom = bedroom_raw
         
         # Nº de vagas de carragem \* 
-
         car_spaces_element = property_soup.find('span', string = lambda x: x and re.search(r'\b(Vaga?|Vagas?)\b', x))
         car_spaces_raw = car_spaces_element.get_text(strip = True) if car_spaces_element else None
         
@@ -133,10 +133,20 @@ class PropertyScraper:
                     car_spaces = int(numeric_match.group(1))
                 except:
                     car_spaces = car_spaces_raw
-
+        
+        # Clean description: remove line breaks, tabs, and multiple spaces
+        if full_description:
+            import re
+            # Replace line breaks and tabs with spaces
+            full_description = re.sub(r'[\n\t\r]+', ' ', full_description)
+            # Replace multiple spaces with a single space
+            full_description = re.sub(r'\s+', ' ', full_description)
+            # Final strip to remove any leading/trailing spaces
+            full_description = full_description.strip()
+    
         return {
-            'description': description,
-            'address': "",
+            'description': full_description,
+            'address': address,
             'property_type': property_type,
             'price': price,
             'size': size_m2,
@@ -169,7 +179,7 @@ class PropertyScraper:
                 if response.status_code == 200:
                     site = BeautifulSoup(response.text, "html.parser")
                     properties = site.find_all('div', class_='new-info')
-                    
+                    # print(properties)
                     # Check if we got properties or empty results
                     if properties:
                         return [self.extract_property_data(property_soup) for property_soup in properties], 200
@@ -203,24 +213,13 @@ class PropertyScraper:
         return [], 503  # Service Unavailable after retries
 
     def scrape_all_pages(self, max_pages=None, workers=1, batch_size=10, batch_delay=30, save_each_batch=True, category='venda', property_type='imoveis', output_dir=None, append=True):
-        """Scrapes all pages until no more data is available or an error occurs.
-        
-        Args:
-            max_pages: Maximum number of pages to scrape, None for unlimited
-            workers: Number of concurrent workers
-            batch_size: Number of pages to process before taking a longer pause
-            batch_delay: Seconds to pause between batches
-            save_each_batch: Whether to save data after each batch
-            category: Contract type (venda/aluguel)
-            property_type: Type of property being scraped
-            output_dir: Directory to save batch data
-            append: Whether to append to existing files
-        """
+        """Scrapes all pages until no more data is available or an error occurs."""
+
         all_properties = []
         empty_page_count = 0
         page = 1
         current_batch = 1
-        consecutive_empty_pages_threshold = 2  # Stop after this many consecutive empty pages
+        consecutive_empty_pages_threshold = 2  
         
         # Calculate batches if max_pages is specified
         total_batches = None
@@ -315,13 +314,13 @@ class PropertyScraper:
                 
                 # Use simplified file naming - one file per contract type (venda/aluguel)
                 excel_filename = f'imoveis_df_{category}.xlsx'
-                csv_filename = f'imoveis_df_{category}.csv'
+                tsv_filename = f'imoveis_df_{category}.tsv'
                 
                 # Save with append=True to keep adding to the same files
                 batch_data_handler.save_to_excel(batch_df, excel_filename, output_dir=output_dir, append=append)
-                batch_data_handler.save_to_csv(batch_df, csv_filename, output_dir=output_dir, append=append)
+                batch_data_handler.save_to_tsv(batch_df, tsv_filename, output_dir=output_dir, append=append)
                 
-                print(f"Batch {current_batch} data for {property_type} saved to {output_dir}/{excel_filename}")
+                print(f"Batch {current_batch} data for {property_type} saved to {output_dir}/{excel_filename} and {output_dir}/{tsv_filename}")
             
             # Take a longer pause between batches
             actual_delay = batch_delay + random.uniform(-5, 5)  # Add some randomness
@@ -356,16 +355,6 @@ PROPERTY_TYPES = [
 
 def run_scraper(category='venda', property_type='imoveis', max_pages=30, workers=3, output_dir=None, append=True, custom_output_files=None, batch_size=30, batch_delay=30, save_each_batch=True):
     """Run the DF Imoveis scraper with the specified parameters.
-    
-    Args:
-        category (str): Type of properties to scrape ('venda' or 'aluguel')
-        max_pages (int): Maximum number of pages to scrape
-        workers (int): Number of concurrent workers for threading
-        output_dir (str): Directory to save output files
-        append (bool): Whether to append to existing files
-        custom_output_files (dict): Custom file paths for output (excel_path, csv_path)
-        batch_size (int): Number of pages per batch to process before pausing
-        batch_delay (int): Seconds to wait between batches
     """
     # Select the base URL based on the scraping mode
     base_url = BASE_URL_ALUGUEL if category == 'aluguel' else BASE_URL_VENDA
@@ -392,43 +381,35 @@ def run_scraper(category='venda', property_type='imoveis', max_pages=30, workers
     # Save the data to files if output_dir is provided
     if output_dir is not None:
         # Check if custom output files are specified
-        if custom_output_files and 'excel_path' in custom_output_files and 'csv_path' in custom_output_files:
+        if custom_output_files and 'excel_path' in custom_output_files and 'tsv_path' in custom_output_files:
             # Use the standardized file paths from the orchestrator
             excel_path = custom_output_files['excel_path']
-            csv_path = custom_output_files['csv_path']
+            tsv_path = custom_output_files['tsv_path']
             
             # Save directly to specified paths
             data_handler.save_to_excel(df, excel_path, append=append)
-            data_handler.save_to_csv(df, csv_path, append=append)
+            data_handler.save_to_tsv(df, tsv_path, append=append)
             
             print(f"Excel data saved to {excel_path}")
-            print(f"CSV data saved to {csv_path}")
+            print(f"TSV data saved to {tsv_path}")
         else:
             # Use simplified file naming - one file per contract type (venda/aluguel)
             excel_filename = f'imoveis_df_{category}.xlsx'
-            csv_filename = f'imoveis_df_{category}.csv'
+            tsv_filename = f'imoveis_df_{category}.tsv'
             
             data_handler.save_to_excel(df, excel_filename, output_dir=output_dir, append=append)
-            data_handler.save_to_csv(df, csv_filename, output_dir=output_dir, append=append)
+            data_handler.save_to_tsv(df, tsv_filename, output_dir=output_dir, append=append)
             
             print(f"Excel data saved to {output_dir}/{excel_filename}")
-            print(f"CSV data saved to {output_dir}/{csv_filename}")
+            print(f"TSV data saved to {output_dir}/{tsv_filename}")
     
     return df
 
 # This allows the script to be run directly for testing
 def run_all_scrapers(max_pages=30, workers=3, output_dir=None, append=True, batch_size=30, batch_delay=30, save_each_batch=True):
     """Run all scrapers for all contract types and property types.
-    
-    Args:
-        max_pages (int): Maximum number of pages to scrape per combination
-        workers (int): Number of concurrent workers for threading
-        output_dir (str): Directory to save output files
-        append (bool): Whether to append to existing files
-        batch_size (int): Number of pages per batch
-        batch_delay (int): Seconds to wait between batches
     """
-    contract_types = ['aluguel']
+    contract_types = ['venda','aluguel']
     all_dataframes = []
     
     for contract_type in contract_types:
@@ -471,7 +452,7 @@ if __name__ == "__main__":
         workers=5,
         output_dir="scripts/df-imoveis/dataset",
         append=True,
-        batch_size=40,
-        batch_delay=20,
+        batch_size=35,
+        batch_delay=18,
         save_each_batch=True
     )

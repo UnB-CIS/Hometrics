@@ -77,31 +77,31 @@ def save_batch_callback(batch_data, is_final_batch):
         print(f"ERROR during batch saving: {str(e)}")
 
 
-def load_and_process_data(csv_paths, standard_keys=None, skip_geocoding=False, batch_size=50, resume=False, restart=False, geocoding_service="google"):
+def load_and_process_data(tsv_paths, standard_keys=None, skip_geocoding=False, batch_size=50, resume=False, restart=False, geocoding_service="google"):
     """
-    Load CSV files, clean and transform data
+    Load TSV files, clean and transform data
     Processes data in batches and saves incrementally
     """
     all_data = []
     total_properties = 0
     
     print("\n===== LOADING DATA =====")
-    # Load all CSV files and convert to list of dictionaries
-    for csv_path in csv_paths:
+    # Load all TSV files and convert to list of dictionaries
+    for tsv_path in tsv_paths:
         try:
-            print(f"Loading file: {csv_path}...")
-            df = pd.read_csv(csv_path)
-            print(f"Found {len(df)} properties in {os.path.basename(csv_path)}")
+            print(f"Loading file: {tsv_path}...")
+            df = pd.read_csv(tsv_path, sep='\t')
+            print(f"Found {len(df)} properties in {os.path.basename(tsv_path)}")
             total_properties += len(df)
             
             # Convert DataFrame to list of dictionaries
             data_list = df.to_dict('records')
             all_data.extend(data_list)
         except Exception as e:
-            print(f"ERROR loading {csv_path}: {str(e)}")
+            print(f"ERROR loading {tsv_path}: {str(e)}")
             continue
     
-    print(f"\nTotal properties loaded: {len(all_data)} from {len(csv_paths)} files")
+    print(f"\nTotal properties loaded: {len(all_data)} from {len(tsv_paths)} files")
     
     # Clean data
     print("\n===== CLEANING DATA =====")
@@ -125,8 +125,8 @@ def load_and_process_data(csv_paths, standard_keys=None, skip_geocoding=False, b
         os.makedirs(pipeline_dir)
     
     # Set up file paths
-    rental_file_path = os.path.join(pipeline_dir, 'imoveis_aluguel_final.csv')
-    sales_file_path = os.path.join(pipeline_dir, 'imoveis_venda_final.csv')
+    rental_file_path = os.path.join(pipeline_dir, 'imoveis_aluguel_final.tsv')
+    sales_file_path = os.path.join(pipeline_dir, 'imoveis_venda_final.tsv')
     
     # Check if we should resume processing or start fresh
     already_processed_items = {}
@@ -142,7 +142,7 @@ def load_and_process_data(csv_paths, standard_keys=None, skip_geocoding=False, b
                         rental_df = pd.read_csv(rental_file_path, quoting=pd.io.common.csv.QUOTE_NONE, 
                                             error_bad_lines=False, warn_bad_lines=True, 
                                             escapechar='\\', encoding='utf-8', 
-                                            engine='python', delimiter=',', 
+                                            engine='python', delimiter='\t', 
                                             on_bad_lines='skip')
                     except Exception as e1:
                         try:

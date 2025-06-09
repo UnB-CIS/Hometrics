@@ -46,7 +46,7 @@ class ScraperOrchestrator:
         if category in self.category_files:
             custom_output_files = {
                 'excel_path': self.category_files[category]['excel'],
-                'csv_path': self.category_files[category]['csv']
+                'tsv_path': self.category_files[category]['tsv']
             }
         
         common_params = {
