@@ -15,6 +15,9 @@ A ideia central é utilizar técnicas de machine learning em dados de imóveis p
 │   ├── Project_documentation.docx # Documentação do projeto em formato Word
 │   └── Project_documentation.pdf  # Documentação do projeto em formato PDF
 ├── pipeline
+│   ├── data_cleaning.py           # Responsável por realizar o tratamento dos dados coletados
+│   ├── data_scraping.py           # Orquestra a execução dos scrapers
+│   ├── data_transform.py          # Responsável pela transformação e normalização dos dados
 │   └── main.py                    # Gerencia a interação com o banco de dados
 ├── scripts
 │   ├── df-imoveis                 # Scripts de scraping para o site 'df-imoveis'
@@ -23,11 +26,32 @@ A ideia central é utilizar técnicas de machine learning em dados de imóveis p
 │   ├── viva-real                  # Scripts de scraping para o site 'viva-real'
 │   ├── w-imoveis                  # Scripts de scraping para o site 'w-imoveis'
 │   ├── zap-imoveis                # Scripts de scraping para o site 'zap-imoveis'
-│   ├── data-cleaning.py           # Responsável por realizar o tratamento dos dados coletados
-│   ├── data-scrapping.py          # Orquestra a execução dos scrapers.
-    └── data-transform.py          # Responsável pela transformação e normalização dos dados
-
+├── utils
+│   └── data_handler.py            # Classe para manipulação e salvamento de dados
 ```
+
+## Funcionalidades Principais
+
+### Web Scraping Multi-site
+
+- Suporte para múltiplos sites de imóveis: DF-Imóveis, Net-Imóveis, Quinto Andar, Viva Real, W-Imóveis e Zap-Imóveis
+- Coleta automatizada de dados de imóveis com suporte para diferentes tipos de contratos (venda/aluguel)
+- Suporte para diferentes tipos de propriedades: apartamentos, casas, flats, etc.
+
+### Processamento de Dados
+
+- Limpeza e normalização de dados de imóveis
+- Geocodificação de endereços para obtenção de coordenadas geográficas
+- Suporte para múltiplos serviços de geocodificação:
+  - Nominatim (serviço gratuito, padrão)
+  - Google Maps API (requer chave de API)
+
+### Armazenamento de Dados
+
+- Salvamento incremental de dados (modo append)
+- Suporte para formatos Excel e CSV
+- Processamento em lotes com salvamento automático para evitar perda de dados
+- Tratamento robusto para arquivos corrompidos com funcionalidade de backup
 
 ## Instalação e Configuração
 
@@ -46,7 +70,10 @@ Crie um arquivo `.env` a partir do `.env.example`.
 cp .env.example .env
 ```
 
-Então, preencha o arquivo `.env` com as devidas variáveis de ambiente do projeto
+Então, preencha o arquivo `.env` com as devidas variáveis de ambiente do projeto:
+
+- `MONGODB_URI`: URI de conexão com o MongoDB
+- `GOOGLE_MAPS_API_KEY`: Chave de API do Google Maps (opcional, para geocodificação)
 
 ### Utilizando o Docker
 
@@ -70,7 +97,42 @@ Execute o comando abaixo para instalar as dependências:
 pip install -r requirements.txt
 ```
 
-Verifique o pyhton PATH local e execute o arquivo desejado.
+Verifique o python PATH local e execute o arquivo desejado.
+
+## Exemplos de Uso
+
+### Executando os scrapers
+
+Para executar todos os scrapers para DF-Imóveis:
+
+```python
+from scripts.df-imoveis.scrapings.scrapping_df_imoveis import run_all_scrapers
+
+run_all_scrapers(
+    max_pages=None,  # Sem limite de páginas
+    workers=5,        # 5 workers concorrentes
+    output_dir="data/scraped",  # Diretório de saída
+    append=True,      # Adicionar aos arquivos existentes
+    batch_size=40,    # Tamanho do lote
+    batch_delay=20,   # Atraso entre lotes em segundos
+    save_each_batch=True  # Salvar após cada lote
+)
+```
+
+### Utilizando a geocodificação
+
+```python
+from pipeline.data_transform import DataTransformer
+
+# Usando o serviço Nominatim (padrão)
+transformer = DataTransformer(data, geocoding_service="nominatim")
+
+# Ou usando o Google Maps API
+transformer = DataTransformer(data, geocoding_service="google")
+
+# Adicionar coordenadas aos dados
+transformed_data = transformer.add_coordinates_to_data(address_field="full_address")
+```
 
 ## Branchs principais
 
