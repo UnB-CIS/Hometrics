@@ -99,42 +99,7 @@ pip install -r requirements.txt
 
 Verifique o python PATH local e execute o arquivo desejado.
 
-## Exemplos de Uso
-
-### Executando os scrapers
-
-Para executar todos os scrapers para DF-Imóveis:
-
-```python
-from scripts.df-imoveis.scrapings.scrapping_df_imoveis import run_all_scrapers
-
-run_all_scrapers(
-    max_pages=None,  # Sem limite de páginas
-    workers=5,        # 5 workers concorrentes
-    output_dir="data/scraped",  # Diretório de saída
-    append=True,      # Adicionar aos arquivos existentes
-    batch_size=40,    # Tamanho do lote
-    batch_delay=20,   # Atraso entre lotes em segundos
-    save_each_batch=True  # Salvar após cada lote
-)
-```
-
-### Utilizando a geocodificação
-
-```python
-from pipeline.data_transform import DataTransformer
-
-# Usando o serviço Nominatim (padrão)
-transformer = DataTransformer(data, geocoding_service="nominatim")
-
-# Ou usando o Google Maps API
-transformer = DataTransformer(data, geocoding_service="google")
-
-# Adicionar coordenadas aos dados
-transformed_data = transformer.add_coordinates_to_data(address_field="full_address")
-```
-
-## Branchs principais
+## Branches principais
 
 ### Main
 
