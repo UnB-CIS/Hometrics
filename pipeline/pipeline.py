@@ -77,7 +77,7 @@ def save_batch_callback(batch_data, is_final_batch):
         print(f"ERROR during batch saving: {str(e)}")
 
 
-def load_and_process_data(tsv_paths, standard_keys=None, skip_geocoding=False, batch_size=50, resume=False, restart=False, geocoding_service="google"):
+def load_and_process_data(tsv_paths, standard_keys=None, skip_geocoding=False, batch_size=50, resume=False, restart=False, geocoding_service="google", preloaded_data=None):
     """
     Load TSV files, clean and transform data
     Processes data in batches and saves incrementally
@@ -85,23 +85,28 @@ def load_and_process_data(tsv_paths, standard_keys=None, skip_geocoding=False, b
     all_data = []
     total_properties = 0
     
-    print("\n===== LOADING DATA =====")
-    # Load all TSV files and convert to list of dictionaries
-    for tsv_path in tsv_paths:
-        try:
-            print(f"Loading file: {tsv_path}...")
-            df = pd.read_csv(tsv_path, sep='\t')
-            print(f"Found {len(df)} properties in {os.path.basename(tsv_path)}")
-            total_properties += len(df)
-            
-            # Convert DataFrame to list of dictionaries
-            data_list = df.to_dict('records')
-            all_data.extend(data_list)
-        except Exception as e:
-            print(f"ERROR loading {tsv_path}: {str(e)}")
-            continue
-    
-    print(f"\nTotal properties loaded: {len(all_data)} from {len(tsv_paths)} files")
+    if preloaded_data is not None:
+        all_data = preloaded_data
+        total_properties = len(all_data)
+        print(f"\nTotal properties loaded: {len(all_data)} from merged scraper data")
+    else:
+        print("\n===== LOADING DATA =====")
+        # Load all TSV files and convert to list of dictionaries
+        for tsv_path in tsv_paths:
+            try:
+                print(f"Loading file: {tsv_path}...")
+                df = pd.read_csv(tsv_path, sep='\t')
+                print(f"Found {len(df)} properties in {os.path.basename(tsv_path)}")
+                total_properties += len(df)
+                
+                # Convert DataFrame to list of dictionaries
+                data_list = df.to_dict('records')
+                all_data.extend(data_list)
+            except Exception as e:
+                print(f"ERROR loading {tsv_path}: {str(e)}")
+                continue
+        
+        print(f"\nTotal properties loaded: {len(all_data)} from {len(tsv_paths)} files")
     
     # Clean data
     print("\n===== CLEANING DATA =====")
@@ -125,8 +130,8 @@ def load_and_process_data(tsv_paths, standard_keys=None, skip_geocoding=False, b
         os.makedirs(pipeline_dir)
     
     # Set up file paths
-    rental_file_path = os.path.join(pipeline_dir, 'imoveis_aluguel_final.tsv')
-    sales_file_path = os.path.join(pipeline_dir, 'imoveis_venda_final.tsv')
+    rental_file_path = os.path.join(pipeline_dir, 'imoveis_aluguel_final.csv')
+    sales_file_path = os.path.join(pipeline_dir, 'imoveis_venda_final.csv')
     
     # Check if we should resume processing or start fresh
     already_processed_items = {}
@@ -366,35 +371,58 @@ def main():
     print(f"Skip Geocoding: {'YES' if skip_geocoding else 'NO'}")
     print(f"Verbose Mode: {'YES' if verbose else 'NO'}")
     print(f"Batch Size: {batch_size}")
-    print(f"Resume Processing: {'YES (forced)'}") 
+    print(f"Resume Processing: {'YES (forced)'}")
     print(f"Force Restart: {'NO (forced)'}")
     print(f"Auto-resume: ENABLED")
     print(f"Geocoding Service: {geocoding_service.upper()}")
     
-    # Define paths to CSV files
-    dataset_dir = os.path.join(os.getcwd(), 'dataset', 'v02')
-    csv_files = [
-        os.path.join(dataset_dir, 'imoveis_aluguel.csv'),
-        os.path.join(dataset_dir, 'imoveis_venda.csv')
-    ]
+    # Use the ScraperOrchestrator to gather and save data from all scrapers
+    print("\n===== DISCOVERING AND SAVING DATA FROM SCRAPERS =====")
+    orchestrator = ScraperOrchestrator()
     
-    # Verify all files exist
-    missing_files = [f for f in csv_files if not os.path.exists(f)]
-    if missing_files:
-        print(f"ERROR: The following input files could not be found:")
-        for f in missing_files:
-            print(f"  - {f}")
+    # Run the pipeline to save merged data to raw_final_output folder
+    pipeline_result = orchestrator.run_pipeline()
+    
+    if not pipeline_result['output_files']:
+        print("ERROR: No data files were saved from scrapers.")
         sys.exit(1)
+        
+    # Now load the merged data from the raw_final_output folder
+    raw_final_output_dir = os.path.join(Path(__file__).parent, "raw_final_output")
+    merged_file_path = None
+    
+    # Prefer TSV file if available
+    if 'tsv' in pipeline_result['output_files']:
+        merged_file_path = pipeline_result['output_files']['tsv']
+        print(f"\n===== LOADING MERGED DATA FROM TSV FILE =====\n{merged_file_path}")
+        merged_data = pd.read_csv(merged_file_path, sep='\t')
+    elif 'xlsx' in pipeline_result['output_files']:
+        merged_file_path = pipeline_result['output_files']['xlsx']
+        print(f"\n===== LOADING MERGED DATA FROM XLSX FILE =====\n{merged_file_path}")
+        merged_data = pd.read_excel(merged_file_path)
+    else:
+        print("ERROR: No merged data files found in raw_final_output folder.")
+        sys.exit(1)
+    
+    if merged_data.empty:
+        print("ERROR: Merged data file is empty.")
+        sys.exit(1)
+    
+    print(f"Successfully loaded {len(merged_data)} total properties from {merged_file_path}")
+    
+    # Convert DataFrame to list of dictionaries for processing
+    all_data = merged_data.to_dict('records')
     
     # Process data
     try:
         processed_data = load_and_process_data(
-            csv_files, 
+            [], # Empty list since we already have the data loaded
             skip_geocoding=skip_geocoding,
             batch_size=batch_size,
             resume=resume,
             restart=restart,
-            geocoding_service=geocoding_service
+            geocoding_service=geocoding_service,
+            preloaded_data=all_data  # Pass the preloaded data
         )
     except Exception as e:
         print(f"Fatal error during data processing: {str(e)}")

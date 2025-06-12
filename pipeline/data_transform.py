@@ -9,10 +9,10 @@ class DataTransformer:
         self.data = data
         self.geocoding_service = geocoding_service.lower()
 
-  
 
     def transform_data(self, skip_geocoding=False) -> List[Dict[str, Any]]:
         """Transform data and add coordinates if geocoding is enabled"""
+
         if not skip_geocoding:
             for item in self.data:
                 if 'full_address' in item and item['full_address']:
@@ -35,13 +35,7 @@ class DataTransformer:
             return self.get_coordinates(address)
         
     def get_coordinates_google(self, address: str, max_retries: int = 2) -> Optional[Tuple[float, float]]:
-        """
-        Convert an address to latitude and longitude using Google Maps API.
-        
-        Args:
-            address: The address to geocode
-            max_retries: Number of retries for technical errors
-        """
+        """ Convert an address to latitude and longitude using Google Maps API. """
         # Get API key from environment variables
         api_key = os.environ.get('GOOGLE_MAPS_API_KEY')
         if not api_key:
@@ -91,13 +85,7 @@ class DataTransformer:
         return None
     
     def get_coordinates(self, address: str, max_retries: int = 2) -> Optional[Tuple[float, float]]:
-        """
-        Convert an address to latitude and longitude using Nominatim from geopy (free service).
-        
-        Args:
-            address: The address to geocode
-            max_retries: Number of retries for technical errors only (timeouts, service errors)
-        """
+        """ Convert an address to latitude and longitude using Nominatim from geopy (free service). """
         geolocator = Nominatim(user_agent="house_price_project")
         
         # Try with different address formats
@@ -137,11 +125,8 @@ class DataTransformer:
                         pass
                 print(f"Error geocoding address '{full_address}': {e}")
         
-        # If we've tried all formats, try one more approach: split the address
-        # This can help with addresses that have apartment numbers or other details
         if ', ' in address:
             try:
-                # Try with just the first part before the first comma (usually the street address)
                 parts = address.split(', ')
                 if len(parts) > 1:
                     simplified_address = f"{parts[0]}, {parts[-1]}, Brasília, Brazil"
@@ -159,9 +144,10 @@ class DataTransformer:
     
     def add_coordinates_to_data(self, address_field: str, batch_size: int = 50, callback=None) -> List[Dict[str, Any]]:
         """
-        Add latitude and longitude to each item in the data based on a specified address field.
-        Processes data in batches of batch_size items and calls the callback function after each batch.
+        Add latitude and longitude to each item in the data based on a specified address field. 
+        Processes data in batches of batch_size items and calls the callback function after each batch. 
         """
+
         transformed_data = []
         total_items = len(self.data)
         current_batch = []

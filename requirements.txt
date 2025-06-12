@@ -10,3 +10,5 @@ webdriver-manager
 openpyxl
 geopy
 python-dotenv
+tqdm
+google-genai

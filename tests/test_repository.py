@@ -16,14 +16,12 @@ test_data = [
         },
     ]
 
-
 def test_valid_insertion(uri=DB_URI,test_data=test_data):
     """ This test will pass if MDB_URI is set to a valid connection string. """
     connection = MongoDBConnection(uri)
     client = connection.connect()
     property_manager = Property(client)
     inserted_data = property_manager.insert_multiple_properties(test_data)
-
 
     print(f"test_valid_insertion: Properties inserted with IDs: {inserted_data}")
     connection.close()

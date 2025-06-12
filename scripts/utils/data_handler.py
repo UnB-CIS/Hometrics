@@ -9,18 +9,13 @@ class DataHandler:
         self.data = data
 
     def create_dataframe(self, contract_type):
-        """
-        Creates a Pandas DataFrame from the property data and adds a 'contract_type' column.
-        """
-
+        """ Creates a Pandas DataFrame from the property data and adds a 'contract_type' column. """
         df = pd.DataFrame(self.data)
         df['contract_type'] = contract_type  
         return df
 
     def save_to_excel(self, df, filename, output_dir=None, append=False):
-        """
-        Saves the DataFrame to an Excel file.
-        """
+        """ Saves the DataFrame to an Excel file. """
         # Create full path
         filepath = os.path.join(output_dir, filename) if output_dir else filename
         
@@ -46,9 +41,7 @@ class DataHandler:
         print(f"Excel data saved to {filepath}")
         
     def save_to_csv(self, df, filename, output_dir=None, append=False, separator=',', encoding='utf-8'):
-        """
-        Saves the DataFrame to a delimited text file (CSV by default, TSV if separator='\t').
-        """
+        """ Saves the DataFrame to a delimited text file (CSV by default, TSV if separator='\t'). """
 
         # Create full path
         filepath = os.path.join(output_dir, filename) if output_dir else filename
@@ -100,9 +93,7 @@ class DataHandler:
             print(f"Error saving file {filepath}: {e}")
         
     def save_to_tsv(self, df, filename, output_dir=None, append=False, encoding='utf-8'):
-        """
-        Saves the DataFrame to a TSV file (tab-separated values).
-        """
+        """ Saves the DataFrame to a TSV file (tab-separated values). """
         # Make sure filename has .tsv extension
         if not filename.lower().endswith('.tsv'):
             if '.' in filename:

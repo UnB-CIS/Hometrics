@@ -1,8 +1,9 @@
-import pandas as pd
 import time
-from property_scraper import PropertyScraper,PROPERTY_TYPES
-from utils.data_handler import DataHandler
-
+from property_scraper import PropertyScraper
+from scraping_utils import PROPERTY_TYPES
+from scripts.utils.data_handler import DataHandler
+from clean_duplicates import clean_duplicates
+from extract_property_descriptions import extract_property_descriptions
 
 HEADERS = {
     # 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36'
@@ -13,12 +14,10 @@ BASE_URL_ALUGUEL = "https://www.dfimoveis.com.br/aluguel/df/todos/{property_type
 BASE_URL_VENDA = "https://www.dfimoveis.com.br/venda/df/todos/{property_type}?pagina="
 
 def run_scraper(category='venda', property_type='imoveis', max_pages=30, workers=3, output_dir=None, append=True, custom_output_files=None, batch_size=30, batch_delay=30, save_each_batch=True):
-    """Executa o raspador do DF Imóveis com os parâmetros especificados.
-    """
-    # Seleciona a URL base de acordo com o modo de raspagem
+    """Executa o raspador do DF Imóveis com os parâmetros especificados. """
+
     base_url = BASE_URL_ALUGUEL if category == 'aluguel' else BASE_URL_VENDA
     
-    # Inicializa o raspador e realiza a raspagem
     scraper = PropertyScraper(base_url=base_url, property_type=property_type,headers=HEADERS)
     properties_data = scraper.scrape_all_pages(
         max_pages=max_pages, 
@@ -31,17 +30,12 @@ def run_scraper(category='venda', property_type='imoveis', max_pages=30, workers
         output_dir=output_dir,
         append=append
     )
-    
-    # Processa os dados raspados
-    
+        
     data_handler = DataHandler(properties_data)
     df = data_handler.create_dataframe(category)
     
-    # Salva os dados em arquivos se output_dir for fornecido
     if output_dir is not None:
-        # Verifica se arquivos de saída personalizados são especificados
         if custom_output_files and 'excel_path' in custom_output_files and 'tsv_path' in custom_output_files:
-            # Usa os caminhos de arquivo padronizados do orquestrador
             excel_path = custom_output_files['excel_path']
             tsv_path = custom_output_files['tsv_path']
             
@@ -52,7 +46,6 @@ def run_scraper(category='venda', property_type='imoveis', max_pages=30, workers
             print(f"Excel data saved to {excel_path}")
             print(f"TSV data saved to {tsv_path}")
         else:
-            # Usa nomenclatura de arquivo simplificada - um arquivo por tipo de contrato (venda/aluguel)
             excel_filename = f'imoveis_df_{category}.xlsx'
             tsv_filename = f'imoveis_df_{category}.tsv'
             
@@ -64,11 +57,10 @@ def run_scraper(category='venda', property_type='imoveis', max_pages=30, workers
     
     return df
 
-# Isso permite que o script seja executado diretamente para testes
 def run_all_scrapers(max_pages=30, workers=3, output_dir=None, append=True, batch_size=30, batch_delay=30, save_each_batch=True):
     """Executa todos os raspadores para todos os tipos de contrato e tipos de propriedade.
     """
-    contract_types = ['venda','aluguel']
+    contract_types = ['aluguel','venda',]
     all_dataframes = []
     
     for contract_type in contract_types:
@@ -87,32 +79,45 @@ def run_all_scrapers(max_pages=30, workers=3, output_dir=None, append=True, batc
             )
             all_dataframes.append(df)
             
-            # Dá um descanso ao servidor entre diferentes tipos de propriedade
             time.sleep(30)
     
     return all_dataframes
 
 if __name__ == "__main__":
 
-    # Rodar o script diretamente
-    df = run_scraper(
-        category='venda',
-        property_type='apartamento',
-        max_pages=1,
-        workers=3,
-        output_dir="scripts/df-imoveis/dataset",
+    # run_scraper(
+    #     category='venda',
+    #     property_type='apartamento',
+    #     max_pages=1,
+    #     workers=3,
+    #     output_dir="scripts/df-imoveis/dataset/raw_listings",
+    #     append=True,
+    #     batch_size=30,
+    #     batch_delay=30,
+    #     save_each_batch=True
+    # )
+    
+    run_all_scrapers(
+        max_pages=None,
+        workers=6,
+        output_dir="scripts/df-imoveis/dataset/raw_listings",
         append=True,
-        batch_size=30,
-        batch_delay=30,
+        batch_size=45,
+        batch_delay=15,
         save_each_batch=True
     )
     
-    # all_dfs = run_all_scrapers(
-    #     max_pages=None,
-    #     workers=5,
-    #     output_dir="scripts/df-imoveis/dataset",
-    #     append=True,
-    #     batch_size=35,
-    #     batch_delay=18,
-    #     save_each_batch=True
-    # )
+    clean_duplicates(input_dir="scripts/df-imoveis/dataset/raw_listings", output_dir="scripts/df-imoveis/dataset/raw_listings")
+
+    categories = ['aluguel', 'venda']
+
+    for category in categories:
+        extract_property_descriptions(
+            category=category,
+            delay_min=0.5,
+            delay_max=2,
+            workers=2,  
+            batch_size=10,  
+            save_each_batch=True  
+        )
+
