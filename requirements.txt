@@ -2,7 +2,7 @@ pymongo
 pytest
 pandas
 numpy
-# matplotlib
+matplotlib
 bs4
 requests
 selenium
@@ -12,3 +12,7 @@ geopy
 python-dotenv
 tqdm
 google-genai
+flake8
+isort
+black
+autoflake

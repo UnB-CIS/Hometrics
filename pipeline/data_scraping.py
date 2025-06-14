@@ -11,28 +11,20 @@ class ScraperOrchestrator:
     """
     
     def __init__(self, base_scripts_dir: str = None):
-        """
-        Initialize the scraper orchestrator.
+        """ Initialize the scraper orchestrator """
 
-        """
-        # Determine project root directory
+
         if base_scripts_dir is None:
-            # Default to scripts directory at project root
             self.scripts_dir = os.path.join(Path(__file__).parent.parent, "scripts")
         else:
             self.scripts_dir = base_scripts_dir
         
-        # Data structures to store found files
         self.tsv_files = []
         self.xlsx_files = []
         
     def discover_data_files(self) -> Dict[str, List[str]]:
-        """
-        Discover all TSV and XLSX files in detailed_properties folders.
+        """ Discover all TSV and XLSX files in detailed_properties folders. """
         
-        Returns:
-            Dictionary with 'tsv' and 'xlsx' keys containing lists of file paths.
-        """
         self.tsv_files = []
         self.xlsx_files = []
         
