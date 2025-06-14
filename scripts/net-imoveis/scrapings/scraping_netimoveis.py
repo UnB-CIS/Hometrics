@@ -1,16 +1,17 @@
-from datetime import datetime
-import os
 import random
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.common.by import By
-from bs4 import BeautifulSoup as bs
-import pandas as pd
 import time
+from datetime import datetime
+
+import pandas as pd
+from bs4 import BeautifulSoup as bs
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+from webdriver_manager.chrome import ChromeDriverManager
+
 
 class ScrapingNetImoveis:
     def __init__(self, tipo):
@@ -41,7 +42,7 @@ class ScrapingNetImoveis:
 
         service = Service(ChromeDriverManager().install())
         driver = webdriver.Chrome(service=service, options=chrome_options)
-        
+
         url = f"https://www.netimoveis.com/{self.tipo}/distrito-federal/brasilia?transacao={self.tipo}&localizacao=BR-DF-brasilia---&pagina={num}"
         driver.get(url)
         time.sleep(time_navigation)
@@ -78,29 +79,39 @@ class ScrapingNetImoveis:
             if "{{ nomeBairro }}" in address:
                 return None
 
-            price = imovel.select_one("div.valor").text.split()[1].replace('.', '')
-            
+            price = imovel.select_one("div.valor").text.split()[1].replace(".", "")
+
             features = {
-                'type': imovel.select_one("div.mb-2.tipo h2"), 
-                'area': imovel.select_one("div.caracteristica.area"),
-                'quartos': imovel.select_one("div.caracteristica.quartos"),
-                'banheiros': imovel.select_one("div.caracteristica.banheiros"),
-                'vagas': imovel.select_one("div.caracteristica.vagas")
+                "type": imovel.select_one("div.mb-2.tipo h2"),
+                "area": imovel.select_one("div.caracteristica.area"),
+                "quartos": imovel.select_one("div.caracteristica.quartos"),
+                "banheiros": imovel.select_one("div.caracteristica.banheiros"),
+                "vagas": imovel.select_one("div.caracteristica.vagas"),
             }
 
             data = {
                 "description": address,
-                "type": features['type'].text.split()[0] if features['type'] else None,
+                "type": features["type"].text.split()[0] if features["type"] else None,
                 "price": price,
-                "size_m2": features['area'].text.split()[0] if features['area'] else None,
-                "bedrooms": features['quartos'].text.split()[0] if features['quartos'] else None,
-                "bathrooms": features['banheiros'].text.split()[0] if features['banheiros'] else None,
-                "parking_spaces": features['vagas'].text.split()[0] if features['vagas'] else None,
+                "size_m2": (
+                    features["area"].text.split()[0] if features["area"] else None
+                ),
+                "bedrooms": (
+                    features["quartos"].text.split()[0] if features["quartos"] else None
+                ),
+                "bathrooms": (
+                    features["banheiros"].text.split()[0]
+                    if features["banheiros"]
+                    else None
+                ),
+                "parking_spaces": (
+                    features["vagas"].text.split()[0] if features["vagas"] else None
+                ),
             }
-            
+
             self.num_dados_raspados += 1
             return data
-        
+
         except Exception as e:
             print(f"Erro ao processar imóvel: {e}")
             return None
@@ -111,12 +122,12 @@ class ScrapingNetImoveis:
         while True:
             print(f"Processando página {num_page}...")
             soup = self.create_page_soup(num_page)
-            
+
             if not soup:
                 break
 
             lista_imoveis = self.find_imoveis(soup)
-            
+
             if not lista_imoveis or len(lista_imoveis) < 5:
                 print("Fim das páginas disponíveis.")
                 break
@@ -127,8 +138,10 @@ class ScrapingNetImoveis:
                     self.data.append(imovel_data)
 
             num_page += 1
-        
-        print(f"Scraping completo! Total de {self.num_dados_raspados} imóveis coletados.")
+
+        print(
+            f"Scraping completo! Total de {self.num_dados_raspados} imóveis coletados."
+        )
         return self.data
 
 
@@ -139,9 +152,9 @@ class DataHandler:
     def create_dataframe(self, modo):
         """Cria DataFrame com os dados e adiciona coluna de modo."""
         df = pd.DataFrame(self.data)
-        df['modo'] = modo
-        df['price'] = pd.to_numeric(df['price'], errors='coerce')
-        return df.dropna(subset=['price'])
+        df["modo"] = modo
+        df["price"] = pd.to_numeric(df["price"], errors="coerce")
+        return df.dropna(subset=["price"])
 
     def save_to_excel(self, df, filename):
         """Salva os dados em um arquivo Excel."""
@@ -151,20 +164,21 @@ class DataHandler:
 
 def main():
     # Configurações
-    TIPOS = ['locacao', 'venda']
+    TIPOS = ["locacao", "venda"]
     DATA_SCAPING = datetime.now().strftime("%Y%m%d_%H%M%S")
 
     for tipo in TIPOS:
         # Executa scraping
         scraper = ScrapingNetImoveis(tipo)
         dados = scraper.scrape_all_pages()
-        
+
         # Processa e salva dados
         if dados:
             handler = DataHandler(dados)
             df = handler.create_dataframe(tipo)
             filename = f"netimoveis_{tipo}_{DATA_SCAPING}.xlsx"
             handler.save_to_excel(df, filename)
+
 
 if __name__ == "__main__":
     main()

@@ -1,4 +1,5 @@
-from typing import List, Dict, Any
+from typing import Any, Dict, List
+
 
 class DataCleaner:
     def __init__(self, data: List[Dict[str, Any]]):
@@ -22,4 +23,3 @@ class DataCleaner:
         self.remove_empty_values()
 
         return self.data
-

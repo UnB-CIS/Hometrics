@@ -1,5 +1,6 @@
 from pymongo import MongoClient
 
+
 class MongoDBConnection:
     def __init__(self, uri):
         self.uri = uri
