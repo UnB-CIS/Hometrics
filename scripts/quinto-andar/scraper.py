@@ -35,19 +35,22 @@ class PropertyDataExtractor:
 
     @staticmethod
     def extract_type_text(element):
-        house_type = re.search(r'\b(apartamento|casa|studio|kitnet)\b', element, re.IGNORECASE)
+        house_type = re.search(
+            r"\b(apartamento|casa|studio|kitnet)\b", element, re.IGNORECASE
+        )
         return house_type.group() if house_type else None
 
     @staticmethod
     def extract_property_data(valor, size, rooms, parking, house_type, description):
         return {
-            'description': description,
-            'type': house_type,
-            'price': valor,
-            'size': size,
-            'bedrooms': rooms,
-            'parking_spaces': parking,
+            "description": description,
+            "type": house_type,
+            "price": valor,
+            "size": size,
+            "bedrooms": rooms,
+            "parking_spaces": parking,
         }
+
 
 class PropertyScraper:
     """Configura e executa a raspagem de dados do site de propriedades."""
@@ -56,7 +59,7 @@ class PropertyScraper:
         self.base_url = base_url
         self.options = options if options else Options()
         self.data_list = []
-        self.options.add_argument('window-size=1400,925')
+        self.options.add_argument("window-size=1400,925")
 
     def setup_driver(self):
         self.driver = webdriver.Chrome(options=self.options)
@@ -69,7 +72,9 @@ class PropertyScraper:
         while True:
             try:
                 button = WebDriverWait(self.driver, 10).until(
-                    EC.element_to_be_clickable((By.XPATH, "//button[@aria-label='Ver mais']"))
+                    EC.element_to_be_clickable(
+                        (By.XPATH, "//button[@aria-label='Ver mais']")
+                    )
                 )
                 button.click()
                 sleep(3)
@@ -82,27 +87,39 @@ class PropertyScraper:
         self.load_all_properties()
 
         page_content = self.driver.page_source
-        site = BeautifulSoup(page_content, 'html.parser')
+        site = BeautifulSoup(page_content, "html.parser")
 
-        properties = site.find_all('div', attrs={'role': 'presentation', 'class': 'Cozy__CardRow-Container oVdjIf'})
-        type_text = site.find_all('h2', attrs={'class': 'CozyTypography UQvm9e xih2fc _72Hu5c _1tBHcU'})
-        price_text = site.find_all('div', attrs={'class': 'Cozy__CardTitle-Title hFUhPy'})
+        properties = site.find_all(
+            "div",
+            attrs={"role": "presentation", "class": "Cozy__CardRow-Container oVdjIf"},
+        )
+        type_text = site.find_all(
+            "h2", attrs={"class": "CozyTypography UQvm9e xih2fc _72Hu5c _1tBHcU"}
+        )
+        price_text = site.find_all(
+            "div", attrs={"class": "Cozy__CardTitle-Title hFUhPy"}
+        )
         # print(len(price_text))
 
         for i in range(len(properties)):
             # print(len(properties))
             valor = PropertyDataExtractor.extract_value_text(price_text[i].text)
             size = PropertyDataExtractor.extract_size_text(properties[i].text)
-            description = properties[i].find('h2').text if properties[i].find('h2') else None
+            description = (
+                properties[i].find("h2").text if properties[i].find("h2") else None
+            )
             house_type = PropertyDataExtractor.extract_type_text(type_text[i].text)
             rooms = PropertyDataExtractor.extract_rooms_text(properties[i].text)
             parking = PropertyDataExtractor.extract_parking_text(properties[i].text)
 
-            property_data = PropertyDataExtractor.extract_property_data(valor, size, rooms, parking, house_type, description)
+            property_data = PropertyDataExtractor.extract_property_data(
+                valor, size, rooms, parking, house_type, description
+            )
             self.data_list.append(property_data)
 
         self.close_driver()
         return self.data_list
+
 
 class DataHandler:
     """Manipula e salva os dados extraídos em um DataFrame."""
@@ -112,15 +129,16 @@ class DataHandler:
 
     def create_dataframe(self):
         df = pd.DataFrame(self.data)
-        df['bathrooms'] = pd.NA  # Adiciona coluna bathrooms com valores nulos
-        df['modo'] = pd.NA  # Adiciona coluna modo com valores nulos
+        df["bathrooms"] = pd.NA  # Adiciona coluna bathrooms com valores nulos
+        df["modo"] = pd.NA  # Adiciona coluna modo com valores nulos
         return df
 
     def save_to_csv(self, df, filename):
-        df.to_csv(filename, index=False, encoding='utf-8-sig')
+        df.to_csv(filename, index=False, encoding="utf-8-sig")
+
 
 if __name__ == "__main__":
-    base_url = 'https://www.quintoandar.com.br/alugar/imovel/brasilia-df-brasil?referrer=home&profiling=true'
+    base_url = "https://www.quintoandar.com.br/alugar/imovel/brasilia-df-brasil?referrer=home&profiling=true"
 
     scraper = PropertyScraper(base_url)
     properties_data = scraper.scrape_properties()
@@ -129,5 +147,5 @@ if __name__ == "__main__":
 
     data_handler = DataHandler(properties_data)
     df = data_handler.create_dataframe()
-    data_handler.save_to_csv(df, 'imoveis_df_aluguel.csv')
+    data_handler.save_to_csv(df, "imoveis_df_aluguel.csv")
     print("Dados salvos em 'imoveis_df_aluguel.csv'")
