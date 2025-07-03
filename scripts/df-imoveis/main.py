@@ -1,5 +1,5 @@
 import time
-from extract_property_descriptions import extract_property_descriptions
+from property_descriptions import extract_property_descriptions
 from property_scraper import PropertyScraper
 from scraping_utils import PROPERTY_TYPES
 
@@ -12,9 +12,7 @@ HEADERS = {
     "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:92.0) Gecko/20100101 Firefox/92.0"
 }
 
-BASE_URL_ALUGUEL = (
-    "https://www.dfimoveis.com.br/aluguel/df/todos/{property_type}?pagina="
-)
+BASE_URL_ALUGUEL = "https://www.dfimoveis.com.br/aluguel/df/todos/{property_type}?pagina="
 BASE_URL_VENDA = "https://www.dfimoveis.com.br/venda/df/todos/{property_type}?pagina="
 
 
