@@ -14,14 +14,12 @@ HEADERS = {
     "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:92.0) Gecko/20100101 Firefox/92.0"
 }
 
-
 def clean_description(text):
     """Clean up the description text by removing extra whitespace and tabs"""
     text = re.sub(r"\s+", " ", text)
     text = text.replace("\t", " ")
     text = text.strip()
     return text
-
 
 def fetch_property_description(url, headers, max_retries=3):
     """
@@ -273,15 +271,14 @@ def extract_property_descriptions(
 
 
 if __name__ == "__main__":
-    # Example usage
     categories = ["aluguel", "venda"]
 
     for category in categories:
         extract_property_descriptions(
             category=category,
-            delay_min=1.0,  # faster per-request minimum delay
-            delay_max=2.0,  # faster per-request maximum delay
-            workers=6,  # more parallel workers
-            batch_size=250,  # keep batch size
+            delay_min=1.0,  
+            delay_max=2.0,  
+            workers=6,  
+            batch_size=250,  
             save_each_batch=True,
         )

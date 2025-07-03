@@ -54,7 +54,6 @@ def extract_numeric_value(text, allow_float=True, handle_range=True):
     return text if text else None
 
 
-# Constantes
 PROPERTY_TYPES = [
     "apartamento",
     "casa",
