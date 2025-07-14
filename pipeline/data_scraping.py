@@ -5,7 +5,6 @@ from typing import Any, Dict, List
 
 import pandas as pd
 
-
 class ScraperOrchestrator:
     """
     Orchestrates the collection and merging of scraped data files from multiple scraper sources.

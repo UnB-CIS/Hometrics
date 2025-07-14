@@ -1,7 +1,3 @@
-import argparse
-import os
-import sys
-import time
 
 import pandas as pd
 from dotenv import load_dotenv
@@ -18,7 +14,5 @@ if __name__ == "__main__":
 
     orchestrator = ScraperOrchestrator()
     results = orchestrator.run_pipeline("pipeline/dataset/raw_final_output")
-
-    
 
     main()
